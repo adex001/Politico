@@ -1,0 +1,516 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  background: #0475C9;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  letter-spacing: 2px;
+  font-family: sans-serif;
+}
+.container{
+  width: 90%;
+  margin: 0 auto;
+}
+.active{
+  display: block;
+}
+/* ----------- FLEX------------ */
+.make-flex-column{
+  display: flex;
+  flex-direction: column;
+}
+.make-flex-row{
+  display: flex;
+  flex-direction: row;
+}
+.center-items{
+  align-items: center;
+  text-align: center;
+}
+
+/* FONTS */
+.make-rem{
+  font-size: 2rem;
+}
+
+/* HEADER */
+header{
+  background: #fff;
+  min-height: 60px;
+}
+.logo{
+  flex: 1;
+  margin: 10px 0;
+}
+.logo a{
+  display: block;
+  text-decoration: none;
+  color: #0475C9;;
+}
+.small-img{
+  height: 40px;
+  width: 50px;
+} 
+
+#profile-nav li{
+  list-style: none;
+  text-align: center;
+  transition: 0.6s;
+}
+#profile-nav li:hover{
+  border-bottom: 2px solid #0475C9;
+  font-weight: bold;
+}
+#profile-nav li a{
+  display: block;
+  text-decoration: none;
+  color: #0475C9;
+  padding: 5px 10px;
+  margin-top: 20px;
+}
+/* End of header */
+
+/* MAIN */
+main{
+  flex: 1;
+}
+main .container{
+  width: 100%;
+}
+/* Navigations */
+.aside{
+  max-width: 400px;
+  font-size: .8rem;
+  flex: 1;
+}
+.hamb {
+  display: none;
+}
+#aside-nav{
+  display: block;
+  min-height: 88vh;
+  width: 100%;
+  margin-top: 10px;
+}
+
+#aside-nav li a{
+  text-decoration: none;
+  color: #fff;
+  display: block;
+}
+.hamb img{
+  width: 40px;
+  display: block;
+}
+#aside-nav li{
+list-style-type: none;
+border: #2f04c9 solid 2px;
+text-align: center;
+padding: 10px;
+margin-top: 1px;
+cursor: pointer;
+background: rgb(6, 86, 148);
+color: #fff;
+transition: 0.5s;
+}
+#aside-nav li:hover{
+  font-weight: bolder;
+  background: #0475C9 !important;
+}
+.user-logo{
+  border-radius: 50%;
+  width: 80px;
+  margin: 30px;
+}
+.display{
+  flex: 3;
+  transition: 1s;
+  background: rgb(3, 74, 128);
+  color: #fff;
+  font-size: .8rem;
+  position: relative;
+}
+#office-disp, #party-disp, #vote-disp, #parties-disp, #politician-disp, #election-disp, #run-disp, #history-disp, #petition-disp{
+  display: none;
+}
+
+/* VOTE */
+.display-divs h2{
+  text-align: center;
+  margin: 20px;
+}
+.vote-area div{
+  display: flex;
+  margin-top: 20px;
+}
+.vote-area span{
+  flex: 1;
+  display: inline-block;
+  text-align: right;
+  padding: 10px 30px 0 0;
+  max-width: 98%;
+}
+.vote-area select{
+  padding: 10px 20px;
+  flex: 2;
+  background: transparent;
+  color: #fff;
+  border: #fff solid 2px;
+  margin-right: 10px;
+}
+.vote-area select option{
+  background: rgba(1, 72, 124, 0.7);
+  font-size: 1.1rem;
+}
+
+/* Vote Ends */
+
+#main-submit{
+padding: 10px 20px;
+color: #2f04c9;
+background: #fff;
+width: 150px;
+align-self: center;
+margin-top: 30px;
+border: 2px solid #fff;
+transition: 0.7s;
+cursor: pointer;
+border-radius: 5px;
+}
+#main-submit:hover{
+  color: white;
+  background: #2f04c9;
+  border: 2px solid #fff;
+}
+
+/* PARTY */
+
+#party-disp{
+  position: relative;
+}
+.plogo img{
+  width: 50px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.pdisp{
+  list-style: none;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+  transition: 0.7s;
+  cursor: pointer;
+}
+.pdisp span{
+  flex: 1;
+}
+.sn{
+  max-width: 50px;
+}
+.plogo{
+  max-width: 150px;
+}
+.pdisp:first-child{
+  background: #2f04c9;
+  font-weight: bolder;
+  padding: 10px;
+}
+.pdisp:not(:first-child):hover{
+  background: #0475C9;
+}
+
+/* POLITICIAN */
+.pol-div select, .ele-office select{
+  padding: 10px 20px;
+  flex: 1;
+  background: transparent;
+  color: #fff;
+  border: #fff solid 2px;
+  margin: 15px;
+  max-width: 400px;
+  height: 40px;
+
+}
+.pol-div option, .ele-office option{
+  background: #0475C9;
+  font-size: 1.1rem;
+}
+.pol-div span, .ele-office span{
+  display: inline-block;
+  text-align: center;
+  padding: 10px 30px 0 0;
+  margin: 20px;
+}
+.office, .vote-span, .result-span, .petition{
+  max-width: 130px;
+}
+.winner{
+  border: 1px solid #fff;
+  padding: 7px;
+  background: green;
+  color: #fff;
+}
+.lost{
+  border: 1px solid #fff;
+  padding: 7px;
+  background: red;
+  color: #fff;
+}
+.petition button{
+  width: 80px;
+  padding: 8px 10px;
+  background: red;
+  color: #fff;
+  border: 2px solid white;
+  cursor: pointer;
+}
+.petition button:hover{
+  background: #fff;
+  color: red;
+  border: 2px solid red;
+}
+
+
+/* ELECTION RESULT */
+
+/* BECOME CANDIDATE */
+
+#run-disp h3{
+  text-align: center;
+}
+
+#history-disp h3{
+  padding: 15px;
+}
+
+/* End of Main */
+
+/* footer */
+footer{
+  text-align: center;
+  font-size: 0.9rem;
+  background: #2f04c9;
+  color: #fff;
+  min-height: 40px;
+  padding-top: 10px;
+}
+/* End of footer */
+
+/* ADMIN */
+.goffice h2, .cparty h2{
+  text-align: center;
+  margin: 20px;
+}
+
+.office-item span, .party-item span{
+  text-align: center;
+  flex: 1;
+}
+
+/* MODALS */
+#alert-modal{
+  display: none;
+}
+#big-modal{
+  display: none;
+  position: absolute;
+  right: 10px;
+  border: 1px solid #2f04c9;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background: rgba(6, 31, 119, 0.7);
+  overflow: auto;
+  z-index: 1;
+  justify-content: center;
+}
+
+.create{
+  width: 80%;
+  max-width: 700px;
+  position: relative;
+  background: #2f04c9;
+  color: #fff;
+  border-radius: 20px;
+}
+.create h2{
+  padding: 20px;
+}
+.close{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 2rem;
+  color: gray;
+  transition: 0.7s;
+  cursor: pointer;
+  font-weight: bold;
+}
+.close:hover, .close:focus{
+  color: #fff;
+}
+.create-group{
+  width: 95%;
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid #fff;
+  color: #2f04c9;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+.create-group:hover{
+  border-color: #0475C9;
+}
+.create-group::placeholder{
+  color: gray;
+}
+.submit-button{
+  border-radius: 5px;
+  padding: 10px 0;
+  border: 2px solid #fff;  
+  transition: .5s;
+  width: 100px;
+  margin: 20px 0;
+  background: #fff;
+  color: #0475C9;
+}
+.submit-button:hover{
+  background: #0475C9;
+  color: #fff;
+  font-weight: bolder;
+  cursor: pointer;
+}
+#clear-button{
+  color: red;
+}
+#clear-button:hover{
+  background: red;
+  color: #fff;
+}
+#new-party-modal, #new-office-modal, #modify-office-modal, #modify-party-modal{
+  display: none;
+  position: absolute;
+  min-height: 85vh;
+  align-content: center;
+  width: 100%;
+  top: 0;
+  background: rgba(180, 183, 195, 0.7);
+  justify-content: center;
+  z-index: 1;
+  overflow: auto;
+}
+
+/* COLORS */
+.success{
+  color: green;
+}
+.warning{
+  color: rgb(28, 121, 24);
+}
+.danger{
+  color: red;
+}
+.action .warning{
+  padding: 8px;
+  background: white;
+  border: 2px solid rgb(28, 121, 24);;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.action .danger{
+  padding: 8px;
+  background: white;
+  border: 2px solid red;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.danger:hover{
+  background: red;
+  color: #fff;
+  border: 2px solid #fff;
+}
+.warning:hover{
+  background: rgb(28, 121, 24);
+  color: #fff;
+  border: 2px solid #fff;
+}
+.off-name, .off-type{
+  max-width: 200px;
+}
+.office-item:first-child, .party-item{
+  font-weight: bolder;
+  padding: 15px;
+  background: #2f04c9;
+}
+.office-item:not(:first-child){
+  border-bottom: 1px solid gray;
+  padding: 10px;
+}
+.office-item:not(:first-child):hover{
+  background: #0475C9;
+}
+.office-item{
+  cursor: pointer;
+  transition: 0.8s;
+}
+.make-button{
+  width: 200px;
+  padding: 10px;
+  margin: 20px;
+  border: 2px solid #2f04c9;
+  background: #fff;
+  color: #2f04c9;
+  cursor: pointer;
+  transition: 0.7s;
+  border-radius: 5px;
+}
+.make-button:hover{
+  background: #2f04c9;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+@media screen and (max-width: 700px) {
+  main .container{
+    width: 100% !important;
+  }
+  .aside{
+    display: none;
+    z-index: 2;
+    position: absolute;
+    background: darkblue;
+    width: 60%;
+    transition: 1s;
+  }
+
+  .hamb{
+    left: 30px;
+    display: block;
+    cursor: pointer;
+    top: 70px;
+    left: 0;
+    position: fixed;
+    z-index: 1;
+    background: #fff;
+  }
+
+  .vote-div h2, #history-disp{
+    text-align: center;
+  }
+  .sn{
+    max-width: 20px;
+    margin-right: 10px;
+  }
+  .plogo{
+    max-width: 80px;
+  }
+  .cname, .pname{
+    margin-right: 10px;
+  }
+}
