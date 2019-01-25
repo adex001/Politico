@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../css//main.css">
+  <title>User Dashboard.</title>
+</head>
+<body>
+  <header>
+    <div class="container make-flex-row main-header">
+      <div class="logo">
+        <a href="../index.html">
+          <img src="../images/logo.png" class="small-img" alt="Politico Logo">
+          <span class="make-rem">Politico</span>
+        </a>
+      </div>
+      <ul id="profile-nav">
+        <li><a href="../index.html">Logout</a></li>
+      </ul>
+    </div>
+  </header>
+  <span class="hamb">
+    <img src="../images/hamburger.png" alt="Hamburger icon">
+  </span>
+  <main>
+    <div class="container">
+      <div class="portal make-flex-row">
+        <div class="aside" id="aside">
+          <ul class="make-flex-column center-items" id="aside-nav">
+            <img src="../images//user.png" class="user-logo">
+            <h3>Welcome User</h3>
+            <br>
+            <li id="vote">VOTE</li>
+            <li id="parties">View Parties</li>
+            <li id="politician">View Politicians</li>
+            <li id="election" class="election-res">Election Result</li>
+            <li id="run">Become a Candidate</li>
+            <li id="history">History</li>
+            <li><a href="../index.html">Logout</a></li>
+          </ul>
+        </div> <!--End of aside-->
+        <div id="display" class="display">
+          <div id="vote-disp" class="display-divs">
+            <div class="vote-div">
+            <h2>Cast your Vote for your favourite Candidate</h2>
+            <div class="vote-area make-flex-column">
+                <div>
+                  <span>Select Office name:</span>
+                  <select id="">
+                    <option value="Select an Office" disabled></option>
+                    <option value="president">President</option>
+                    <option value="governor">Governor</option>
+                    <option value="chairman">Chairman</option>
+                  </select>
+                  <br>
+                </div>
+                <div>
+                  <span>Select Political Party:</span>
+                  <select name="" id="">
+                    <option value="APC">A P C</option>
+                    <option value="PDP">P D P</option>
+                    <option value="ACN">A C N</option>
+                  </select>
+                  <br>
+                </div>
+                <div>
+                  <span>Preferred Candidate:</span>
+                  <select name="" id="">
+                    <option value="id1">Olatunbosun Adeoye Ebenezer</option>
+                    <option value="id2">Olumide Akande</option>
+                    <option value="id3">Adesanya Oluwaseun </option>
+                    <option value="id4">Boluwatife Adeboye</option>
+                  </select>
+                  <br>
+                </div>
+                <button id="main-submit">VOTE</button>
+              </div>
+            </div> <!--Votediv--->
+          </div> <!-- vote disp-->
+        </div> <!--End of display-->
+      </div> <!--End of portal-->
+    </div> <!--End of container-->
+  </main>
+  <footer>
+    <div class="container">
+      <p>Made with ♥ by Olatunbosun Adeoye Ebenezer, &copy; 2019</p>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>
