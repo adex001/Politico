@@ -36,9 +36,9 @@
           </ul>
         </div> <!--End of aside-->
         <div id="display" class="display">
-            <div class="hamb">
-              <img class="img"  src="../images/hamburger.png" alt="Hamburger icon">
-            </div>
+          <div class="hamb">
+            <img class="img"  src="../images/hamburger.png" alt="Hamburger icon">
+          </div>
 
           <div id="office-disp">
             <a href="#"><button class="make-button" id="office-button">Add Government Office</button></a>
@@ -96,22 +96,41 @@
             </div>
 
             <div id="new-office-modal" class="center-items make-flex-column">
-                <div class="create make-flex-column">
-                  <span id="off" class="close">&times;</span>
-                  <h2>Create Government Office</h2>
-                  <form action="#">
-                    <input type="text" class="create-group" id="" placeholder="Enter Office Name e.g president, governor, etc.">
-                    <input type="text" class="create-group" id="" placeholder="Enter office description.">
-                    <select id="" class="create-group office-select">
-                      <option selected disabled>Office type</option>
-                      <option value="federal">Federal Government</option>
-                      <option value="legislative">Legislative Government</option>
-                      <option value="state">State Government</option>
-                      <option value="local">Local Government</option>
-                    </select>
-                    <input type="submit" class="submit-button pty"  value="Create">
-                  </form>
-                </div>
+              <div class="create make-flex-column">
+                <span id="off" class="close">&times;</span>
+                <h2>Create Government Office</h2>
+                <form action="#">
+                  <input type="text" class="create-group" id="" placeholder="Enter Office Name e.g president, governor, etc.">
+                  <input type="text" class="create-group" id="" placeholder="Enter office description.">
+                  <select id="" class="create-group office-select">
+                    <option selected disabled>Office type</option>
+                    <option value="federal">Federal Government</option>
+                    <option value="legislative">Legislative Government</option>
+                    <option value="state">State Government</option>
+                    <option value="local">Local Government</option>
+                  </select>
+                  <input type="submit" class="submit-button pty"  value="Create">
+                </form>
+              </div>
+            </div>
+
+            <div id="modify-office-modal" class="center-items make-flex-column">
+              <div class="create make-flex-column">
+                <span id="off" class="close">&times;</span>
+                <h2>Modify Government Office</h2>
+                <form action="#">
+                  <input type="text" class="create-group" id="" value="Enter Office Name e.g president, governor, etc.">
+                  <input type="text" class="create-group" id="" value="Enter office description.">
+                  <select id="" class="create-group office-select">
+                    <option disabled>Office type</option>
+                    <option selected value="federal">Federal Government</option>
+                    <option value="legislative">Legislative Government</option>
+                    <option value="state">State Government</option>
+                    <option value="local">Local Government</option>
+                  </select>
+                  <input type="submit" class="submit-button pty"  value="Modify">
+                </form>
+              </div>
             </div>
           </div> <!-- office disp-->
 
@@ -182,6 +201,7 @@
                 </li>
               </div>
             </div>
+            
             <div id="new-party-modal" class="center-items make-flex-column">
               <div class="create make-flex-column">
                 <span class="close" id="pty">&times;</span>
@@ -220,9 +240,6 @@
       </div> <!--End of portal-->
     </div> <!--End of container-->
   </main>
-  <div id="alert">
-
-  </div>
   <footer>
     <div class="container">
       <p>Made with ♥ by Olatunbosun Adeoye Ebenezer, &copy; 2019</p>

@@ -26,8 +26,6 @@ const disp = {
 };
 
 let previous = null;
-// Defaults
-        
 if(partyDisp){
   partyDisp.style.display = 'block';
   partyLi.style.background = 'blue';
@@ -56,7 +54,6 @@ asideNav.addEventListener("click", (e) => {
           historyLi.style.background = 'rgb(6, 86, 148)';
           historyLi.style.fontWeight = 'normal';
         }
-
         if(previous){
           // Remove all Previous stylings
           disp[previous.id].style.display = 'none';
@@ -86,7 +83,6 @@ const asideDisp = document.getElementById('aside');
 
 
 if(partyButton || officeButton){
-
   partyButton.onclick = () => {
     newPartyModal.style.display = 'flex';
   }
@@ -107,18 +103,14 @@ hamb.addEventListener('mouseover', () => {
   asideDisp.addEventListener('mouseleave', () => {
     asideDisp.style.display = 'none';
   });
-
 })
-
 const modifyButton = document.getElementsByClassName('modify');
 Array.from(modifyButton).forEach(element => {
   element.addEventListener('click', (e) => {
     if(e.target.offsetParent.children[3]){
       e.target.offsetParent.children[3].style.display = 'flex';
     }else{
-      console.log(e);
-      e.target.offsetParent.children[0].children[2].style.display = 'flex';
+      e.target.offsetParent.children[1].children[3].style.display = 'flex';
     }
-
   });
 });
