@@ -36,9 +36,84 @@
           </ul>
         </div> <!--End of aside-->
         <div id="display" class="display">
-          <div class="hamb">
-            <img class="img"  src="../images/hamburger.png" alt="Hamburger icon">
-          </div>
+            <div class="hamb">
+              <img class="img"  src="../images/hamburger.png" alt="Hamburger icon">
+            </div>
+
+          <div id="office-disp">
+            <a href="#"><button class="make-button" id="office-button">Add Government Office</button></a>
+            <div class="make-flex-column goffice">
+              <h2>Available Government Offices</h2>
+              <div class="goffice-list">
+                <li class="make-flex-row office-item">
+                  <span class="sn">s/n</span>
+                  <span class="off-name">Office Name</span>
+                  <span>Office Description</span>
+                  <span class="off-type">Office type</span>
+                  <span>Action</span>
+                </li>
+                <li class="make-flex-row office-item center-items">
+                  <span class="sn">1</span>
+                  <span class="off-name">President</span>
+                  <span>The Commander in chief of the Armed Forces</span>
+                  <span class="off-type">Federal</span>
+                  <span class="action">
+                    <a href="#"><button class="warning modify">modify</button></a>
+                    <a href="#"><button class="danger">delete</button></a>
+                  </span>
+                </li>
+                <li class="make-flex-row office-item center-items">
+                  <span class="sn">2</span>
+                  <span class="off-name">Senator</span>
+                  <span>The Commander in chief of the Armed Forces</span>
+                  <span class="off-type">Federal</span>
+                  <span class="action">
+                    <a href="#"><button class="warning modify">modify</button></a>
+                    <a href="#"><button class="danger">delete</button></a>
+                  </span>
+                </li>
+                <li class="make-flex-row office-item center-items">
+                  <span class="sn">3</span>
+                  <span class="off-name">Governor</span>
+                  <span>States Leader</span>
+                  <span class="off-type">State</span>
+                  <span class="action">
+                    <a href="#"><button class="warning modify">modify</button></a>
+                    <a href="#"><button class="danger">delete</button></a>
+                  </span>
+                </li>
+                <li class="make-flex-row office-item center-items">
+                  <span class="sn">4</span>
+                  <span class="off-name">Chairman</span>
+                  <span>The local Government chairman of a region</span>
+                  <span class="off-type">Local</span>
+                  <span class="action">
+                    <a href="#"><button class="warning modify">modify</button></a>
+                    <a href="#"><button class="danger">delete</button></a>
+                  </span>
+                </li>
+              </div>
+            </div>
+
+            <div id="new-office-modal" class="center-items make-flex-column">
+                <div class="create make-flex-column">
+                  <span id="off" class="close">&times;</span>
+                  <h2>Create Government Office</h2>
+                  <form action="#">
+                    <input type="text" class="create-group" id="" placeholder="Enter Office Name e.g president, governor, etc.">
+                    <input type="text" class="create-group" id="" placeholder="Enter office description.">
+                    <select id="" class="create-group office-select">
+                      <option selected disabled>Office type</option>
+                      <option value="federal">Federal Government</option>
+                      <option value="legislative">Legislative Government</option>
+                      <option value="state">State Government</option>
+                      <option value="local">Local Government</option>
+                    </select>
+                    <input type="submit" class="submit-button pty"  value="Create">
+                  </form>
+                </div>
+            </div>
+          </div> <!-- office disp-->
 
           <div id="party-disp">
             <a href="#"><button class="make-button" id="party-button">Add Party</button></a>
@@ -145,6 +220,9 @@
       </div> <!--End of portal-->
     </div> <!--End of container-->
   </main>
+  <div id="alert">
+
+  </div>
   <footer>
     <div class="container">
       <p>Made with ♥ by Olatunbosun Adeoye Ebenezer, &copy; 2019</p>
