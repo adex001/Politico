@@ -109,3 +109,26 @@ describe('Gets a specific Office', () => {
       });
   });
 });
+
+describe('Deletes a specific government Office', () => {
+  it('should delete a government office ', (done) => {
+    chai.request(app)
+      .delete('/api/v1/offices/1')
+      .set('Accept', 'application/json')
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should return an error if government office does not exist ', (done) => {
+    chai.request(app)
+      .delete('/api/v1/offices/10000000')
+      .set('Accept', 'application/json')
+      .end((err, response) => {
+        response.body.status.should.eql(404);
+        response.body.error.should.be.eql('UserId does not exist');
+        done();
+      });
+  });
+});
