@@ -1,6 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import {it, describe} from 'mocha';
+import { it, describe } from 'mocha';
 
 import app from '../app';
 
