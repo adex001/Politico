@@ -38,7 +38,7 @@ describe('Handle Input Parameters', () => {
   const noName = {
     type: 'state',
     description: 'Official governor of the state'
-  }
+  };
   it('should respond with error message ', (done) => {
     chai.request(app)
       .post('/api/v1/offices')
@@ -69,6 +69,19 @@ describe('Handle Input Parameters', () => {
       .end((err, response) => {
         response.body.status.should.eql(400);
         response.body.error.should.be.eql('Please, enter a valid name! Name must be greater than 3 characters');
+        done();
+      });
+  });
+});
+
+describe('Gets all Offices', () => {
+  it('should return all government offices ', (done) => {
+    chai.request(app)
+      .get('/api/v1/offices')
+      .set('Accept', 'application/json')
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
         done();
       });
   });

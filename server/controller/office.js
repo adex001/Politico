@@ -10,6 +10,14 @@ class OfficeController {
       data,
     });
   }
+
+  static getAllOffices(req, res) {
+    const data = Office.retrieveAll();
+    return res.json({
+      status: 200,
+      data,
+    });
+  }
 }
 
 export default OfficeController;
