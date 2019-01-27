@@ -5,7 +5,7 @@
 }
 
 body{
-  background: #0475C9;
+  background: #4CB963;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@ body{
 
 /* HEADER */
 header{
-  background: #fff;
+  background: #694D75;
   min-height: 60px;
 }
 .logo{
@@ -51,7 +51,7 @@ header{
 .logo a{
   display: block;
   text-decoration: none;
-  color: #0475C9;;
+  color: #E0F2E9;;
 }
 .small-img{
   height: 40px;
@@ -64,13 +64,13 @@ header{
   transition: 0.6s;
 }
 #profile-nav li:hover{
-  border-bottom: 2px solid #0475C9;
+  border-bottom: 2px solid #E0F2E9;
   font-weight: bold;
 }
 #profile-nav li a{
   display: block;
   text-decoration: none;
-  color: #0475C9;
+  color: #E0F2E9;
   padding: 5px 10px;
   margin-top: 20px;
 }
@@ -295,7 +295,7 @@ border-radius: 5px;
 footer{
   text-align: center;
   font-size: 0.9rem;
-  background: #2f04c9;
+  background: #694D75;
   color: #fff;
   min-height: 40px;
   padding-top: 10px;
