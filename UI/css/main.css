@@ -88,6 +88,7 @@ main .container{
   max-width: 400px;
   font-size: .8rem;
   flex: 1;
+  background: #E0F2E9;
 }
 .hamb {
   display: none;
@@ -101,27 +102,37 @@ main .container{
 
 #aside-nav li a{
   text-decoration: none;
-  color: #fff;
+  color: #E0F2E9;
+  background: #4CB963;
+  padding: 10px;
   display: block;
+  margin-top: 1px;
+  transition: 0.5s;
+  border: #157F1F solid 2px;
+}
+#aside-nav li a:hover{
+  background: #E0F2E9 !important;
+  color: #134611 !important;
 }
 .hamb img{
   width: 40px;
   display: block;
 }
-#aside-nav li{
+#aside-nav li:not(:last-child){
 list-style-type: none;
-border: #2f04c9 solid 2px;
+border: #157F1F solid 2px;
 text-align: center;
 padding: 10px;
 margin-top: 1px;
 cursor: pointer;
-background: rgb(6, 86, 148);
-color: #fff;
+background: #4CB963;
+color: #E0F2E9;
 transition: 0.5s;
 }
 #aside-nav li:hover{
   font-weight: bolder;
-  background: #0475C9 !important;
+  background: #E0F2E9 !important;
+  color: #134611 !important;
 }
 .user-logo{
   border-radius: 50%;
@@ -131,8 +142,8 @@ transition: 0.5s;
 .display{
   flex: 3;
   transition: 1s;
-  background: rgb(3, 74, 128);
-  color: #fff;
+  background: #157F1F;
+  color: #E0F2E9;
   font-size: .8rem;
   position: relative;
 }
@@ -160,12 +171,12 @@ transition: 0.5s;
   padding: 10px 20px;
   flex: 2;
   background: transparent;
-  color: #fff;
-  border: #fff solid 2px;
+  color: #E0F2E9;
+  border: #E0F2E9 solid 2px;
   margin-right: 10px;
 }
 .vote-area select option{
-  background: rgba(1, 72, 124, 0.7);
+  background: #4CB963;
   font-size: 1.1rem;
 }
 
@@ -173,20 +184,20 @@ transition: 0.5s;
 
 #main-submit{
 padding: 10px 20px;
-color: #2f04c9;
-background: #fff;
+color: #134611;
+background: #E0F2E9;
 width: 150px;
 align-self: center;
 margin-top: 30px;
-border: 2px solid #fff;
+border: 2px solid #E0F2E9;
 transition: 0.7s;
 cursor: pointer;
 border-radius: 5px;
 }
 #main-submit:hover{
-  color: white;
-  background: #2f04c9;
-  border: 2px solid #fff;
+  color: #E0F2E9;
+  background: #134611;
+  border: 2px solid #E0F2E9;
 }
 
 /* PARTY */
@@ -217,12 +228,12 @@ border-radius: 5px;
   max-width: 150px;
 }
 .pdisp:first-child{
-  background: #2f04c9;
+  background: #694D75;
   font-weight: bolder;
   padding: 10px;
 }
 .pdisp:not(:first-child):hover{
-  background: #0475C9;
+  background: #4CB963;
 }
 
 /* POLITICIAN */
@@ -230,15 +241,15 @@ border-radius: 5px;
   padding: 10px 20px;
   flex: 1;
   background: transparent;
-  color: #fff;
-  border: #fff solid 2px;
+  color: #E0F2E9;
+  border: #E0F2E9 solid 2px;
   margin: 15px;
   max-width: 400px;
   height: 40px;
 
 }
 .pol-div option, .ele-office option{
-  background: #0475C9;
+  background: #4CB963;
   font-size: 1.1rem;
 }
 .pol-div span, .ele-office span{
@@ -251,28 +262,28 @@ border-radius: 5px;
   max-width: 130px;
 }
 .winner{
-  border: 1px solid #fff;
+  border: 1px solid #E0F2E9;
   padding: 7px;
   background: green;
-  color: #fff;
+  color: #E0F2E9;
 }
 .lost{
-  border: 1px solid #fff;
+  border: 1px solid #E0F2E9;
   padding: 7px;
   background: red;
-  color: #fff;
+  color: #E0F2E9;
 }
 .petition button{
   width: 80px;
   padding: 8px 10px;
   background: red;
-  color: #fff;
-  border: 2px solid white;
+  color: #E0F2E9;
+  border: 2px solid #E0F2E9;
   cursor: pointer;
 }
 .petition button:hover{
-  background: #fff;
-  color: red;
+  background: #E0F2E9;
+  color: rgb(236, 26, 26);
   border: 2px solid red;
 }
 
@@ -318,8 +329,8 @@ footer{
   width: 80%;
   max-width: 700px;
   position: relative;
-  background: #2f04c9;
-  color: #fff;
+  background: #134611;
+  color: #E0F2E9;
   border-radius: 20px;
 }
 .create h2{
@@ -342,13 +353,13 @@ footer{
   width: 95%;
   margin: 5px;
   padding: 15px;
-  border: 1px solid #fff;
-  color: #2f04c9;
+  border: 1px solid #E0F2E9;
+  color: #134611;
   border-radius: 5px;
   transition: 0.5s;
 }
 .create-group:hover{
-  border-color: #0475C9;
+  border-color: #4CB963;
 }
 .create-group::placeholder{
   color: gray;
@@ -356,16 +367,16 @@ footer{
 .submit-button{
   border-radius: 5px;
   padding: 10px 0;
-  border: 2px solid #fff;  
+  border: 2px solid #E0F2E9;  
   transition: .5s;
   width: 100px;
   margin: 20px 0;
-  background: #fff;
-  color: #0475C9;
+  background: #E0F2E9;
+  color: #4CB963;
 }
 .submit-button:hover{
-  background: #0475C9;
-  color: #fff;
+  background: #4CB963;
+  color: #E0F2E9;
   font-weight: bolder;
   cursor: pointer;
 }
@@ -374,7 +385,7 @@ footer{
 }
 #clear-button:hover{
   background: red;
-  color: #fff;
+  color: #E0F2E9;
 }
 #new-party-modal, #new-office-modal, #modify-office-modal, #modify-party-modal{
   display: none;
@@ -401,14 +412,14 @@ footer{
 }
 .action .warning{
   padding: 8px;
-  background: white;
+  background: #E0F2E9;
   border: 2px solid rgb(28, 121, 24);;
   cursor: pointer;
   border-radius: 5px;
 }
 .action .danger{
   padding: 8px;
-  background: white;
+  background: #E0F2E9;
   border: 2px solid red;
   cursor: pointer;
   border-radius: 5px;
@@ -421,7 +432,7 @@ footer{
 .warning:hover{
   background: rgb(28, 121, 24);
   color: #fff;
-  border: 2px solid #fff;
+  border: 2px solid #E0F2E9;
 }
 .off-name, .off-type{
   max-width: 200px;
@@ -429,14 +440,14 @@ footer{
 .office-item:first-child, .party-item{
   font-weight: bolder;
   padding: 15px;
-  background: #2f04c9;
+  background: #694D75;
 }
 .office-item:not(:first-child){
   border-bottom: 1px solid gray;
   padding: 10px;
 }
 .office-item:not(:first-child):hover{
-  background: #0475C9;
+  background: #4CB963;
 }
 .office-item{
   cursor: pointer;
@@ -446,17 +457,17 @@ footer{
   width: 200px;
   padding: 10px;
   margin: 20px;
-  border: 2px solid #2f04c9;
-  background: #fff;
-  color: #2f04c9;
+  border: 2px solid #4CB963;
+  background: #E0F2E9;
+  color: #4CB963;
   cursor: pointer;
   transition: 0.7s;
   border-radius: 5px;
 }
 .make-button:hover{
-  background: #2f04c9;
-  color: #fff;
-  border: 2px solid #fff;
+  background: #4CB963;
+  color: #E0F2E9;
+  border: 2px solid #E0F2E9;
 }
 
 @media screen and (max-width: 700px) {
@@ -467,7 +478,7 @@ footer{
     display: none;
     z-index: 2;
     position: absolute;
-    background: darkblue;
+    background: #694D75;
     width: 60%;
     transition: 1s;
   }
@@ -480,7 +491,7 @@ footer{
     left: 0;
     position: fixed;
     z-index: 1;
-    background: #fff;
+    background: #E0F2E9;
   }
 
   .vote-div h2, #history-disp{

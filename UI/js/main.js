@@ -28,13 +28,13 @@ const disp = {
 let previous = null;
 if(partyDisp){
   partyDisp.style.display = 'block';
-  partyLi.style.background = 'blue';
+  partyLi.style.background = '#134611';
   partyLi.style.color = 'white';
   partyLi.style.fontWeight = 'bolder';
   }
 if(historyDisp){
   historyDisp.style.display = 'block';
-  historyLi.style.background = 'blue';
+  historyLi.style.background = '#134611';
   historyLi.style.color = 'white';
   historyLi.style.fontWeight = 'bolder';
 }
@@ -46,24 +46,24 @@ asideNav.addEventListener("click", (e) => {
       else{
         if(partyDisp){
           partyDisp.style.display = 'none';
-          partyLi.style.background = 'rgb(6, 86, 148)';
+          partyLi.style.background = '#4CB963';
           partyLi.style.fontWeight = 'normal';
         }
         if(historyDisp){
           historyDisp.style.display = 'none';
-          historyLi.style.background = 'rgb(6, 86, 148)';
+          historyLi.style.background = '#4CB963';
           historyLi.style.fontWeight = 'normal';
         }
         if(previous){
           // Remove all Previous stylings
           disp[previous.id].style.display = 'none';
-          previous.style.background = 'rgb(6, 86, 148)';
+          previous.style.background = '#4CB963';
           previous.style.fontWeight = 'normal';
         }
         // Add all css stylings
         disp[item.id].style.display ='block';
-        item.style.background = 'blue';
-        item.style.color = 'white';
+        item.style.background = '#134611';
+        item.style.color = '#E0F2E9';
         item.style.fontWeight = 'bolder';
         previous = item;
       }
