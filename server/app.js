@@ -12,6 +12,8 @@ app.get('/', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('App started on port: ' +port);
 });
+
+export default app;
