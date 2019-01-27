@@ -33,6 +33,21 @@ class OfficeController {
       error: 'No such office',
     });
   }
+
+  static deleteOffice(req, res) {
+    const { officeId } = req.params;
+    const data = Office.delete(parseInt(officeId, 10));
+    if (data) {
+      return res.json({
+        status: 200,
+        data,
+      });
+    }
+    return res.json({
+      status: 404,
+      error: 'UserId does not exist',
+    });
+  }
 }
 
 export default OfficeController;
