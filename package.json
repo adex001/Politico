@@ -1,0 +1,42 @@
+{
+  "name": "porlitiko",
+  "version": "1.0.0",
+  "description": "A voting application",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "babel-node ./server/app.js",
+    "start:dev": "nodemon ./server/app.js --exec babel-node",
+    "test": "mocha --require @babel/register --timeout 10000 ./server/test/*.js --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adex001/porlitiko.git"
+  },
+  "keywords": [
+    "Vote"
+  ],
+  "author": "Olatunbosun Adeoye Ebenezer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adex001/porlitiko/issues"
+  },
+  "homepage": "https://github.com/adex001/porlitiko#readme",
+  "dependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/register": "^7.0.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-import": "^0.13.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9"
+  }
+}
