@@ -11,6 +11,10 @@ class Office {
     office.office.push(officeObject);
     return [office.office[office.office.length - 1]];
   }
+
+  static retrieveAll() {
+    return office.office;
+  }
 }
 
 export default Office;
