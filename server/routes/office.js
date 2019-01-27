@@ -6,5 +6,6 @@ const officeRouter = Router();
 
 officeRouter.post('/', Validator.validateOffice, OfficeController.createGovernmentOffice);
 officeRouter.get('/', OfficeController.getAllOffices);
+officeRouter.get('/:officeId', OfficeController.getUniqueOffice);
 
 export default officeRouter;

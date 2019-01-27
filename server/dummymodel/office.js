@@ -15,6 +15,12 @@ class Office {
   static retrieveAll() {
     return office.office;
   }
+
+  static findOne(id) {
+    const searcher = search => search.officeId === id;
+    const found = office.office.find(searcher);
+    return found;
+  }
 }
 
 export default Office;

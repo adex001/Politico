@@ -37,7 +37,7 @@ describe('Handle Input Parameters', () => {
   };
   const noName = {
     type: 'state',
-    description: 'Official governor of the state'
+    description: 'Official governor of the state',
   };
   it('should respond with error message ', (done) => {
     chai.request(app)
@@ -82,6 +82,29 @@ describe('Gets all Offices', () => {
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
+        done();
+      });
+  });
+});
+
+describe('Gets a specific Office', () => {
+  it('should return a specific government office ', (done) => {
+    chai.request(app)
+      .get('/api/v1/offices/1')
+      .set('Accept', 'application/json')
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should return an error if government office does not exist ', (done) => {
+    chai.request(app)
+      .get('/api/v1/offices/10000000')
+      .set('Accept', 'application/json')
+      .end((err, response) => {
+        response.body.status.should.eql(404);
+        response.body.error.should.be.eql('No such office');
         done();
       });
   });
