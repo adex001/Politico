@@ -18,6 +18,21 @@ class OfficeController {
       data,
     });
   }
+
+  static getUniqueOffice(req, res) {
+    const { officeId } = req.params;
+    const data = Office.findOne(parseInt(officeId, 10));
+    if (data) {
+      return res.json({
+        status: 200,
+        data: [data],
+      });
+    }
+    return res.json({
+      status: 404,
+      error: 'No such office',
+    });
+  }
 }
 
 export default OfficeController;
