@@ -36,6 +36,7 @@
     "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "codeclimate-test-reporter": "^0.5.1",
     "coveralls": "^3.0.2",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
