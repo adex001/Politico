@@ -71,7 +71,7 @@ describe('Tests to Create Political Party', () => {
     name: 'Modern Youth Political party',
     address: '21, Ilupeju road, Ikeja',
   };
-  it('should create an office ', (done) => {
+  it('should create a party ', (done) => {
     chai.request(app)
       .post('/api/v1/parties')
       .set('Accept', 'application/json')
@@ -126,6 +126,35 @@ describe('Handle Validation for Parties', () => {
       .end((err, response) => {
         response.body.status.should.eql(400);
         response.body.error.should.be.eql('Please, enter a valid name! Name must be greater than 3 characters');
+        done();
+      });
+  });
+});
+describe('Tests to Modify Political Party', () => {
+  const partyObject = {
+    logo: 'http://bit.ly/modified',
+    name: 'Modern Youth Political party Modified',
+    address: '21, Ilupeju road, Ikeja modified',
+  };
+  it('should modify a party ', (done) => {
+    chai.request(app)
+      .patch('/api/v1/parties/2')
+      .set('Accept', 'application/json')
+      .send(partyObject)
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not modify an invalid party ', (done) => {
+    chai.request(app)
+      .patch('/api/v1/parties/100000000')
+      .set('Accept', 'application/json')
+      .send(partyObject)
+      .end((err, response) => {
+        response.body.status.should.eql(404);
+        response.body.error.should.eql('Update failed! party not found!');
         done();
       });
   });

@@ -141,7 +141,7 @@ describe('Modify a specific government Office', () => {
   };
   it('should modify a government office ', (done) => {
     chai.request(app)
-      .put('/api/v1/offices/2')
+      .patch('/api/v1/offices/2')
       .set('Accept', 'application/json')
       .send(updateOffice)
       .end((err, response) => {
@@ -152,7 +152,7 @@ describe('Modify a specific government Office', () => {
   });
   it('should return an error if government office does not exist ', (done) => {
     chai.request(app)
-      .put('/api/v1/offices/10000000')
+      .patch('/api/v1/offices/10000000')
       .set('Accept', 'application/json')
       .send(updateOffice)
       .end((err, response) => {
