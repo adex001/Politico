@@ -1,3 +1,5 @@
+import { types } from 'util';
+
 class Validator {
   static validateOffice(req, res, next) {
     const { name, type, description } = req.body;
@@ -20,6 +22,29 @@ class Validator {
       return res.json({
         status: 400,
         error: 'Please, enter a valid description! Description must be greater than 5 characters',
+      });
+    }
+    return next();
+  }
+
+  static validateParty(req, res, next) {
+    const { name, logo, address } = req.body;
+    if (typeof name !== 'string' || name.length < 3) {
+      return res.json({
+        status: 400,
+        error: 'Please, enter a valid name! Name must be greater than 3 characters',
+      });
+    }
+    if (typeof logo !== 'string' || logo.length < 5) {
+      return res.json({
+        status: 400,
+        error: 'Please, enter a valid logo URL!',
+      });
+    }
+    if (typeof address !== 'string' || address.length < 5) {
+      return res.json({
+        status: 400,
+        error: 'Please, enter a valid address and address must be greater than 5 characters',
       });
     }
     return next();
