@@ -1,6 +1,8 @@
 # porlitiko
 Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
+
 [![Build Status](https://travis-ci.com/adex001/porlitiko.svg?branch=develop)](https://travis-ci.com/adex001/porlitiko)
+
 ### Key Application Features
 An admin can perform the following:
  - Admin (electoral body) can create political parties.
