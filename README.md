@@ -2,6 +2,7 @@
 Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
 [![Build Status](https://travis-ci.com/adex001/porlitiko.svg?branch=develop)](https://travis-ci.com/adex001/porlitiko)
+[![Coverage Status](https://coveralls.io/repos/github/adex001/porlitiko/badge.svg)](https://coveralls.io/github/adex001/porlitiko)
 
 ### Key Application Features
 An admin can perform the following:

@@ -4,9 +4,11 @@
   "description": "A voting application",
   "main": "server/app.js",
   "scripts": {
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "start": "babel-node ./server/app.js",
     "start:dev": "nodemon ./server/app.js --exec babel-node",
-    "test": "mocha --require @babel/register --timeout 10000 ./server/test/*.js --exit"
+    "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --require @babel/register --timeout 10000 ./server/test/*.js --exit"
   },
   "repository": {
     "type": "git",
@@ -34,11 +36,13 @@
     "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "coveralls": "^3.0.2",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-import": "^0.13.0",
     "eslint-plugin-import": "^2.15.0",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "nyc": "^13.1.0"
   }
 }
