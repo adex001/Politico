@@ -48,6 +48,24 @@ class OfficeController {
       error: 'UserId does not exist',
     });
   }
+
+  static modifyOffice(req, res) {
+    const { officeId } = req.params;
+    const { type, name, description } = req.body;
+    const officeObject = { type, name, description };
+
+    const data = Office.modify(parseInt(officeId, 10), officeObject);
+    if (data) {
+      return res.json({
+        status: 200,
+        data: [data],
+      });
+    }
+    return res.json({
+      status: 404,
+      error: 'office not found',
+    });
+  }
 }
 
 export default OfficeController;

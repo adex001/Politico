@@ -8,5 +8,6 @@ officeRouter.post('/', Validator.validateOffice, OfficeController.createGovernme
 officeRouter.get('/', OfficeController.getAllOffices);
 officeRouter.get('/:officeId', OfficeController.getUniqueOffice);
 officeRouter.delete('/:officeId', OfficeController.deleteOffice);
+officeRouter.put('/:officeId', Validator.validateOffice, OfficeController.modifyOffice);
 
 export default officeRouter;

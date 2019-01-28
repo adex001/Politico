@@ -132,3 +132,33 @@ describe('Deletes a specific government Office', () => {
       });
   });
 });
+
+describe('Modify a specific government Office', () => {
+  const updateOffice = {
+    type: 'federal',
+    name: 'President',
+    description: 'I am the updated part',
+  };
+  it('should modify a government office ', (done) => {
+    chai.request(app)
+      .put('/api/v1/offices/2')
+      .set('Accept', 'application/json')
+      .send(updateOffice)
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should return an error if government office does not exist ', (done) => {
+    chai.request(app)
+      .put('/api/v1/offices/10000000')
+      .set('Accept', 'application/json')
+      .send(updateOffice)
+      .end((err, response) => {
+        response.body.status.should.eql(404);
+        response.body.error.should.be.eql('office not found');
+        done();
+      });
+  });
+});
