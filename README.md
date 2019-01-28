@@ -3,6 +3,8 @@ Politico enables citizens give their mandate to politicians running for differen
 
 [![Build Status](https://travis-ci.com/adex001/porlitiko.svg?branch=develop)](https://travis-ci.com/adex001/porlitiko)
 [![Coverage Status](https://coveralls.io/repos/github/adex001/porlitiko/badge.svg?branch=develop)](https://coveralls.io/github/adex001/porlitiko?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9d48138283aad946b96e/maintainability)](https://codeclimate.com/github/adex001/porlitiko/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9d48138283aad946b96e/test_coverage)](https://codeclimate.com/github/adex001/porlitiko/test_coverage)
 
 ### Key Application Features
 An admin can perform the following:
