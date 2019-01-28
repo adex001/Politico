@@ -4,3 +4,5 @@ node_js: "8.11.1"
 notifications:
   email: false
 
+script:
+  - nyc --reporter=lcov --reporter=text-lcov npm test
