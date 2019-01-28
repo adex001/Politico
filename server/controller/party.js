@@ -49,5 +49,22 @@ class PartyController {
       data,
     });
   }
+
+  static modifyParty(req, res) {
+    const { name, logo, address } = req.body;
+    const { partyId } = req.params;
+    const partyObject = { name, address, logo };
+    const data = Party.modify(parseInt(partyId, 10), partyObject);
+    if (data) {
+      return res.json({
+        status: 200,
+        data: [data],
+      });
+    }
+    return res.json({
+      status: 404,
+      error: 'Update failed! party not found!',
+    });
+  }
 }
 export default PartyController;

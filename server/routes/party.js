@@ -9,5 +9,6 @@ partyRouter.get('/', PartyController.getAllParties);
 partyRouter.get('/:partyId', PartyController.getSpecificParty);
 partyRouter.delete('/:partyId', PartyController.deleteParty);
 partyRouter.post('/', Validator.validateParty, PartyController.createParty);
+partyRouter.patch('/:partyId', Validator.validateParty, PartyController.modifyParty);
 
 export default partyRouter;
