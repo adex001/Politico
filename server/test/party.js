@@ -43,3 +43,25 @@ describe('Gets a specific party', () => {
       });
   });
 });
+describe('Deletes a specific Political Party', () => {
+  it('should delete a political party', (done) => {
+    chai.request(app)
+      .delete('/api/v1/parties/1')
+      .set('Accept', 'application/json')
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should return an error if political does not exist ', (done) => {
+    chai.request(app)
+      .delete('/api/v1/parties/10000000')
+      .set('Accept', 'application/json')
+      .end((err, response) => {
+        response.body.status.should.eql(404);
+        response.body.error.should.be.eql('party not found');
+        done();
+      });
+  });
+});
