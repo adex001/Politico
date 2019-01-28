@@ -39,5 +39,15 @@ class PartyController {
       error: 'party not found',
     });
   }
+
+  static createParty(req, res) {
+    const { name, logo, address } = req.body;
+    const partyObject = { name, address, logo };
+    const data = Party.create(partyObject);
+    return res.json({
+      status: 201,
+      data,
+    });
+  }
 }
 export default PartyController;

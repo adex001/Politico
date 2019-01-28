@@ -23,5 +23,16 @@ class Party {
     }
     return false;
   }
+
+  static create(params) {
+    const partyObject = {
+      partyId: party.party.length + 1,
+      address: params.address,
+      name: params.name,
+      logo: params.logo,
+    };
+    party.party.push(partyObject);
+    return [party.party[party.party.length - 1]];
+  }
 }
 export default Party;

@@ -65,3 +65,68 @@ describe('Deletes a specific Political Party', () => {
       });
   });
 });
+describe('Tests to Create Political Party', () => {
+  const partyObject = {
+    logo: 'http://bit.ly',
+    name: 'Modern Youth Political party',
+    address: '21, Ilupeju road, Ikeja',
+  };
+  it('should create an office ', (done) => {
+    chai.request(app)
+      .post('/api/v1/parties')
+      .set('Accept', 'application/json')
+      .send(partyObject)
+      .end((err, response) => {
+        response.body.status.should.eql(201);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+});
+describe('Handle Validation for Parties', () => {
+  const noAddress = {
+    name: 'Modern Youth Political party',
+    logo: 'http:bit.ly/mypp',
+  };
+  const noName = {
+    logo: 'http:bit.ly/mypp',
+    address: '21, Ilupeju road, Ikeja',
+  };
+  const noLogo = {
+    name: 'Modern Youth Political party',
+    address: '21, Ilupeju road, Ikeja',
+  };
+  it('should respond with error message when no address is given ', (done) => {
+    chai.request(app)
+      .post('/api/v1/parties')
+      .set('Accept', 'application/json')
+      .send(noAddress)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('Please, enter a valid address and address must be greater than 5 characters');
+        done();
+      });
+  });
+  it('should respond with error when no logo is given', (done) => {
+    chai.request(app)
+      .post('/api/v1/parties')
+      .set('Accept', 'application/json')
+      .send(noLogo)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('Please, enter a valid logo URL!');
+        done();
+      });
+  });
+  it('should respond with error when no party name is provided ', (done) => {
+    chai.request(app)
+      .post('/api/v1/parties')
+      .set('Accept', 'application/json')
+      .send(noName)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('Please, enter a valid name! Name must be greater than 3 characters');
+        done();
+      });
+  });
+});
