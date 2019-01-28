@@ -12,6 +12,10 @@ An admin can perform the following:
  - Admin (electoral body) can create different ​political offices.
  - Admin (electoral body) can delete different ​political offices
  - Admin (electoral body) can modify different ​political offices
+ - Users can sign up
+ - Users can sign in
+ - Users can vote for only one politician per ​political office​.
+ - Users can see the results of election
 
  ### Development
 This application was developed usone NodeJs with express for routing.
@@ -38,7 +42,7 @@ more info:
 - Express (https://www.npmjs.com/package/express-api)
 
 ### Author
-- Olatunbosun Adeoye
+- Olatunbosun Adeoye Ebenezer
 
 ### License
 - MIT License
