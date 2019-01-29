@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/adex001/porlitiko#readme",
   "dependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/register": "^7.0.0",
     "@babel/cli": "^7.2.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
@@ -32,8 +34,6 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "codeclimate-test-reporter": "^0.5.1",

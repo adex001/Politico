@@ -1,10 +1,13 @@
-# porlitiko
+# Politico
 Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
-[![Build Status](https://travis-ci.com/adex001/porlitiko.svg?branch=develop)](https://travis-ci.com/adex001/porlitiko)
-[![Coverage Status](https://coveralls.io/repos/github/adex001/porlitiko/badge.svg?branch=develop)](https://coveralls.io/github/adex001/porlitiko?branch=develop)
+[![Build Status](https://travis-ci.com/adex001/Politico.svg?branch=develop)](https://travis-ci.com/adex001/Politico)
+[![Coverage Status](https://coveralls.io/repos/github/adex001/Politico/badge.svg?branch=develop)](https://coveralls.io/github/adex001/porlitiko?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9d48138283aad946b96e/maintainability)](https://codeclimate.com/github/adex001/porlitiko/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9d48138283aad946b96e/test_coverage)](https://codeclimate.com/github/adex001/porlitiko/test_coverage)
+
+### UI Templates
+My UI templates can be found here: [* UI ](https://adex001.github.io/Politico/UI/)
 
 ### Key Application Features
 An admin can perform the following:
