@@ -1,11 +1,12 @@
-import { types } from 'util';
-
+/* eslint-disable prefer-const */
 class Validator {
   static validateOffice(req, res, next) {
     let { name, type, description } = req.body;
-    type = type.toLowerCase();
     // eslint-disable-next-line no-unused-vars
     let valid;
+    if (type) {
+      type = type.toLowerCase();
+    }
     if (type === 'federal' || type === 'state' || type === 'local' || type === 'legislative') {
       valid = true;
     } else {
@@ -30,10 +31,7 @@ class Validator {
   }
 
   static validateParty(req, res, next) {
-    let { name, logo, address } = req.body;
-    name = name.toLowerCase();
-    logo = logo.toLowerCase();
-    address = address.toLowerCase();
+    const { name, logo, address } = req.body;
     if (typeof name !== 'string' || name.length < 3) {
       return res.json({
         status: 400,
