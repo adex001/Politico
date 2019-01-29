@@ -156,27 +156,28 @@ transition: 0.5s;
   text-align: center;
   margin: 20px;
 }
-.vote-area div{
-  display: flex;
-  margin-top: 20px;
+.vote-div, .run-disp{
+  width: 80%;
+  margin: 0 auto;
 }
 .vote-area span{
-  flex: 1;
   display: inline-block;
-  text-align: right;
-  padding: 10px 30px 0 0;
-  max-width: 98%;
+  width: 25%;
+
+}
+.vote-area div{
+  margin-top: 20px;
 }
 .vote-area select{
   padding: 10px 20px;
-  flex: 2;
   background: transparent;
   color: #E0F2E9;
   border: #E0F2E9 solid 2px;
   margin-right: 10px;
+  width: 70%;
 }
 .vote-area select option{
-  background: #4CB963;
+  background: #134611;
   font-size: 1.1rem;
 }
 
@@ -246,10 +247,9 @@ border-radius: 5px;
   margin: 15px;
   max-width: 400px;
   height: 40px;
-
 }
 .pol-div option, .ele-office option{
-  background: #4CB963;
+  background: #134611;
   font-size: 1.1rem;
 }
 .pol-div span, .ele-office span{
@@ -286,10 +286,6 @@ border-radius: 5px;
   color: rgb(236, 26, 26);
   border: 2px solid red;
 }
-
-
-/* ELECTION RESULT */
-
 /* BECOME CANDIDATE */
 
 #run-disp h3{
