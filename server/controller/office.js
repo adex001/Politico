@@ -3,7 +3,7 @@ import Office from '../dummymodel/office';
 class OfficeController {
   static createGovernmentOffice(req, res) {
     const { type, name, description } = req.body;
-    const requestData = { type, name, description };
+    const requestData = { type: type.toLowerCase(), name, description };
     const data = Office.create(requestData);
     return res.json({
       status: 201,
@@ -52,7 +52,7 @@ class OfficeController {
   static modifyOffice(req, res) {
     const { officeId } = req.params;
     const { type, name, description } = req.body;
-    const officeObject = { type, name, description };
+    const officeObject = { type: type.toLowerCase(), name, description };
 
     const data = Office.modify(parseInt(officeId, 10), officeObject);
     if (data) {

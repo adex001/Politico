@@ -2,7 +2,9 @@ import { types } from 'util';
 
 class Validator {
   static validateOffice(req, res, next) {
-    const { name, type, description } = req.body;
+    let { name, type, description } = req.body;
+    type = type.toLowerCase();
+    // eslint-disable-next-line no-unused-vars
     let valid;
     if (type === 'federal' || type === 'state' || type === 'local' || type === 'legislative') {
       valid = true;
@@ -28,7 +30,10 @@ class Validator {
   }
 
   static validateParty(req, res, next) {
-    const { name, logo, address } = req.body;
+    let { name, logo, address } = req.body;
+    name = name.toLowerCase();
+    logo = logo.toLowerCase();
+    address = address.toLowerCase();
     if (typeof name !== 'string' || name.length < 3) {
       return res.json({
         status: 400,
