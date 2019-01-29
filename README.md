@@ -7,7 +7,7 @@ Politico enables citizens give their mandate to politicians running for differen
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9d48138283aad946b96e/test_coverage)](https://codeclimate.com/github/adex001/porlitiko/test_coverage)
 
 ### UI Templates
-My UI templates can be found here: [* UI ](https://adex001.github.io/Politico/UI/)
+My UI templates can be found here: [ UI ](https://adex001.github.io/Politico/UI/)
 
 ### Key Application Features
 An admin can perform the following:
@@ -23,7 +23,7 @@ An admin can perform the following:
  - Users can see the results of election
 
  ### Development
-This application was developed usone NodeJs with express for routing.
+This application was developed using NodeJs with express for routing.
 
 ### Installation
 

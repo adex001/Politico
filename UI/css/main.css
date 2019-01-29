@@ -156,7 +156,7 @@ transition: 0.5s;
   text-align: center;
   margin: 20px;
 }
-.vote-div{
+.vote-div, .run-disp{
   width: 80%;
   margin: 0 auto;
 }
@@ -247,10 +247,9 @@ border-radius: 5px;
   margin: 15px;
   max-width: 400px;
   height: 40px;
-
 }
 .pol-div option, .ele-office option{
-  background: #4CB963;
+  background: #134611;
   font-size: 1.1rem;
 }
 .pol-div span, .ele-office span{
@@ -287,10 +286,6 @@ border-radius: 5px;
   color: rgb(236, 26, 26);
   border: 2px solid red;
 }
-
-
-/* ELECTION RESULT */
-
 /* BECOME CANDIDATE */
 
 #run-disp h3{
