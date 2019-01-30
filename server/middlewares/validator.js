@@ -1,9 +1,12 @@
-import { types } from 'util';
-
+/* eslint-disable prefer-const */
 class Validator {
   static validateOffice(req, res, next) {
-    const { name, type, description } = req.body;
+    let { name, type, description } = req.body;
+    // eslint-disable-next-line no-unused-vars
     let valid;
+    if (type) {
+      type = type.toLowerCase();
+    }
     if (type === 'federal' || type === 'state' || type === 'local' || type === 'legislative') {
       valid = true;
     } else {
