@@ -1,4 +1,5 @@
-/* eslint-disable prefer-const */
+import validator from 'validator';
+
 class Validator {
   static validateOffice(req, res, next) {
     let { name, type, description } = req.body;
@@ -48,6 +49,37 @@ class Validator {
       return res.json({
         status: 400,
         error: 'Please, enter a valid address and address must be greater than 5 characters',
+      });
+    }
+    return next();
+  }
+
+  static validateUserSignUp(req, res, next) {
+    const {
+      email, password, firstname, lastname,
+    } = req.body;
+    if (typeof email === 'undefined' || !validator.isEmail(email)) {
+      return res.json({
+        status: 400,
+        error: 'Enter a valid email address',
+      });
+    }
+    if (typeof password !== 'string' || password.length < 6) {
+      return res.json({
+        status: 400,
+        error: 'Enter a valid password! password must be greater than 6 characters.',
+      });
+    }
+    if (typeof firstname !== 'string' || firstname.length < 2) {
+      return res.json({
+        status: 400,
+        error: 'Enter a valid Firstname! Firstname must be 2 or more characters.',
+      });
+    }
+    if (typeof lastname !== 'string' || lastname.length < 2) {
+      return res.json({
+        status: 400,
+        error: 'Enter a valid Lastname! Lastname must be 2 or more characters.',
       });
     }
     return next();
