@@ -93,3 +93,78 @@ describe('Handle Input Parameters', () => {
       });
   });
 });
+describe('Tests to login a User', () => {
+  const userObject = {
+    email: 'adex001@gmail.com',
+    password: 'password',
+  };
+  const noEmail = {
+    password: 'MyPassword',
+  };
+  const invalidEmail = {
+    email: 'invalid@invalid.com',
+    password: 'password',
+  };
+  const invalidPassword = {
+    email: 'adex001@gmail.com',
+    password: 'invalid-password',
+  };
+  const noPassword = {
+    email: 'adex001@gmail.com',
+  };
+  it('should login a user ', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .set('Accept', 'application/json')
+      .send(userObject)
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not login a user ', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .set('Accept', 'application/json')
+      .send(invalidEmail)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('invalid username or password');
+        done();
+      });
+  });
+  it('should not login a user ', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .set('Accept', 'application/json')
+      .send(invalidPassword)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('invalid username or password');
+        done();
+      });
+  });
+  it('should respond with: "Enter a valid email address" ', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .set('Accept', 'application/json')
+      .send(noEmail)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('Enter a valid email address');
+        done();
+      });
+  });
+  it('should respond with: "Enter a valid email address" ', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .set('Accept', 'application/json')
+      .send(noPassword)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('Enter a valid password! password must be greater than 6 characters.');
+        done();
+      });
+  });
+});

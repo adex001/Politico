@@ -33,14 +33,14 @@ export default {
       email: 'adex001@gmail.com',
       firstname: 'Adeoye',
       lastname: 'Olatunbosun',
-      password: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWRleDAwMUBnbWFpbC5jb20iLCJpYXQiOjE1NDg4NTQ2MTh9.gc9ticExCMFm2tD93KfGFDPutLN4M_kGgLuYAvCbjxw',
+      password: '$2a$04$SG77kTT59JDiR2Ov54/AuuQ/Qe41cVUs5y8p47uMvb8jShu/Jqjke',
     },
     {
       userId: 2,
       email: 'ahaiweemman@gmail.com',
       firstname: 'Emmanuel',
       lastname: 'Ahaiwe',
-      password: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWhhaXdlZW1tYW5AZ21haWwuY29tIiwiaWF0IjoxNTQ4ODU0NjE4fQ.g7Q5zwGZ3yLidwE5SAx92scg-0BtJwUxE03Tcl_L__8',
+      password: '$2a$04$SG77kTT59JDiR2Ov54/AuuQ/Qe41cVUs5y8p47uMvb8jShu/Jqjke',
     },
   ],
 };

@@ -84,5 +84,22 @@ class Validator {
     }
     return next();
   }
+
+  static validateUserLogin(req, res, next) {
+    const { email, password } = req.body;
+    if (typeof email === 'undefined' || !validator.isEmail(email)) {
+      return res.json({
+        status: 400,
+        error: 'Enter a valid email address',
+      });
+    }
+    if (typeof password !== 'string' || password.length < 6) {
+      return res.json({
+        status: 400,
+        error: 'Enter a valid password! password must be greater than 6 characters.',
+      });
+    }
+    return next();
+  }
 }
 export default Validator;
