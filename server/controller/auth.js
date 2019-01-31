@@ -40,6 +40,41 @@ class AuthController {
       error: 'User not found',
     });
   }
+
+  static async login(req, res) {
+    const { email, password } = req.body;
+    // Verify email
+    const data = User.getUser(email);
+    if (!data) {
+      return res.json({
+        status: 400,
+        error: 'invalid username or password',
+      });
+    }
+    // Decrypt password
+    const passwordCorrect = await PasswordHasher.verify(password, data.password);
+    if (!passwordCorrect) {
+      return res.json({
+        status: 400,
+        error: 'invalid username or password',
+      });
+    }
+    const payload = {
+      userId: data.userId,
+      email: data.email,
+    };
+    const token = await TokenHandler.createToken(payload);
+    payload.firstname = data.firstname;
+    payload.lastname = data.lastname;
+    return res.json({
+      status: 200,
+      data: [{
+        token,
+        user: payload,
+      },
+      ],
+    });
+  }
 }
 
 export default AuthController;

@@ -12,6 +12,16 @@ class User {
     user.user.push(userObject);
     return user.user[user.user.length - 1];
   }
+
+  static getUser(email) {
+    const userObject = user.user;
+    const searcher = search => search.email === email;
+    const found = userObject.find(searcher);
+    if (found) {
+      return found;
+    }
+    return false;
+  }
 }
 
 export default User;
