@@ -34,7 +34,6 @@ const createTables = async (dev) => {
     try {
       await db.query(`${createTableUsers};`);
       console.log('Tables created!');
-      
     } catch (err) {
       return false;
     }
