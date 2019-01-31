@@ -12,7 +12,7 @@ env:
     - CC_TEST_REPORTER_ID=1483b924cb0df1f7f2d973afc21d5845ddd8c8118076f99cc6971db5d9beb7fe
 
 before_script:
-  - psql -c 'create database politico-test;' -U postgres
+  - psql -c 'create database politico;' -U postgres
   - npm install nyc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
