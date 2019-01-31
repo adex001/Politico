@@ -1,3 +1,4 @@
+import modelUser from '../model/user';
 import User from '../dummymodel/user';
 import TokenHandler from '../utilities/tokenHandler';
 import PasswordHasher from '../utilities/passwordHasher';
@@ -7,7 +8,12 @@ class AuthController {
     const {
       email, password, firstname, lastname,
     } = req.body;
-    // Encrypt Password
+    if (await modelUser.find(email)) {
+      return res.json({
+        status: 400,
+        error: 'User exists, choose another email',
+      });
+    }
     const encryptedPassword = await PasswordHasher.create(password);
     const userObject = {
       email,
@@ -16,11 +22,11 @@ class AuthController {
       lastname,
     };
     // JWT for token
-    const payload = User.create(userObject);
+    const payload = await modelUser.create(userObject);
     // Take details
     if (payload) {
       const payloadObject = {
-        userId: payload.userId,
+        userId: payload.userid,
         email: payload.email,
       };
       const token = await TokenHandler.createToken(payloadObject);

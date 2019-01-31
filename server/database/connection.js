@@ -1,4 +1,8 @@
+/* eslint-disable no-console */
 import { Pool } from 'pg';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const testConfig = {
   database: process.env.DB_NAME_TEST,
@@ -10,35 +14,24 @@ const testConfig = {
 
 const createTableUsers = `CREATE TABLE IF NOT EXISTS users (
   userId serial PRIMARY KEY,
-  username varchar(50) UNIQUE,
   email varchar(80) UNIQUE,
   password varchar(400),
-  sex varchar(10),
+  sex varchar(7),
   firstname varchar(50),
   lastname varchar(50), 
   timeRegistered TIMESTAMP NOT NULL DEFAULT NOW()
-  
   )`;
-const dropTables = 'DROP TABLE users';
+const dropTables = 'DROP TABLE IF EXISTS users';
 
 const db = (process.env.NODE_ENV === 'test') ? new Pool(testConfig) : new Pool();
+console.log(testConfig);
+
 const createTables = async (dev) => {
   if (dev === 'test') {
-    try {
-      await db.query(`${dropTables}; ${createTableUsers};`);
-      console.log(' Test table dropped and created!.');
-    } catch (err) {
-      return false;
-    }
+    await db.query(`${dropTables}; ${createTableUsers};`);
   } else {
-    try {
-      await db.query(`${createTableUsers};`);
-      console.log('Tables created!');
-    } catch (err) {
-      return false;
-    }
+    await db.query(`${createTableUsers};`);
   }
-  return true;
 };
 createTables(process.env.NODE_ENV);
 

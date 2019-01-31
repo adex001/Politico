@@ -26,6 +26,17 @@ describe('Tests to create a User', () => {
         done();
       });
   });
+  it('should not create an existing user ', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .set('Accept', 'application/json')
+      .send(userObject)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('User exists, choose another email');
+        done();
+      });
+  });
 });
 describe('Handle Input Parameters', () => {
   const noEmail = {
