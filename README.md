@@ -9,6 +9,9 @@ Politico enables citizens give their mandate to politicians running for differen
 ### UI Templates
 My UI templates can be found here: [ UI ](https://adex001.github.io/Politico/UI/)
 
+### Pivotal Tracker
+My Pivotal Tracker board can be found [ here ](https://www.pivotaltracker.com/n/projects/2238846)
+
 ### API Endpoints
 My API can be found here: [ API ](https://politico2019.herokuapp.com)
 
