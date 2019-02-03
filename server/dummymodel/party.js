@@ -14,6 +14,15 @@ class Party {
     return false;
   }
 
+  static findName(name) {
+    const searcher = search => search.name === name;
+    const found = party.party.find(searcher);
+    if (found) {
+      return found;
+    }
+    return false;
+  }
+
   static delete(id) {
     const searcher = search => search.partyId === id;
     const found = party.party.find(searcher);

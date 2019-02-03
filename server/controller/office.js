@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import Office from '../dummymodel/office';
 import Response from '../utilities/response';
 
@@ -19,25 +20,31 @@ class OfficeController {
   }
 
   static getUniqueOffice(req, res) {
-    const { officeId } = req.params;
-    const data = Office.findOne(parseInt(officeId, 10));
+    let { officeId } = req.params;
+    officeId = Number(officeId);
+    if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
+    const data = Office.findOne(officeId);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'No such office');
   }
 
   static deleteOffice(req, res) {
-    const { officeId } = req.params;
-    const data = Office.delete(parseInt(officeId, 10));
+    let { officeId } = req.params;
+    officeId = Number(officeId);
+    if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
+    const data = Office.delete(officeId);
     if (data) return Response.validData(res, 200, data);
     return Response.errorData(res, 404, 'Office does not exist');
   }
 
   static modifyOffice(req, res) {
-    const { officeId } = req.params;
+    let { officeId } = req.params;
+    officeId = Number(officeId);
+    if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
     const { type, name, description } = req.body;
     const officeObject = { type: type.toLowerCase(), name, description };
 
-    const data = Office.modify(parseInt(officeId, 10), officeObject);
+    const data = Office.modify(officeId, officeObject);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'office not found');
   }

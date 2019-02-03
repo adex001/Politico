@@ -7,8 +7,6 @@ import app from '../app';
 
 chai.use(chaiHttp);
 chai.should();
-let userToken = null; 
-let adminToken = null;
 describe('Tests to create a User', () => {
   const userObject = {
     email: 'adex002@gmail.com',
@@ -25,7 +23,6 @@ describe('Tests to create a User', () => {
       .end((err, response) => {
         response.body.status.should.eql(201);
         response.body.data.should.be.an('array');
-        adminToken = response.body.token;
         done();
       });
   });
@@ -56,7 +53,7 @@ describe('Handle Input Parameters', () => {
     firstname: 'Adeoye',
     lastname: 'Ebenezer',
     password: 'password',
-  }
+  };
   it('should respond with error message "Enter a valid email address"', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')

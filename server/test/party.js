@@ -51,6 +51,17 @@ describe('Gets a specific party', () => {
         done();
       });
   });
+  it('should not get party with invalid partyid', (done) => {
+    chai.request(app)
+      .get('/api/v1/parties/1xx')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('invalid party id');
+        done();
+      });
+  });
   it('should return a party not found error message ', (done) => {
     chai.request(app)
       .get('/api/v1/parties/10000000000')
@@ -72,6 +83,17 @@ describe('Deletes a specific Political Party', () => {
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not delete a party with invalid partyid', (done) => {
+    chai.request(app)
+      .delete('/api/v1/parties/1xx')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('invalid party id');
         done();
       });
   });
@@ -114,6 +136,18 @@ describe('Tests to Create Political Party', () => {
       .end((err, response) => {
         response.body.status.should.eql(201);
         response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not create party with existing party name', (done) => {
+    chai.request(app)
+      .post('/api/v1/parties')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .send(partyObject)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('Party name already exists!');
         done();
       });
   });
@@ -207,6 +241,18 @@ describe('Tests to Modify Political Party', () => {
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not modify a party with invalid partyid', (done) => {
+    chai.request(app)
+      .patch('/api/v1/parties/1xx')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .send(partyObject)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('invalid party id');
         done();
       });
   });

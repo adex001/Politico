@@ -5,7 +5,7 @@ import { it, describe } from 'mocha';
 
 import app from '../app';
 
-let adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoiYWRleDAwM0BnbWFpbC5jb20iLCJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTU0OTEwMDU3Nn0.6Gmn2cOMMQcn715rZJaqoOTXwp5KjnR-_sK0prZmrnw';
+const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoiYWRleDAwM0BnbWFpbC5jb20iLCJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTU0OTEwMDU3Nn0.6Gmn2cOMMQcn715rZJaqoOTXwp5KjnR-_sK0prZmrnw';
 chai.use(chaiHttp);
 chai.should();
 
@@ -29,7 +29,6 @@ describe('Tests for the Create Government office', () => {
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
-        // adminToken = response.body.data[0].token;
         done();
       });
   });
@@ -135,6 +134,17 @@ describe('Gets a specific Office', () => {
         done();
       });
   });
+  it('should not get an office with invalid url ', (done) => {
+    chai.request(app)
+      .get('/api/v1/offices/2xx')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('invalid office id');
+        done();
+      });
+  });
   it('should return an error if government office does not exist ', (done) => {
     chai.request(app)
       .get('/api/v1/offices/10000000')
@@ -157,6 +167,17 @@ describe('Deletes a specific government Office', () => {
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not delete an office with invalid url ', (done) => {
+    chai.request(app)
+      .delete('/api/v1/offices/2xx')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('invalid office id');
         done();
       });
   });
@@ -188,6 +209,18 @@ describe('Modify a specific government Office', () => {
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not modify an office with invalid url ', (done) => {
+    chai.request(app)
+      .patch('/api/v1/offices/2xx')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .send(updateOffice)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('invalid office id');
         done();
       });
   });
