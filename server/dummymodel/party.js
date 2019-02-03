@@ -26,7 +26,7 @@ class Party {
 
   static create(params) {
     const partyObject = {
-      partyId: party.party.length + 1,
+      partyId: party.party[party.party.length - 1].partyId + 1,
       address: params.address,
       name: params.name,
       logo: params.logo,

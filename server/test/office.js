@@ -5,23 +5,55 @@ import { it, describe } from 'mocha';
 
 import app from '../app';
 
+let adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoiYWRleDAwM0BnbWFpbC5jb20iLCJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTU0OTEwMDU3Nn0.6Gmn2cOMMQcn715rZJaqoOTXwp5KjnR-_sK0prZmrnw';
 chai.use(chaiHttp);
 chai.should();
+
+// Login to get token
+const userObject = {
+  email: 'adex001@gmail.com',
+  password: 'password',
+};
 
 describe('Tests for the Create Government office', () => {
   const officeObject = {
     type: 'state',
-    name: 'Governor',
+    name: 'Chairman',
     description: 'Office of the Governor of Lagos State',
   };
+  it('should login a user ', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .set('Accept', 'application/json')
+      .send(userObject)
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        // adminToken = response.body.data[0].token;
+        done();
+      });
+  });
   it('should create an office ', (done) => {
     chai.request(app)
       .post('/api/v1/offices')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(officeObject)
       .end((err, response) => {
         response.body.status.should.eql(201);
         response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not create an existing office ', (done) => {
+    chai.request(app)
+      .post('/api/v1/offices')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .send(officeObject)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('office name exists already! try another');
         done();
       });
   });
@@ -43,6 +75,7 @@ describe('Handle Input Parameters', () => {
     chai.request(app)
       .post('/api/v1/offices')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(noType)
       .end((err, response) => {
         response.body.status.should.eql(400);
@@ -54,6 +87,7 @@ describe('Handle Input Parameters', () => {
     chai.request(app)
       .post('/api/v1/offices')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(noDesc)
       .end((err, response) => {
         response.body.status.should.eql(400);
@@ -65,6 +99,7 @@ describe('Handle Input Parameters', () => {
     chai.request(app)
       .post('/api/v1/offices')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(noName)
       .end((err, response) => {
         response.body.status.should.eql(400);
@@ -79,6 +114,7 @@ describe('Gets all Offices', () => {
     chai.request(app)
       .get('/api/v1/offices')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
@@ -92,6 +128,7 @@ describe('Gets a specific Office', () => {
     chai.request(app)
       .get('/api/v1/offices/1')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
@@ -102,6 +139,7 @@ describe('Gets a specific Office', () => {
     chai.request(app)
       .get('/api/v1/offices/10000000')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .end((err, response) => {
         response.body.status.should.eql(404);
         response.body.error.should.be.eql('No such office');
@@ -115,6 +153,7 @@ describe('Deletes a specific government Office', () => {
     chai.request(app)
       .delete('/api/v1/offices/1')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
@@ -125,9 +164,10 @@ describe('Deletes a specific government Office', () => {
     chai.request(app)
       .delete('/api/v1/offices/10000000')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .end((err, response) => {
         response.body.status.should.eql(404);
-        response.body.error.should.be.eql('UserId does not exist');
+        response.body.error.should.be.eql('Office does not exist');
         done();
       });
   });
@@ -143,6 +183,7 @@ describe('Modify a specific government Office', () => {
     chai.request(app)
       .patch('/api/v1/offices/2')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(updateOffice)
       .end((err, response) => {
         response.body.status.should.eql(200);
@@ -154,6 +195,7 @@ describe('Modify a specific government Office', () => {
     chai.request(app)
       .patch('/api/v1/offices/10000000')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(updateOffice)
       .end((err, response) => {
         response.body.status.should.eql(404);

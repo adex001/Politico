@@ -7,12 +7,30 @@ import app from '../app';
 
 chai.use(chaiHttp);
 chai.should();
+const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoiYWRleDAwM0BnbWFpbC5jb20iLCJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTU0OTEwMDU3Nn0.6Gmn2cOMMQcn715rZJaqoOTXwp5KjnR-_sK0prZmrnw';
+const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoiYWRleDAwM0BnbWFpbC5jb20iLCJpc0FkbWluIjoiZmFsc2UiLCJpYXQiOjE1NDkxNDg1Mzh9.AqKWn5j5350xgkb0KMjwrZDNM-W0Ajdyk4fOrsL7AlI';
+const userObject = {
+  email: 'adex001@gmail.com',
+  password: 'password',
+};
 
 describe('Gets all Parties', () => {
+  it('should login a user ', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .set('Accept', 'application/json')
+      .send(userObject)
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
   it('should return all political parties ', (done) => {
     chai.request(app)
       .get('/api/v1/parties')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
@@ -26,6 +44,7 @@ describe('Gets a specific party', () => {
     chai.request(app)
       .get('/api/v1/parties/1')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
@@ -36,6 +55,7 @@ describe('Gets a specific party', () => {
     chai.request(app)
       .get('/api/v1/parties/10000000000')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .end((err, response) => {
         response.body.status.should.eql(404);
         response.body.error.should.eql('party not found');
@@ -48,9 +68,22 @@ describe('Deletes a specific Political Party', () => {
     chai.request(app)
       .delete('/api/v1/parties/1')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not delete a political party', (done) => {
+    chai.request(app)
+      .delete('/api/v1/parties/1')
+      .set('Accept', 'application/json')
+      .set('token', `${userToken}`)
+      .end((err, response) => {
+        response.status.should.eql(403);
+        response.body.status.should.eql(403);
+        response.body.error.should.eql('You do not have the permission to access this resource!');
         done();
       });
   });
@@ -58,6 +91,7 @@ describe('Deletes a specific Political Party', () => {
     chai.request(app)
       .delete('/api/v1/parties/10000000')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .end((err, response) => {
         response.body.status.should.eql(404);
         response.body.error.should.be.eql('party not found');
@@ -75,6 +109,7 @@ describe('Tests to Create Political Party', () => {
     chai.request(app)
       .post('/api/v1/parties')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(partyObject)
       .end((err, response) => {
         response.body.status.should.eql(201);
@@ -96,10 +131,35 @@ describe('Handle Validation for Parties', () => {
     name: 'Modern Youth Political party',
     address: '21, Ilupeju road, Ikeja',
   };
+  const errorToken = 'kwfmf3knfj3knfjk3nff4f4.4f4f4f4f.4f4f4f4f';
+  it('should respond with error message when no token is provided', (done) => {
+    chai.request(app)
+      .post('/api/v1/parties')
+      .set('Accept', 'application/json')
+      .send(noAddress)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('No token provided!');
+        done();
+      });
+  });
+  it('should respond with error message when token cannot be verified', (done) => {
+    chai.request(app)
+      .post('/api/v1/parties')
+      .set('Accept', 'application/json')
+      .set('token', errorToken)
+      .send(noAddress)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('Token cannot be verified');
+        done();
+      });
+  });
   it('should respond with error message when no address is given ', (done) => {
     chai.request(app)
       .post('/api/v1/parties')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(noAddress)
       .end((err, response) => {
         response.body.status.should.eql(400);
@@ -111,6 +171,7 @@ describe('Handle Validation for Parties', () => {
     chai.request(app)
       .post('/api/v1/parties')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(noLogo)
       .end((err, response) => {
         response.body.status.should.eql(400);
@@ -122,6 +183,7 @@ describe('Handle Validation for Parties', () => {
     chai.request(app)
       .post('/api/v1/parties')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(noName)
       .end((err, response) => {
         response.body.status.should.eql(400);
@@ -140,6 +202,7 @@ describe('Tests to Modify Political Party', () => {
     chai.request(app)
       .patch('/api/v1/parties/2')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(partyObject)
       .end((err, response) => {
         response.body.status.should.eql(200);
@@ -151,6 +214,7 @@ describe('Tests to Modify Political Party', () => {
     chai.request(app)
       .patch('/api/v1/parties/100000000')
       .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
       .send(partyObject)
       .end((err, response) => {
         response.body.status.should.eql(404);

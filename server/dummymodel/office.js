@@ -3,7 +3,7 @@ import office from './db';
 class Office {
   static create(params) {
     const officeObject = {
-      officeId: office.office.length + 1,
+      officeId: office.office[office.office.length - 1].officeId + 1,
       type: params.type,
       name: params.name,
       description: params.description,
@@ -22,11 +22,17 @@ class Office {
     return found;
   }
 
+  static findName(name) {
+    const searcher = search => search.name === name;
+    const found = office.office.find(searcher);
+    return found;
+  }
+
   static delete(id) {
     const searcher = search => search.officeId === id;
     const found = office.office.find(searcher);
     if (found) {
-      office.office.splice(found, 1);
+      office.office.splice(found.officeId - 1, 1);
       return office.office;
     }
     return false;
