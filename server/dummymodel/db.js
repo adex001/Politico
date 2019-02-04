@@ -34,6 +34,7 @@ export default {
       firstname: 'Adeoye',
       lastname: 'Olatunbosun',
       password: '$2a$04$SG77kTT59JDiR2Ov54/AuuQ/Qe41cVUs5y8p47uMvb8jShu/Jqjke',
+      isAdmin: true,
     },
     {
       userId: 2,
@@ -41,6 +42,7 @@ export default {
       firstname: 'Emmanuel',
       lastname: 'Ahaiwe',
       password: '$2a$04$SG77kTT59JDiR2Ov54/AuuQ/Qe41cVUs5y8p47uMvb8jShu/Jqjke',
+      isAdmin: false,
     },
   ],
 };

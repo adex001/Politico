@@ -3,11 +3,12 @@ import user from './db';
 class User {
   static create(params) {
     const userObject = {
-      userId: user.user.length + 1,
+      userId: user.user[user.user.length - 1].userId + 1,
       email: params.email,
       password: params.password,
       firstname: params.firstname,
       lastname: params.lastname,
+      isAdmin: params.isAdmin,
     };
     user.user.push(userObject);
     return user.user[user.user.length - 1];

@@ -1,4 +1,5 @@
 import validator from 'validator';
+import Response from '../utilities/response';
 
 class Validator {
   static validateOffice(req, res, next) {
@@ -11,22 +12,13 @@ class Validator {
     if (type === 'federal' || type === 'state' || type === 'local' || type === 'legislative') {
       valid = true;
     } else {
-      return res.json({
-        status: 400,
-        error: 'Please, enter a valid office type! Type must be federal, legislative, state or local',
-      });
+      return Response.errorData(res, 400, 'Please, enter a valid office type! Type must be federal, legislative, state or local');
     }
     if (typeof name !== 'string' || name.length < 3) {
-      return res.json({
-        status: 400,
-        error: 'Please, enter a valid name! Name must be greater than 3 characters',
-      });
+      return Response.errorData(res, 400, 'Please, enter a valid name! Name must be greater than 3 characters');
     }
     if (typeof description !== 'string' || description.length < 5) {
-      return res.json({
-        status: 400,
-        error: 'Please, enter a valid description! Description must be greater than 5 characters',
-      });
+      return Response.errorData(res, 400, 'Please, enter a valid description! Description must be greater than 5 characters');
     }
     return next();
   }
@@ -34,53 +26,37 @@ class Validator {
   static validateParty(req, res, next) {
     const { name, logo, address } = req.body;
     if (typeof name !== 'string' || name.length < 3) {
-      return res.json({
-        status: 400,
-        error: 'Please, enter a valid name! Name must be greater than 3 characters',
-      });
+      return Response.errorData(res, 400, 'Please, enter a valid name! Name must be greater than 3 characters');
     }
     if (typeof logo !== 'string' || logo.length < 5) {
-      return res.json({
-        status: 400,
-        error: 'Please, enter a valid logo URL!',
-      });
+      return Response.errorData(res, 400, 'Please, enter a valid logo URL!');
     }
     if (typeof address !== 'string' || address.length < 5) {
-      return res.json({
-        status: 400,
-        error: 'Please, enter a valid address and address must be greater than 5 characters',
-      });
+      return Response.errorData(res, 400, 'Please, enter a valid address and address must be greater than 5 characters');
     }
     return next();
   }
 
   static validateUserSignUp(req, res, next) {
     const {
-      email, password, firstname, lastname,
+      email, password, firstname, lastname, isAdmin,
     } = req.body;
     if (typeof email === 'undefined' || !validator.isEmail(email)) {
-      return res.json({
-        status: 400,
-        error: 'Enter a valid email address',
-      });
+      return Response.errorData(res, 400, 'Enter a valid email address');
     }
     if (typeof password !== 'string' || password.length < 6) {
-      return res.json({
-        status: 400,
-        error: 'Enter a valid password! password must be greater than 6 characters.',
-      });
+      return Response.errorData(res, 400, 'Enter a valid password! password must be greater than 6 characters.');
     }
     if (typeof firstname !== 'string' || firstname.length < 2) {
-      return res.json({
-        status: 400,
-        error: 'Enter a valid Firstname! Firstname must be 2 or more characters.',
-      });
+      return Response.errorData(res, 400, 'Enter a valid Firstname! Firstname must be 2 or more characters.');
     }
     if (typeof lastname !== 'string' || lastname.length < 2) {
-      return res.json({
-        status: 400,
-        error: 'Enter a valid Lastname! Lastname must be 2 or more characters.',
-      });
+      return Response.errorData(res, 400, 'Enter a valid Lastname! Lastname must be 2 or more characters.');
+    }
+    if (typeof isAdmin !== 'undefined' || isAdmin === 'true' || isAdmin === 'false') {
+      const valid = true;
+    } else {
+      return Response.errorData(res, 400, 'Enter a valid admin status. isAdmin should be either true or false.');
     }
     return next();
   }
@@ -88,16 +64,10 @@ class Validator {
   static validateUserLogin(req, res, next) {
     const { email, password } = req.body;
     if (typeof email === 'undefined' || !validator.isEmail(email)) {
-      return res.json({
-        status: 400,
-        error: 'Enter a valid email address',
-      });
+      return Response.errorData(res, 400, 'Enter a valid email address');
     }
     if (typeof password !== 'string' || password.length < 6) {
-      return res.json({
-        status: 400,
-        error: 'Enter a valid password! password must be greater than 6 characters.',
-      });
+      return Response.errorData(res, 400, 'Enter a valid password! password must be greater than 6 characters.');
     }
     return next();
   }

@@ -7,13 +7,13 @@ import app from '../app';
 
 chai.use(chaiHttp);
 chai.should();
-
 describe('Tests to create a User', () => {
   const userObject = {
     email: 'adex002@gmail.com',
     firstname: 'Adeoye',
     lastname: 'Ebenezer',
     password: 'MyPassword',
+    isAdmin: 'true',
   };
   it('should create a user ', (done) => {
     chai.request(app)
@@ -47,6 +47,12 @@ describe('Handle Input Parameters', () => {
     email: 'adex002@gmail.com',
     firstname: 'Adeoye',
     lastname: 'Ebenezer',
+  };
+  const noAdminStatus = {
+    email: 'adex002@gmail.com',
+    firstname: 'Adeoye',
+    lastname: 'Ebenezer',
+    password: 'password',
   };
   it('should respond with error message "Enter a valid email address"', (done) => {
     chai.request(app)
@@ -89,6 +95,17 @@ describe('Handle Input Parameters', () => {
       .end((err, response) => {
         response.body.status.should.eql(400);
         response.body.error.should.be.eql('Enter a valid Lastname! Lastname must be 2 or more characters.');
+        done();
+      });
+  });
+  it('should respond with error "Enter a valid admin status. isAdmin should be either true or false."', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .set('Accept', 'application/json')
+      .send(noAdminStatus)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.be.eql('Enter a valid admin status. isAdmin should be either true or false.');
         done();
       });
   });

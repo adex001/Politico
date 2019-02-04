@@ -1,49 +1,45 @@
 import User from '../dummymodel/user';
 import TokenHandler from '../utilities/tokenHandler';
 import PasswordHasher from '../utilities/passwordHasher';
+import Response from '../utilities/response';
 
 class AuthController {
   static async signup(req, res) {
     const {
-      email, password, firstname, lastname,
+      email, password, firstname, lastname, isAdmin,
     } = req.body;
-    // Encrypt Password
     const encryptedPassword = await PasswordHasher.create(password);
     const userObject = {
       email,
       firstname,
       password: encryptedPassword,
       lastname,
+      isAdmin,
     };
-    // JWT for token
+    const data = User.getUser(email);
+    if (data) return Response.errorData(res, 400, 'Email exists already! try another!');
     const payload = User.create(userObject);
-    // Take details
     if (payload) {
       const payloadObject = {
         userId: payload.userId,
         email: payload.email,
+        isAdmin: payload.isAdmin,
       };
       const token = await TokenHandler.createToken(payloadObject);
       payloadObject.firstname = payload.firstname;
       payloadObject.lastname = payload.lastname;
-      return res.json({
-        status: 201,
-        data: [{
-          token,
-          user: payloadObject,
-        },
-        ],
-      });
+
+      return Response.validData(res, 201, [{
+        token,
+        user: payloadObject,
+      },
+      ]);
     }
-    return res.json({
-      status: 400,
-      error: 'User not found',
-    });
+    return Response.errorData(res, 400, 'User not found');
   }
 
   static async login(req, res) {
     const { email, password } = req.body;
-    // Verify email
     const data = User.getUser(email);
     if (!data) {
       return res.json({
@@ -51,29 +47,21 @@ class AuthController {
         error: 'invalid username or password',
       });
     }
-    // Decrypt password
     const passwordCorrect = await PasswordHasher.verify(password, data.password);
-    if (!passwordCorrect) {
-      return res.json({
-        status: 400,
-        error: 'invalid username or password',
-      });
-    }
+    if (!passwordCorrect) return Response.errorData(res, 400, 'invalid username or password');
     const payload = {
       userId: data.userId,
       email: data.email,
+      isAdmin: data.isAdmin,
     };
     const token = await TokenHandler.createToken(payload);
     payload.firstname = data.firstname;
     payload.lastname = data.lastname;
-    return res.json({
-      status: 200,
-      data: [{
-        token,
-        user: payload,
-      },
-      ],
-    });
+    return Response.validData(res, 200, [{
+      token,
+      user: payload,
+    },
+    ]);
   }
 }
 
