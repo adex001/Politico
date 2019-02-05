@@ -32,5 +32,10 @@ class Office {
     const result = await db.query('SELECT name, type, description FROM office');
     return result.rows;
   }
+
+  static async findOne(id) {
+    const result = await db.query('SELECT officeid, name, type, description FROM office WHERE officeid = $1', [id]);
+    return result.rows[0];
+  }
 }
 export default Office;

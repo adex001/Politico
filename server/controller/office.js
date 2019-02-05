@@ -24,11 +24,11 @@ class OfficeController {
     return Response.validData(res, 200, data);
   }
 
-  static getUniqueOffice(req, res) {
+  static async getUniqueOffice(req, res) {
     let { officeId } = req.params;
     officeId = Number(officeId);
     if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
-    const data = Office.findOne(officeId);
+    const data = await modelOffice.findOne(officeId);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'No such office');
   }
