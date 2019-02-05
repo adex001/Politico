@@ -25,14 +25,14 @@ const createTableUsers = `CREATE TABLE IF NOT EXISTS users (
 const dropTables = 'DROP TABLE IF EXISTS users';
 
 const db = (process.env.NODE_ENV === 'test') ? new Pool(testConfig) : new Pool();
-const createTables = async (dev) => {
+const dev = process.env.NODE_ENV;
+(async () => {
   if (dev === 'test') {
     await db.query(`${dropTables}; ${createTableUsers};`);
   } else {
     await db.query(`${createTableUsers};`);
   }
   return true;
-};
-createTables(process.env.NODE_ENV);
+})();
 
 export default db;

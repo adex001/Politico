@@ -12,7 +12,7 @@ describe('Tests to create a User', () => {
     email: 'adex002@gmail.com',
     firstname: 'Adeoye',
     lastname: 'Ebenezer',
-    password: 'MyPassword',
+    password: 'password',
     isAdmin: 'true',
   };
   it('should create a user ', (done) => {
@@ -112,7 +112,7 @@ describe('Handle Input Parameters', () => {
 });
 describe('Tests to login a User', () => {
   const userObject = {
-    email: 'adex001@gmail.com',
+    email: 'adex002@gmail.com',
     password: 'password',
   };
   const noEmail = {
@@ -123,11 +123,11 @@ describe('Tests to login a User', () => {
     password: 'password',
   };
   const invalidPassword = {
-    email: 'adex001@gmail.com',
+    email: 'adex002@gmail.com',
     password: 'invalid-password',
   };
   const noPassword = {
-    email: 'adex001@gmail.com',
+    email: 'adex002@gmail.com',
   };
   it('should login a user ', (done) => {
     chai.request(app)

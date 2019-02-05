@@ -10,7 +10,7 @@ chai.should();
 const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoiYWRleDAwM0BnbWFpbC5jb20iLCJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTU0OTEwMDU3Nn0.6Gmn2cOMMQcn715rZJaqoOTXwp5KjnR-_sK0prZmrnw';
 const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoiYWRleDAwM0BnbWFpbC5jb20iLCJpc0FkbWluIjoiZmFsc2UiLCJpYXQiOjE1NDkxNDg1Mzh9.AqKWn5j5350xgkb0KMjwrZDNM-W0Ajdyk4fOrsL7AlI';
 const userObject = {
-  email: 'adex001@gmail.com',
+  email: 'adex002@gmail.com',
   password: 'password',
 };
 

@@ -11,7 +11,7 @@ chai.should();
 
 // Login to get token
 const userObject = {
-  email: 'adex001@gmail.com',
+  email: 'adex002@gmail.com',
   password: 'password',
 };
 
