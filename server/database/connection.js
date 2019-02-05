@@ -19,18 +19,25 @@ const createTableUsers = `CREATE TABLE IF NOT EXISTS users (
   firstname varchar(50),
   lastname varchar(50),
   isAdmin boolean DEFAULT false,
-  timeRegistered TIMESTAMP NOT NULL DEFAULT NOW()
+  timeRegistered TIMESTAMP DEFAULT NOW()
   
-  )`;
-const dropTables = 'DROP TABLE IF EXISTS users';
+)`;
+const createTableOffice = `CREATE TABLE IF NOT EXISTS office (
+  officeId serial PRIMARY KEY,
+  type varchar(50),
+  name varchar(50),
+  description varchar(200),
+  office_creation TIMESTAMPTZ DEFAULT NOW()
+)`;
+const dropTables = 'DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS office';
 
 const db = (process.env.NODE_ENV === 'test') ? new Pool(testConfig) : new Pool();
 const dev = process.env.NODE_ENV;
 (async () => {
   if (dev === 'test') {
-    await db.query(`${dropTables}; ${createTableUsers};`);
+    await db.query(`${dropTables}; ${createTableUsers}; ${createTableOffice}`);
   } else {
-    await db.query(`${createTableUsers};`);
+    await db.query(`${createTableUsers}; ${createTableOffice}`);
   }
   return true;
 })();
