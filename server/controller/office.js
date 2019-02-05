@@ -1,17 +1,22 @@
 /* eslint-disable no-restricted-globals */
 import Office from '../dummymodel/office';
+import modelOffice from '../model/office';
 import Response from '../utilities/response';
 
 class OfficeController {
-  static createGovernmentOffice(req, res) {
+  static async createGovernmentOffice(req, res) {
     const { type, name, description } = req.body;
-    const requestData = { type: type.toLowerCase(), name, description };
-    const officeExist = Office.findName(name);
+    const requestData = {
+      type: type.toLowerCase(),
+      name: name.trim(),
+      description: description.trim(),
+    };
+    const officeExist = await modelOffice.findName(name);
     if (officeExist) {
       return Response.errorData(res, 400, 'office name exists already! try another');
     }
-    const data = Office.create(requestData);
-    return Response.validData(res, 201, data);
+    const data = await modelOffice.create(requestData);
+    return Response.validData(res, 201, [data]);
   }
 
   static getAllOffices(req, res) {
