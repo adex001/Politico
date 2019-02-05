@@ -19,8 +19,8 @@ class OfficeController {
     return Response.validData(res, 201, [data]);
   }
 
-  static getAllOffices(req, res) {
-    const data = Office.retrieveAll();
+  static async getAllOffices(req, res) {
+    const data = await modelOffice.retrieveAll();
     return Response.validData(res, 200, data);
   }
 
