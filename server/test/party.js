@@ -39,53 +39,6 @@ describe('Gets all Parties', () => {
   });
 });
 
-describe('Deletes a specific Political Party', () => {
-  it('should delete a political party', (done) => {
-    chai.request(app)
-      .delete('/api/v1/parties/1')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .end((err, response) => {
-        response.body.status.should.eql(200);
-        response.body.data.should.be.an('array');
-        done();
-      });
-  });
-  it('should not delete a party with invalid partyid', (done) => {
-    chai.request(app)
-      .delete('/api/v1/parties/1xx')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .end((err, response) => {
-        response.body.status.should.eql(400);
-        response.body.error.should.eql('invalid party id');
-        done();
-      });
-  });
-  it('should not delete a political party', (done) => {
-    chai.request(app)
-      .delete('/api/v1/parties/1')
-      .set('Accept', 'application/json')
-      .set('token', `${userToken}`)
-      .end((err, response) => {
-        response.status.should.eql(403);
-        response.body.status.should.eql(403);
-        response.body.error.should.eql('You do not have the permission to access this resource!');
-        done();
-      });
-  });
-  it('should return an error if political does not exist ', (done) => {
-    chai.request(app)
-      .delete('/api/v1/parties/10000000')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .end((err, response) => {
-        response.body.status.should.eql(404);
-        response.body.error.should.be.eql('party not found');
-        done();
-      });
-  });
-});
 describe('Tests to Create Political Party', () => {
   const partyObject = {
     logo: 'http://bit.ly',
@@ -265,6 +218,53 @@ describe('Gets a specific party', () => {
       .end((err, response) => {
         response.body.status.should.eql(404);
         response.body.error.should.eql('party not found');
+        done();
+      });
+  });
+});
+describe('Deletes a specific Political Party', () => {
+  it('should delete a political party', (done) => {
+    chai.request(app)
+      .delete('/api/v1/parties/1')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not delete a party with invalid partyid', (done) => {
+    chai.request(app)
+      .delete('/api/v1/parties/1xx')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('invalid party id');
+        done();
+      });
+  });
+  it('should not delete a political party', (done) => {
+    chai.request(app)
+      .delete('/api/v1/parties/1')
+      .set('Accept', 'application/json')
+      .set('token', `${userToken}`)
+      .end((err, response) => {
+        response.status.should.eql(403);
+        response.body.status.should.eql(403);
+        response.body.error.should.eql('You do not have the permission to access this resource!');
+        done();
+      });
+  });
+  it('should return an error if political does not exist ', (done) => {
+    chai.request(app)
+      .delete('/api/v1/parties/10000000')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(404);
+        response.body.error.should.be.eql('party not found');
         done();
       });
   });
