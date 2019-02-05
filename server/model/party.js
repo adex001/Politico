@@ -63,5 +63,20 @@ class Party {
       return false;
     }
   }
+
+  /**
+ * @function getOne
+ *  * @param {*} id
+ * @returns {*} retrieves a specific party
+ */
+  static async getOne(id) {
+    const query = 'SELECT partyid, name, address, logo FROM party WHERE partyid = $1';
+    try {
+      const result = await db.query(query, [id]);
+      return result.rows[0];
+    } catch (err) {
+      return false;
+    }
+  }
 }
 export default Party;

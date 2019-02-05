@@ -1,15 +1,6 @@
 import party from './db';
 
 class Party {
-  static getOne(id) {
-    const searcher = search => search.partyId === id;
-    const found = party.party.find(searcher);
-    if (found) {
-      return found;
-    }
-    return false;
-  }
-
   static delete(id) {
     const searcher = search => search.partyId === id;
     const found = party.party.find(searcher);
