@@ -27,5 +27,10 @@ class Office {
       return false;
     }
   }
+
+  static async retrieveAll() {
+    const result = await db.query('SELECT name, type, description FROM office');
+    return result.rows;
+  }
 }
 export default Office;
