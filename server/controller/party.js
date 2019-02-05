@@ -1,13 +1,28 @@
 /* eslint-disable no-restricted-globals */
 import Party from '../dummymodel/party';
+import modelParty from '../model/party';
 import Response from '../utilities/response';
 
-
+/**
+ * @class partyController
+ */
 class PartyController {
+  /**
+ * @function getAllParties
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} all parties
+ */
   static getAllParties(req, res) {
     const data = Party.getAll();
     return Response.validData(res, 200, data);
   }
+  /**
+ * @function getSpecificParty
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} the specific party
+ */
 
   static getSpecificParty(req, res) {
     let { partyId } = req.params;
@@ -17,6 +32,12 @@ class PartyController {
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'party not found');
   }
+  /**
+ * @function deleteParty
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} the deleted party
+ */
 
   static deleteParty(req, res) {
     let { partyId } = req.params;
@@ -27,14 +48,26 @@ class PartyController {
     return Response.errorData(res, 404, 'party not found');
   }
 
-  static createParty(req, res) {
+  /**
+ * @function createParty
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} the created party
+ */
+  static async createParty(req, res) {
     const { name, logo, address } = req.body;
     const partyObject = { name, address, logo };
-    if (Party.findName(name)) return Response.errorData(res, 400, 'Party name already exists!');
-    const data = Party.create(partyObject);
-    return Response.validData(res, 201, data);
+    if (await modelParty.findName(name)) return Response.errorData(res, 400, 'Party name already exists!');
+    const data = await modelParty.create(partyObject);
+    return Response.validData(res, 201, [data]);
   }
 
+  /**
+ * @function modifyParty
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} the modified party
+ */
   static modifyParty(req, res) {
     const { name, logo, address } = req.body;
     let { partyId } = req.params;
