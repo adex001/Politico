@@ -39,41 +39,6 @@ describe('Gets all Parties', () => {
   });
 });
 
-describe('Gets a specific party', () => {
-  it('should return a specific political party ', (done) => {
-    chai.request(app)
-      .get('/api/v1/parties/1')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .end((err, response) => {
-        response.body.status.should.eql(200);
-        response.body.data.should.be.an('array');
-        done();
-      });
-  });
-  it('should not get party with invalid partyid', (done) => {
-    chai.request(app)
-      .get('/api/v1/parties/1xx')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .end((err, response) => {
-        response.body.status.should.eql(400);
-        response.body.error.should.eql('invalid party id');
-        done();
-      });
-  });
-  it('should return a party not found error message ', (done) => {
-    chai.request(app)
-      .get('/api/v1/parties/10000000000')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .end((err, response) => {
-        response.body.status.should.eql(404);
-        response.body.error.should.eql('party not found');
-        done();
-      });
-  });
-});
 describe('Deletes a specific Political Party', () => {
   it('should delete a political party', (done) => {
     chai.request(app)
@@ -265,6 +230,41 @@ describe('Tests to Modify Political Party', () => {
       .end((err, response) => {
         response.body.status.should.eql(404);
         response.body.error.should.eql('Update failed! party not found!');
+        done();
+      });
+  });
+});
+describe('Gets a specific party', () => {
+  it('should return a specific political party ', (done) => {
+    chai.request(app)
+      .get('/api/v1/parties/1')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not get party with invalid partyid', (done) => {
+    chai.request(app)
+      .get('/api/v1/parties/1xx')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('invalid party id');
+        done();
+      });
+  });
+  it('should return a party not found error message ', (done) => {
+    chai.request(app)
+      .get('/api/v1/parties/10000000000')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(404);
+        response.body.error.should.eql('party not found');
         done();
       });
   });

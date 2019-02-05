@@ -24,11 +24,11 @@ class PartyController {
  * @returns {*} the specific party
  */
 
-  static getSpecificParty(req, res) {
+  static async getSpecificParty(req, res) {
     let { partyId } = req.params;
     partyId = Number(partyId);
     if (isNaN(partyId)) return Response.errorData(res, 400, 'invalid party id');
-    const data = Party.getOne(partyId);
+    const data = await modelParty.getOne(partyId);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'party not found');
   }
