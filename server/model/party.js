@@ -19,6 +19,17 @@ class Party {
     }
   }
 
+  static async modify(id, params) {
+    const { name, address, logo } = params;
+    const modifyQuery = 'UPDATE party SET name = $1, address = $2, logo = $3 WHERE partyid = $4 RETURNING *';
+    try {
+      const result = await db.query(modifyQuery, [name, address, logo, id]);
+      return result.rows[0];
+    } catch (err) {
+      return false;
+    }
+  }
+
   /**
  * @function findName
  * @param {*} name

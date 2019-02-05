@@ -68,13 +68,13 @@ class PartyController {
  * @param {*} res
  * @returns {*} the modified party
  */
-  static modifyParty(req, res) {
+  static async modifyParty(req, res) {
     const { name, logo, address } = req.body;
     let { partyId } = req.params;
     partyId = Number(partyId);
     if (isNaN(partyId)) return Response.errorData(res, 400, 'invalid party id');
     const partyObject = { name, address, logo };
-    const data = Party.modify(parseInt(partyId, 10), partyObject);
+    const data = await modelParty.modify(partyId, partyObject);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'Update failed! party not found!');
   }

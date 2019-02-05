@@ -234,7 +234,7 @@ describe('Tests to Modify Political Party', () => {
   };
   it('should modify a party ', (done) => {
     chai.request(app)
-      .patch('/api/v1/parties/2')
+      .patch('/api/v1/parties/1')
       .set('Accept', 'application/json')
       .set('token', `${adminToken}`)
       .send(partyObject)

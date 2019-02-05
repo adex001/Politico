@@ -23,17 +23,5 @@ class Party {
     }
     return false;
   }
-
-  static modify(id, params) {
-    const searcher = search => search.partyId === id;
-    const found = party.party.find(searcher);
-    if (found) {
-      found.name = params.name;
-      found.logo = params.logo;
-      found.address = params.address;
-      return found;
-    }
-    return false;
-  }
 }
 export default Party;
