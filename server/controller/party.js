@@ -1,5 +1,4 @@
 /* eslint-disable no-restricted-globals */
-import Party from '../dummymodel/party';
 import modelParty from '../model/party';
 import Response from '../utilities/response';
 
@@ -39,12 +38,12 @@ class PartyController {
  * @returns {*} the deleted party
  */
 
-  static deleteParty(req, res) {
+  static async deleteParty(req, res) {
     let { partyId } = req.params;
     partyId = Number(partyId);
     if (isNaN(partyId)) return Response.errorData(res, 400, 'invalid party id');
-    const data = Party.delete(partyId);
-    if (data) return Response.validData(res, 200, data);
+    const data = await modelParty.delete(partyId);
+    if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'party not found');
   }
 

@@ -78,5 +78,20 @@ class Party {
       return false;
     }
   }
+
+  /**
+ * @function delete
+ *  * @param {*} id
+ * @returns {*} deletes the specified party
+ */
+  static async delete(id) {
+    const deleteQuery = 'DELETE FROM party WHERE partyid = $1 RETURNING *';
+    try {
+      const result = await db.query(deleteQuery, [id]);
+      return result.rows[0];
+    } catch (err) {
+      return false;
+    }
+  }
 }
 export default Party;
