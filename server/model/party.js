@@ -19,6 +19,11 @@ class Party {
     }
   }
 
+  /**
+ * @function modify
+ * @param {*} params
+ * @returns {*} the created party
+ */
   static async modify(id, params) {
     const { name, address, logo } = params;
     const modifyQuery = 'UPDATE party SET name = $1, address = $2, logo = $3 WHERE partyid = $4 RETURNING *';
@@ -40,6 +45,20 @@ class Party {
     try {
       const result = await db.query(findQuery, [name]);
       return result.rows[0];
+    } catch (err) {
+      return false;
+    }
+  }
+
+  /**
+ * @function getAll
+ * @returns {*} retrieves all parties
+ */
+  static async getAll() {
+    const allQuery = 'SELECT * FROM party';
+    try {
+      const result = await db.query(allQuery);
+      return result.rows;
     } catch (err) {
       return false;
     }

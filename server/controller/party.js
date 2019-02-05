@@ -13,8 +13,8 @@ class PartyController {
  * @param {*} res
  * @returns {*} all parties
  */
-  static getAllParties(req, res) {
-    const data = Party.getAll();
+  static async getAllParties(req, res) {
+    const data = await modelParty.getAll();
     return Response.validData(res, 200, data);
   }
   /**
