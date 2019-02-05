@@ -1,8 +1,7 @@
 /* eslint-disable no-restricted-globals */
-import Office from '../dummymodel/office';
 import modelOffice from '../model/office';
 import Response from '../utilities/response';
-  /**
+/**
  * @class OfficeController
  */
 class OfficeController {
@@ -59,12 +58,12 @@ class OfficeController {
  * @param {*} res
  * @returns {*} the deleted office
  */
-  static deleteOffice(req, res) {
+  static async deleteOffice(req, res) {
     let { officeId } = req.params;
     officeId = Number(officeId);
     if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
-    const data = Office.delete(officeId);
-    if (data) return Response.validData(res, 200, data);
+    const data = await modelOffice.delete(officeId);
+    if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'Office does not exist');
   }
 
