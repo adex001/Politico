@@ -1,14 +1,19 @@
 language: node_js
-node_js: "8.11.1"
+node_js: 
+  - "node"
 
 notifications:
   email: false
 
+services:
+  - postgresql
+
 env:
   global:
-    - CC_TEST_REPORTER_ID=1483b924cb0df1f7f2d973afc21d5845ddd8c8118076f99cc6971db5d9beb7fe
+    - CC_TEST_REPORTER_ID=8ae132b8e54e2d8913f9d8ce0edafb103ae463fd6549055d84e108a5b1d7767c
 
 before_script:
+  - psql -c 'create database politico;' -U postgres
   - npm install nyc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -16,5 +21,10 @@ before_script:
 script:
   - nyc --reporter=lcov --reporter=text-lcov npm test
 
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
 after_success:
   npm run coverage
+  npm run coveralls
+  

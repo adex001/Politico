@@ -53,7 +53,7 @@ class Validator {
     if (typeof lastname !== 'string' || lastname.length < 2) {
       return Response.errorData(res, 400, 'Enter a valid Lastname! Lastname must be 2 or more characters.');
     }
-    if (typeof isAdmin !== 'undefined' || isAdmin === 'true' || isAdmin === 'false') {
+    if (isAdmin === 'true' || isAdmin === 'false') {
       const valid = true;
     } else {
       return Response.errorData(res, 400, 'Enter a valid admin status. isAdmin should be either true or false.');

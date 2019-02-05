@@ -1,4 +1,5 @@
 import User from '../dummymodel/user';
+import userModel from '../model/user';
 import TokenHandler from '../utilities/tokenHandler';
 import PasswordHasher from '../utilities/passwordHasher';
 import Response from '../utilities/response';
@@ -16,9 +17,9 @@ class AuthController {
       lastname,
       isAdmin,
     };
-    const data = User.getUser(email);
+    const data = await userModel.getUser(email);
     if (data) return Response.errorData(res, 400, 'Email exists already! try another!');
-    const payload = User.create(userObject);
+    const payload = await userModel.create(userObject);
     if (payload) {
       const payloadObject = {
         userId: payload.userId,
