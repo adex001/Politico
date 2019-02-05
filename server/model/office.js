@@ -76,5 +76,21 @@ class Office {
       return false;
     }
   }
+
+  /**
+ * @function delete
+ * @param {*} id
+ * @param {*} params
+ * @returns {*} the office modified
+ */
+  static async delete(id) {
+    const deleteQuery = 'DELETE FROM office WHERE officeid = $1 RETURNING *';
+    try {
+      const result = await db.query(deleteQuery, [id]);
+      return result.rows[0];
+    } catch (err) {
+      return false;
+    }
+  }
 }
 export default Office;

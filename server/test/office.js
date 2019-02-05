@@ -158,41 +158,6 @@ describe('Gets a specific Office', () => {
   });
 });
 
-describe('Deletes a specific government Office', () => {
-  it('should delete a government office ', (done) => {
-    chai.request(app)
-      .delete('/api/v1/offices/1')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .end((err, response) => {
-        response.body.status.should.eql(200);
-        response.body.data.should.be.an('array');
-        done();
-      });
-  });
-  it('should not delete an office with invalid url ', (done) => {
-    chai.request(app)
-      .delete('/api/v1/offices/2xx')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .end((err, response) => {
-        response.body.status.should.eql(400);
-        response.body.error.should.eql('invalid office id');
-        done();
-      });
-  });
-  it('should return an error if government office does not exist ', (done) => {
-    chai.request(app)
-      .delete('/api/v1/offices/10000000')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .end((err, response) => {
-        response.body.status.should.eql(404);
-        response.body.error.should.be.eql('Office does not exist');
-        done();
-      });
-  });
-});
 
 describe('Modify a specific government Office', () => {
   const updateOffice = {
@@ -233,6 +198,42 @@ describe('Modify a specific government Office', () => {
       .end((err, response) => {
         response.body.status.should.eql(404);
         response.body.error.should.be.eql('office not found');
+        done();
+      });
+  });
+});
+
+describe('Deletes a specific government Office', () => {
+  it('should delete a government office ', (done) => {
+    chai.request(app)
+      .delete('/api/v1/offices/1')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not delete an office with invalid url ', (done) => {
+    chai.request(app)
+      .delete('/api/v1/offices/2xx')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(400);
+        response.body.error.should.eql('invalid office id');
+        done();
+      });
+  });
+  it('should return an error if government office does not exist ', (done) => {
+    chai.request(app)
+      .delete('/api/v1/offices/10000000')
+      .set('Accept', 'application/json')
+      .set('token', `${adminToken}`)
+      .end((err, response) => {
+        response.body.status.should.eql(404);
+        response.body.error.should.be.eql('Office does not exist');
         done();
       });
   });
