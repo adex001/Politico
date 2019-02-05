@@ -1,4 +1,3 @@
-import User from '../dummymodel/user';
 import userModel from '../model/user';
 import TokenHandler from '../utilities/tokenHandler';
 import PasswordHasher from '../utilities/passwordHasher';
@@ -41,7 +40,7 @@ class AuthController {
 
   static async login(req, res) {
     const { email, password } = req.body;
-    const data = User.getUser(email);
+    const data = await userModel.getUser(email);
     if (!data) {
       return res.json({
         status: 400,
@@ -51,9 +50,9 @@ class AuthController {
     const passwordCorrect = await PasswordHasher.verify(password, data.password);
     if (!passwordCorrect) return Response.errorData(res, 400, 'invalid username or password');
     const payload = {
-      userId: data.userId,
+      userId: data.userid,
       email: data.email,
-      isAdmin: data.isAdmin,
+      isAdmin: data.isadmin,
     };
     const token = await TokenHandler.createToken(payload);
     payload.firstname = data.firstname;
