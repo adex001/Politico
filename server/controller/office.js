@@ -2,8 +2,16 @@
 import Office from '../dummymodel/office';
 import modelOffice from '../model/office';
 import Response from '../utilities/response';
-
+  /**
+ * @class OfficeController
+ */
 class OfficeController {
+  /**
+ * @function createGovernmentOffice
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} the created office
+ */
   static async createGovernmentOffice(req, res) {
     const { type, name, description } = req.body;
     const requestData = {
@@ -19,11 +27,23 @@ class OfficeController {
     return Response.validData(res, 201, [data]);
   }
 
+  /**
+ * @function getAllOffices
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} all offices
+ */
   static async getAllOffices(req, res) {
     const data = await modelOffice.retrieveAll();
     return Response.validData(res, 200, data);
   }
 
+  /**
+ * @function getUniqueOffice
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} a specific office
+ */
   static async getUniqueOffice(req, res) {
     let { officeId } = req.params;
     officeId = Number(officeId);
@@ -33,6 +53,12 @@ class OfficeController {
     return Response.errorData(res, 404, 'No such office');
   }
 
+  /**
+ * @function deleteOffice
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} the deleted office
+ */
   static deleteOffice(req, res) {
     let { officeId } = req.params;
     officeId = Number(officeId);
@@ -42,14 +68,20 @@ class OfficeController {
     return Response.errorData(res, 404, 'Office does not exist');
   }
 
-  static modifyOffice(req, res) {
+  /**
+ * @function modifyOffice
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} the office modified
+ */
+  static async modifyOffice(req, res) {
     let { officeId } = req.params;
     officeId = Number(officeId);
     if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
     const { type, name, description } = req.body;
     const officeObject = { type: type.toLowerCase(), name, description };
 
-    const data = Office.modify(officeId, officeObject);
+    const data = await modelOffice.modify(officeId, officeObject);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'office not found');
   }

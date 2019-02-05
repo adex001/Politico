@@ -1,6 +1,14 @@
 import db from '../database/connection';
 
+/**
+ * @class Office
+ */
 class Office {
+  /**
+ * @function create
+ * @param {*} params
+ * @returns {*} the created office
+ */
   static async create(params) {
     try {
       const officeObject = [params.type.trim(), params.name.trim(), params.description.trim()];
@@ -18,6 +26,11 @@ class Office {
     }
   }
 
+  /**
+ * @function findName
+ * @param {*} name
+ * @returns {*} the found office name
+ */
   static async findName(name) {
     try {
       const query = 'SELECT name FROM office WHERE name = $1';
@@ -28,14 +41,40 @@ class Office {
     }
   }
 
+  /**
+ * @function retrieveAll
+ * @returns {*} all offices
+ */
   static async retrieveAll() {
     const result = await db.query('SELECT name, type, description FROM office');
     return result.rows;
   }
 
+  /**
+ * @function findOne
+ * @param {*} id
+ * @returns {*} the found office
+ */
   static async findOne(id) {
     const result = await db.query('SELECT officeid, name, type, description FROM office WHERE officeid = $1', [id]);
     return result.rows[0];
+  }
+
+  /**
+ * @function modify
+ * @param {*} id
+ * @param {*} params
+ * @returns {*} the office modified
+ */
+  static async modify(id, params) {
+    try {
+      const modifyObject = [params.name, params.type, params.description, id];
+      const modifyQuery = 'UPDATE office SET name = $1, type = $2, description = $3 WHERE officeid = $4 RETURNING *';
+      const result = await db.query(modifyQuery, modifyObject);
+      return result.rows[0];
+    } catch (err) {
+      return false;
+    }
   }
 }
 export default Office;
