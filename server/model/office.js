@@ -37,5 +37,17 @@ class Office {
     const result = await db.query('SELECT officeid, name, type, description FROM office WHERE officeid = $1', [id]);
     return result.rows[0];
   }
+
+  static async modify(id, params) {
+    try {
+      const modifyObject = [params.name, params.type, params.description, id];
+      const modifyQuery = 'UPDATE office SET name = $1, type = $2, description = $3 WHERE officeid = $4 RETURNING *';
+      const result = await db.query(modifyQuery, modifyObject);
+      return result.rows[0];
+    }
+    catch (err) {
+      return false;
+    }
+  }
 }
 export default Office;

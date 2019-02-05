@@ -202,7 +202,7 @@ describe('Modify a specific government Office', () => {
   };
   it('should modify a government office ', (done) => {
     chai.request(app)
-      .patch('/api/v1/offices/2')
+      .patch('/api/v1/offices/1')
       .set('Accept', 'application/json')
       .set('token', `${adminToken}`)
       .send(updateOffice)
@@ -214,7 +214,7 @@ describe('Modify a specific government Office', () => {
   });
   it('should not modify an office with invalid url ', (done) => {
     chai.request(app)
-      .patch('/api/v1/offices/2xx')
+      .patch('/api/v1/offices/1xx')
       .set('Accept', 'application/json')
       .set('token', `${adminToken}`)
       .send(updateOffice)

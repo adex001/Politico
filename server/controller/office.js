@@ -42,14 +42,14 @@ class OfficeController {
     return Response.errorData(res, 404, 'Office does not exist');
   }
 
-  static modifyOffice(req, res) {
+  static async modifyOffice(req, res) {
     let { officeId } = req.params;
     officeId = Number(officeId);
     if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
     const { type, name, description } = req.body;
     const officeObject = { type: type.toLowerCase(), name, description };
 
-    const data = Office.modify(officeId, officeObject);
+    const data = await modelOffice.modify(officeId, officeObject);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'office not found');
   }
