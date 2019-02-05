@@ -29,15 +29,22 @@ const createTableOffice = `CREATE TABLE IF NOT EXISTS office (
   description varchar(200),
   office_creation TIMESTAMPTZ DEFAULT NOW()
 )`;
-const dropTables = 'DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS office';
+const createTableParty = `CREATE TABLE IF NOT EXISTS party (
+  partyid serial PRIMARY KEY,
+  address varchar(100),
+  name varchar(50),
+  logo varchar(200),
+  party_creation TIMESTAMPTZ DEFAULT NOW()
+)`;
+const dropTables = 'DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS office; DROP TABLE IF EXISTS party';
 
 const db = (process.env.NODE_ENV === 'test') ? new Pool(testConfig) : new Pool();
 const dev = process.env.NODE_ENV;
 (async () => {
   if (dev === 'test') {
-    await db.query(`${dropTables}; ${createTableUsers}; ${createTableOffice}`);
+    await db.query(`${dropTables}; ${createTableUsers}; ${createTableOffice}; ${createTableParty}`);
   } else {
-    await db.query(`${createTableUsers}; ${createTableOffice}`);
+    await db.query(`${createTableUsers}; ${createTableOffice}; ${createTableParty}`);
   }
   return true;
 })();

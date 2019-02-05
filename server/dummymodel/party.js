@@ -14,15 +14,6 @@ class Party {
     return false;
   }
 
-  static findName(name) {
-    const searcher = search => search.name === name;
-    const found = party.party.find(searcher);
-    if (found) {
-      return found;
-    }
-    return false;
-  }
-
   static delete(id) {
     const searcher = search => search.partyId === id;
     const found = party.party.find(searcher);
@@ -31,17 +22,6 @@ class Party {
       return party.party;
     }
     return false;
-  }
-
-  static create(params) {
-    const partyObject = {
-      partyId: party.party[party.party.length - 1].partyId + 1,
-      address: params.address,
-      name: params.name,
-      logo: params.logo,
-    };
-    party.party.push(partyObject);
-    return [party.party[party.party.length - 1]];
   }
 
   static modify(id, params) {
