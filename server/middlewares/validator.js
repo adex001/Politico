@@ -53,7 +53,7 @@ class Validator {
     if (typeof lastname !== 'string' || lastname.length < 2) {
       return Response.errorData(res, 400, 'Enter a valid Lastname! Lastname must be 2 or more characters.');
     }
-    if (isAdmin === 'true' || isAdmin === 'false') {
+    if (isAdmin === true || isAdmin === false || isAdmin === 'true' || isAdmin === 'false') {
       const valid = true;
     } else {
       return Response.errorData(res, 400, 'Enter a valid admin status. isAdmin should be either true or false.');
@@ -68,6 +68,17 @@ class Validator {
     }
     if (typeof password !== 'string' || password.length < 6) {
       return Response.errorData(res, 400, 'Enter a valid password! password must be greater than 6 characters.');
+    }
+    return next();
+  }
+
+  static validateInterest(req, res, next) {
+    const { officename, partyname } = req.body;
+    if (typeof officename !== 'string' || officename.length < 3) {
+      return Response.errorData(res, 400, 'Please, enter a valid office name! Office Name must be greater than 3 characters');
+    }
+    if (typeof partyname !== 'string' || partyname.length < 3) {
+      return Response.errorData(res, 400, 'Please, enter a valid party name! Party Name must be greater than 3 characters');
     }
     return next();
   }

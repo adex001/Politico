@@ -33,7 +33,7 @@ class Office {
  */
   static async findName(name) {
     try {
-      const query = 'SELECT name FROM office WHERE name = $1';
+      const query = 'SELECT name, officeid FROM office WHERE name = $1';
       const result = await db.query(query, [name]);
       return result.rows[0];
     } catch (err) {
@@ -80,7 +80,6 @@ class Office {
   /**
  * @function delete
  * @param {*} id
- * @param {*} params
  * @returns {*} the office modified
  */
   static async delete(id) {

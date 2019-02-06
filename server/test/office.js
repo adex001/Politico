@@ -5,7 +5,7 @@ import { it, describe } from 'mocha';
 
 import app from '../app';
 
-const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoiYWRleDAwM0BnbWFpbC5jb20iLCJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTU0OTEwMDU3Nn0.6Gmn2cOMMQcn715rZJaqoOTXwp5KjnR-_sK0prZmrnw';
+const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWRleDAwMkBnbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDk0NTExNzh9.bIohzogjDYx1ic2cOnqBRfcusYl1I12dumcgRZKO8fA';
 chai.use(chaiHttp);
 chai.should();
 

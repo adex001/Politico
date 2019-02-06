@@ -7,15 +7,20 @@ import app from '../app';
 
 chai.use(chaiHttp);
 chai.should();
-const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoiYWRleDAwM0BnbWFpbC5jb20iLCJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTU0OTEwMDU3Nn0.6Gmn2cOMMQcn715rZJaqoOTXwp5KjnR-_sK0prZmrnw';
-const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoiYWRleDAwM0BnbWFpbC5jb20iLCJpc0FkbWluIjoiZmFsc2UiLCJpYXQiOjE1NDkxNDg1Mzh9.AqKWn5j5350xgkb0KMjwrZDNM-W0Ajdyk4fOrsL7AlI';
+let adminToken;
+let userToken;
 const userObject = {
   email: 'adex002@gmail.com',
   password: 'password',
 };
 
+const userObject2 = {
+  email: 'adex004@gmail.com',
+  password: 'password',
+};
+
 describe('Gets all Parties', () => {
-  it('should login a user ', (done) => {
+  it('should login an admin user ', (done) => {
     chai.request(app)
       .post('/api/v1/auth/login')
       .set('Accept', 'application/json')
@@ -23,6 +28,19 @@ describe('Gets all Parties', () => {
       .end((err, response) => {
         response.body.status.should.eql(200);
         response.body.data.should.be.an('array');
+        adminToken = response.body.data[0].token;
+        done();
+      });
+  });
+  it('should login a user ', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .set('Accept', 'application/json')
+      .send(userObject2)
+      .end((err, response) => {
+        response.body.status.should.eql(200);
+        response.body.data.should.be.an('array');
+        userToken = response.body.data[0].token;
         done();
       });
   });

@@ -13,13 +13,31 @@ describe('Tests to create a User', () => {
     firstname: 'Adeoye',
     lastname: 'Ebenezer',
     password: 'password',
-    isAdmin: 'true',
+    isAdmin: true,
   };
   it('should create a user ', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .set('Accept', 'application/json')
       .send(userObject)
+      .end((err, response) => {
+        response.body.status.should.eql(201);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  const userObject2 = {
+    email: 'adex004@gmail.com',
+    firstname: 'Adeoye',
+    lastname: 'Ebenezer',
+    password: 'password',
+    isAdmin: false,
+  };
+  it('should create a user ', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .set('Accept', 'application/json')
+      .send(userObject2)
       .end((err, response) => {
         response.body.status.should.eql(201);
         response.body.data.should.be.an('array');
