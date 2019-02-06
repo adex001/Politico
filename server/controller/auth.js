@@ -35,7 +35,7 @@ class AuthController {
       },
       ]);
     }
-    return Response.errorData(res, 400, 'User not found');
+    return Response.errorData(res, 500, 'Internal server error!');
   }
 
   static async login(req, res) {

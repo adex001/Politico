@@ -6,7 +6,7 @@ import modelOffice from './office';
    */
 class Candidate {
 /**
- * @function approveCandidate
+ * @function becomeCandidate
  * @param {*} params
  * @returns {*} the candidate approved
  */
@@ -19,6 +19,21 @@ class Candidate {
       const { officeid } = office;
       const candidateObject = [officeid, partyid, params.userId];
       const result = await db.query(bcomQuery, candidateObject);
+      return result.rows[0];
+    } catch (err) {
+      return false;
+    }
+  }
+
+  /**
+ * @function findCandidate
+ * @param {*} id userid
+ * @returns {*} the candidate found
+ */
+  static async findCandidate(id) {
+    const findQuery = 'SELECT * FROM candidate WHERE candidateid = $1';
+    try {
+      const result = await db.query(findQuery, [id]);
       return result.rows[0];
     } catch (err) {
       return false;
@@ -46,7 +61,7 @@ class Candidate {
  * @function checkOfficename
  * @param {*} officename
  * @param {*} userId
- * @returns {*} the candidate party name
+ * @returns {*} the candidate office name
  */
   static async checkOfficeName(officename, userId) {
     const query = 'SELECT officeid FROM candidate WHERE officeid = $1 AND userid = $2';

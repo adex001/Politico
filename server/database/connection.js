@@ -44,15 +44,22 @@ const createTableCandidate = `CREATE TABLE IF NOT EXISTS candidate (
   isapproved boolean DEFAULT false,
   creationtime TIMESTAMPTZ DEFAULT NOW()
 )`;
-const dropTables = 'DROP TABLE IF EXISTS users CASCADE; DROP TABLE IF EXISTS office CASCADE; DROP TABLE IF EXISTS party CASCADE; DROP TABLE IF EXISTS candidate CASCADE';
+const createTableVote = `CREATE TABLE IF NOT EXISTS vote (
+  voteid serial PRIMARY KEY,
+  officeid SERIAL REFERENCES office(officeid),
+  userid serial REFERENCES users(userid),
+  candidateid serial REFERENCES candidate(candidateid),
+  vote_creation TIMESTAMPTZ DEFAULT NOW()
+)`;
+const dropTables = 'DROP TABLE IF EXISTS users CASCADE; DROP TABLE IF EXISTS office CASCADE; DROP TABLE IF EXISTS party CASCADE; DROP TABLE IF EXISTS candidate CASCADE;  DROP TABLE IF EXISTS vote CASCADE';
 
 const db = (process.env.NODE_ENV === 'test') ? new Pool(testConfig) : new Pool();
 const dev = process.env.NODE_ENV;
 (async () => {
   if (dev === 'test') {
-    await db.query(`${dropTables}; ${createTableUsers}; ${createTableOffice}; ${createTableParty}; ${createTableCandidate}`);
+    await db.query(`${dropTables}; ${createTableUsers}; ${createTableOffice}; ${createTableParty}; ${createTableCandidate}; ${createTableVote}`);
   } else {
-    await db.query(`${createTableUsers}; ${createTableOffice}; ${createTableParty}; ${createTableCandidate}`);
+    await db.query(`${createTableUsers}; ${createTableOffice}; ${createTableParty}; ${createTableCandidate}; ${createTableVote}`);
   }
   return true;
 })();
