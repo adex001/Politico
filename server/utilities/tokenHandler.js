@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Response from '../utilities/response';
+import Response from './response';
 
 class TokenHandler {
   static async createToken(payload) {

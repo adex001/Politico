@@ -41,7 +41,7 @@ class Party {
  * @returns {*} the name of party
  */
   static async findName(name) {
-    const findQuery = 'SELECT name FROM party WHERE name = $1';
+    const findQuery = 'SELECT name, partyid FROM party WHERE name = $1';
     try {
       const result = await db.query(findQuery, [name]);
       return result.rows[0];
