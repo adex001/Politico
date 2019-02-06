@@ -81,7 +81,6 @@ describe('Users should be able to express interest for a government office', () 
       .set('token', `${adminToken}`)
       .send(expressObject)
       .end((err, response) => {
-        console.log(response.body.error);
         response.body.status.should.eql(201);
         response.body.data.should.be.an('array');
         done();

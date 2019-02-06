@@ -12,12 +12,12 @@ class Candidate {
  */
   static async becomeCandidate(params) {
     const bcomQuery = 'INSERT INTO candidate (officeid, partyid, userid) VALUES ($1, $2, $3) RETURNING *';
-    const party = await modelParty.findName(params.partyname);
-    const { partyid } = party;
-    const office = await modelOffice.findName(params.officename);
-    const { officeid } = office;
-    const candidateObject = [officeid, partyid, params.userId];
     try {
+      const party = await modelParty.findName(params.partyname);
+      const { partyid } = party;
+      const office = await modelOffice.findName(params.officename);
+      const { officeid } = office;
+      const candidateObject = [officeid, partyid, params.userId];
       const result = await db.query(bcomQuery, candidateObject);
       return result.rows[0];
     } catch (err) {
@@ -32,9 +32,9 @@ class Candidate {
  */
   static async checkPartyName(partyname, userId) {
     const query = 'SELECT partyid FROM candidate WHERE partyid = $1 AND userid = $2';
-    const party = await modelParty.findName(partyname);
-    const { partyid } = party;
     try {
+      const party = await modelParty.findName(partyname);
+      const { partyid } = party;
       const result = await db.query(query, [partyid, userId]);
       return result.rows[0];
     } catch (err) {
@@ -50,9 +50,9 @@ class Candidate {
  */
   static async checkOfficeName(officename, userId) {
     const query = 'SELECT officeid FROM candidate WHERE officeid = $1 AND userid = $2';
-    const office = await modelOffice.findName(officename);
-    const { officeid } = office;
     try {
+      const office = await modelOffice.findName(officename);
+      const { officeid } = office;
       const result = await db.query(query, [officeid, userId]);
       return result.rows[0];
     } catch (err) {
