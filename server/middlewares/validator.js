@@ -120,5 +120,20 @@ class Validator {
     }
     return next();
   }
+  /**
+ * @function validateEmail
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
+
+  static validateEmail(req, res, next) {
+    const { email } = req.body;
+    if (typeof email === 'undefined' || !validator.isEmail(email)) {
+      return Response.errorData(res, 400, 'Enter a valid email address');
+    }
+    return next();
+  }
 }
 export default Validator;

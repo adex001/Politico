@@ -3,7 +3,16 @@ import TokenHandler from '../utilities/tokenHandler';
 import PasswordHasher from '../utilities/passwordHasher';
 import Response from '../utilities/response';
 
+/**
+ * @class AuthController
+ */
 class AuthController {
+  /**
+     * @function signup
+     * @req request object
+     * @res response object
+     * @returns {*} the token and the created user
+     */
   static async signup(req, res) {
     const {
       email, password, firstname, lastname, isAdmin,
@@ -38,6 +47,12 @@ class AuthController {
     return Response.errorData(res, 500, 'Internal server error!');
   }
 
+  /**
+     * @function login
+     * @req request object
+     * @res response object
+     * @returns {*} the token and the login user
+     */
   static async login(req, res) {
     const { email, password } = req.body;
     const data = await userModel.getUser(email);
@@ -62,6 +77,19 @@ class AuthController {
       user: payload,
     },
     ]);
+  }
+
+  /**
+     * @function forgotPassword
+     * @req request object
+     * @res response object
+     * @returns {*} displays the password and sends a message to the email
+     */
+  static async forgotPassword(req, res) {
+    const { email } = req.body;
+    const emailUser = await userModel.getUser(email);
+    if (!emailUser) return Response.errorData(res, 400, 'Invalid email address!');
+    // 
   }
 }
 
