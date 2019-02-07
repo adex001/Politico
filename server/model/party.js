@@ -9,8 +9,8 @@ class Party {
  * @returns {*} the created party
  */
   static async create(params) {
-    const createQuery = 'INSERT INTO party (name, address, logo) VALUES ($1, $2, $3) RETURNING *';
-    const partyObject = [params.name, params.address, params.logoUrl];
+    const createQuery = 'INSERT INTO party (name, address, logo) VALUES ($1, $2, $3) RETURNING partyid, name, address, logo AS logoUrl';
+    const partyObject = [params.name.trim(), params.address.trim(), params.logoUrl.trim()];
     try {
       const result = await db.query(createQuery, partyObject);
       return result.rows[0];
@@ -26,9 +26,9 @@ class Party {
  */
   static async modify(id, params) {
     const { name, address, logoUrl } = params;
-    const modifyQuery = 'UPDATE party SET name = $1, address = $2, logo = $3 WHERE partyid = $4 RETURNING *';
+    const modifyQuery = 'UPDATE party SET name = $1, address = $2, logo = $3 WHERE partyid = $4 RETURNING partyid, name, address, logo AS logoUrl';
     try {
-      const result = await db.query(modifyQuery, [name, address, logoUrl, id]);
+      const result = await db.query(modifyQuery, [name.trim(), address.trim(), logoUrl.trim(), id]);
       return result.rows[0];
     } catch (err) {
       return false;
@@ -43,7 +43,7 @@ class Party {
   static async findName(name) {
     const findQuery = 'SELECT name, partyid FROM party WHERE name = $1';
     try {
-      const result = await db.query(findQuery, [name]);
+      const result = await db.query(findQuery, [name.trim()]);
       return result.rows[0];
     } catch (err) {
       return false;

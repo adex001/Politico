@@ -42,13 +42,13 @@ class Validator {
  */
   static validateParty(req, res, next) {
     const { name, logoUrl, address } = req.body;
-    if (typeof name !== 'string' || name.length < 3) {
+    if (typeof name !== 'string' || name.trim().length < 3) {
       return Response.errorData(res, 400, 'Please, enter a valid name! Name must be greater than 3 characters');
     }
-    if (typeof logoUrl !== 'string' || !validator.isURL(logoUrl)) {
+    if (typeof logoUrl !== 'string' || !validator.isURL(logoUrl.trim())) {
       return Response.errorData(res, 400, 'Please, enter a valid logo URL!');
     }
-    if (typeof address !== 'string' || address.length < 5) {
+    if (typeof address !== 'string' || address.trim().length < 5) {
       return Response.errorData(res, 400, 'Please, enter a valid address and address must be greater than 5 characters');
     }
     return next();
@@ -72,16 +72,16 @@ class Validator {
         return Response.errorData(res, 400, 'Enter a valid admin status. isAdmin should be either true or false.');
       }
     }
-    if (typeof email === 'undefined' || !validator.isEmail(email)) {
+    if (typeof email === 'undefined' || !validator.isEmail(email.trim())) {
       return Response.errorData(res, 400, 'Enter a valid email address');
     }
-    if (typeof password !== 'string' || password.length < 6) {
+    if (typeof password !== 'string' || password.trim().length < 6) {
       return Response.errorData(res, 400, 'Enter a valid password! password must be greater than 6 characters.');
     }
-    if (typeof firstname !== 'string' || firstname.length < 2) {
+    if (typeof firstname !== 'string' || firstname.trim().length < 2) {
       return Response.errorData(res, 400, 'Enter a valid Firstname! Firstname must be 2 or more characters.');
     }
-    if (typeof lastname !== 'string' || lastname.length < 2) {
+    if (typeof lastname !== 'string' || lastname.trim().length < 2) {
       return Response.errorData(res, 400, 'Enter a valid Lastname! Lastname must be 2 or more characters.');
     }
     return next();
@@ -96,10 +96,10 @@ class Validator {
  */
   static validateUserLogin(req, res, next) {
     const { email, password } = req.body;
-    if (typeof email === 'undefined' || !validator.isEmail(email)) {
+    if (typeof email === 'undefined' || !validator.isEmail(email.trim())) {
       return Response.errorData(res, 400, 'Enter a valid email address');
     }
-    if (typeof password !== 'string' || password.length < 6) {
+    if (typeof password !== 'string' || password.trim().length < 6) {
       return Response.errorData(res, 400, 'Enter a valid password! password must be greater than 6 characters.');
     }
     return next();

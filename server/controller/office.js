@@ -14,7 +14,7 @@ class OfficeController {
   static async createGovernmentOffice(req, res) {
     const { type, name, description } = req.body;
     const requestData = {
-      type: type.toLowerCase(),
+      type: type.trim().toLowerCase(),
       name: name.trim(),
       description: description.trim(),
     };
@@ -62,9 +62,10 @@ class OfficeController {
     let { officeId } = req.params;
     officeId = Number(officeId);
     if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
+    if (!await modelOffice.findOne(officeId)) return Response.errorData(res, 404, 'Office does not exist');
     const data = await modelOffice.delete(officeId);
     if (data) return Response.validData(res, 200, [data]);
-    return Response.errorData(res, 404, 'Office does not exist');
+    return Response.errorData(res, 500, 'Internal server error');
   }
 
   /**
@@ -78,11 +79,11 @@ class OfficeController {
     officeId = Number(officeId);
     if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
     const { type, name, description } = req.body;
-    const officeObject = { type: type.toLowerCase(), name, description };
-
+    if (!await modelOffice.findOne(officeId)) return Response.errorData(res, 404, 'office not found');
+    const officeObject = { type: type.trim().toLowerCase(), name: name.trim(), description: description.trim() };
     const data = await modelOffice.modify(officeId, officeObject);
     if (data) return Response.validData(res, 200, [data]);
-    return Response.errorData(res, 404, 'office not found');
+    return Response.errorData(res, 500, 'Internal server error');
   }
 }
 

@@ -200,7 +200,7 @@ describe('Tests to Modify Political Party', () => {
       .send(partyObject)
       .end((err, response) => {
         response.body.status.should.eql(404);
-        response.body.error.should.eql('Update failed! party not found!');
+        response.body.error.should.eql('No such party');
         done();
       });
   });
