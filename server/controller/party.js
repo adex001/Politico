@@ -54,8 +54,8 @@ class PartyController {
  * @returns {*} the created party
  */
   static async createParty(req, res) {
-    const { name, logo, address } = req.body;
-    const partyObject = { name, address, logo };
+    const { name, logoUrl, address } = req.body;
+    const partyObject = { name, address, logoUrl };
     if (await modelParty.findName(name)) return Response.errorData(res, 400, 'Party name already exists!');
     const data = await modelParty.create(partyObject);
     return Response.validData(res, 201, [data]);
@@ -68,11 +68,11 @@ class PartyController {
  * @returns {*} the modified party
  */
   static async modifyParty(req, res) {
-    const { name, logo, address } = req.body;
+    const { name, logoUrl, address } = req.body;
     let { partyId } = req.params;
     partyId = Number(partyId);
     if (isNaN(partyId)) return Response.errorData(res, 400, 'invalid party id');
-    const partyObject = { name, address, logo };
+    const partyObject = { name, address, logoUrl };
     const data = await modelParty.modify(partyId, partyObject);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'Update failed! party not found!');

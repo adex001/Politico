@@ -10,7 +10,7 @@ class Party {
  */
   static async create(params) {
     const createQuery = 'INSERT INTO party (name, address, logo) VALUES ($1, $2, $3) RETURNING *';
-    const partyObject = [params.name, params.address, params.logo];
+    const partyObject = [params.name, params.address, params.logoUrl];
     try {
       const result = await db.query(createQuery, partyObject);
       return result.rows[0];
@@ -25,10 +25,10 @@ class Party {
  * @returns {*} the created party
  */
   static async modify(id, params) {
-    const { name, address, logo } = params;
+    const { name, address, logoUrl } = params;
     const modifyQuery = 'UPDATE party SET name = $1, address = $2, logo = $3 WHERE partyid = $4 RETURNING *';
     try {
-      const result = await db.query(modifyQuery, [name, address, logo, id]);
+      const result = await db.query(modifyQuery, [name, address, logoUrl, id]);
       return result.rows[0];
     } catch (err) {
       return false;

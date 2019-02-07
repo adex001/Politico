@@ -46,7 +46,7 @@ describe('Users should be able to express interest for a government office', () 
       });
   });
   const partyObject = {
-    logo: 'http://bit.ly',
+    logoUrl: 'http://bit.ly',
     name: 'Peoples Democratic Party',
     address: '21, Ilupeju road, Ikeja',
   };

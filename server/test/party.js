@@ -59,7 +59,7 @@ describe('Gets all Parties', () => {
 
 describe('Tests to Create Political Party', () => {
   const partyObject = {
-    logo: 'http://bit.ly',
+    logoUrl: 'http://bit.ly',
     name: 'Modern Youth Political party',
     address: '21, Ilupeju road, Ikeja',
   };
@@ -91,10 +91,10 @@ describe('Tests to Create Political Party', () => {
 describe('Handle Validation for Parties', () => {
   const noAddress = {
     name: 'Modern Youth Political party',
-    logo: 'http:bit.ly/mypp',
+    logoUrl: 'http://bit.ly/mypp',
   };
   const noName = {
-    logo: 'http:bit.ly/mypp',
+    logoUrl: 'http://bit.ly/mypp',
     address: '21, Ilupeju road, Ikeja',
   };
   const noLogo = {
@@ -108,7 +108,7 @@ describe('Handle Validation for Parties', () => {
       .set('Accept', 'application/json')
       .send(noAddress)
       .end((err, response) => {
-        response.body.status.should.eql(400);
+        response.body.status.should.eql(401);
         response.body.error.should.be.eql('No token provided!');
         done();
       });
@@ -120,7 +120,7 @@ describe('Handle Validation for Parties', () => {
       .set('token', errorToken)
       .send(noAddress)
       .end((err, response) => {
-        response.body.status.should.eql(400);
+        response.body.status.should.eql(401);
         response.body.error.should.be.eql('Token cannot be verified');
         done();
       });
@@ -164,7 +164,7 @@ describe('Handle Validation for Parties', () => {
 });
 describe('Tests to Modify Political Party', () => {
   const partyObject = {
-    logo: 'http://bit.ly/modified',
+    logoUrl: 'http://bit.ly/modified',
     name: 'Modern Youth Political party Modified',
     address: '21, Ilupeju road, Ikeja modified',
   };

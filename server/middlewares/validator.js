@@ -41,11 +41,11 @@ class Validator {
  * @returns {*} the next function
  */
   static validateParty(req, res, next) {
-    const { name, logo, address } = req.body;
+    const { name, logoUrl, address } = req.body;
     if (typeof name !== 'string' || name.length < 3) {
       return Response.errorData(res, 400, 'Please, enter a valid name! Name must be greater than 3 characters');
     }
-    if (typeof logo !== 'string' || logo.length < 5) {
+    if (typeof logoUrl !== 'string' || !validator.isURL(logoUrl)) {
       return Response.errorData(res, 400, 'Please, enter a valid logo URL!');
     }
     if (typeof address !== 'string' || address.length < 5) {
