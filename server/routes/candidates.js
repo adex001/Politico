@@ -8,6 +8,6 @@ import isAdmin from '../middlewares/isadmin';
 const candidateRoute = Router();
 
 candidateRoute.get('/office/:officeId/result', TokenHandler.verifyToken, VoteController.voteResult);
-candidateRoute.post('/office/:userId/register', isAdmin, TokenHandler.verifyToken, Validator.validateInterest, CandidateController.expressInterest);
+candidateRoute.post('/office/:userId/register', TokenHandler.verifyToken, isAdmin, Validator.validateInterest, CandidateController.expressInterest);
 
 export default candidateRoute;

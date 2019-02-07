@@ -13,7 +13,7 @@ class Vote {
       const result = await db.query(voteQuery, voteObject);
       return result.rows[0];
     } catch (err) {
-      return err;
+      return false;
     }
   }
 

@@ -19,7 +19,7 @@ class VoteController {
     const findCandidate = await Candidate.findCandidate(candidateid);
     if (!findOffice) return Response.errorData(res, 404, 'Office not found');
     if (!findCandidate) return Response.errorData(res, 404, 'Candidate not found');
-    if (findCandidate.officeid !== officeid) return Response.errorData(res, 400, 'Candidate not going for the right office');
+    if (findCandidate.officeid !== officeid) return Response.errorData(res, 400, 'Invalid office chosen for candidate');
     const checkIfVoted = await voteModel.checkVote(officeid, userId);
     if (checkIfVoted) return Response.errorData(res, 400, 'Candidate has been voted for previously');
     const params = { officeid, candidateid, userId };

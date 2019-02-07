@@ -6,6 +6,6 @@ import TokenHandler from '../utilities/tokenHandler';
 
 const voteRouter = Router();
 
-voteRouter.post('/', TokenHandler.verifyToken, VoteController.vote);
+voteRouter.post('/', TokenHandler.verifyToken, Validator.validateVote, VoteController.vote);
 
 export default voteRouter;

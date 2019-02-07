@@ -46,7 +46,7 @@ class Office {
  * @returns {*} all offices
  */
   static async retrieveAll() {
-    const result = await db.query('SELECT name, type, description FROM office');
+    const result = await db.query('SELECT officeid, name, type, description FROM office');
     return result.rows;
   }
 
