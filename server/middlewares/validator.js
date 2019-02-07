@@ -1,7 +1,17 @@
 import validator from 'validator';
 import Response from '../utilities/response';
 
+/**
+ * @class Validator
+ */
 class Validator {
+  /**
+ * @function validateOffice
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
   static validateOffice(req, res, next) {
     let { name, type, description } = req.body;
     // eslint-disable-next-line no-unused-vars
@@ -23,6 +33,13 @@ class Validator {
     return next();
   }
 
+  /**
+ * @function validateParty
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
   static validateParty(req, res, next) {
     const { name, logo, address } = req.body;
     if (typeof name !== 'string' || name.length < 3) {
@@ -37,6 +54,13 @@ class Validator {
     return next();
   }
 
+  /**
+ * @function validateUserSignUp
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
   static validateUserSignUp(req, res, next) {
     const {
       email, password, firstname, lastname, isAdmin,
@@ -61,6 +85,13 @@ class Validator {
     return next();
   }
 
+  /**
+ * @function validateUserLogin
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
   static validateUserLogin(req, res, next) {
     const { email, password } = req.body;
     if (typeof email === 'undefined' || !validator.isEmail(email)) {
@@ -72,6 +103,13 @@ class Validator {
     return next();
   }
 
+  /**
+ * @function validateInterest
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
   static validateInterest(req, res, next) {
     const { officename, partyname } = req.body;
     if (typeof officename !== 'string' || officename.length < 3) {

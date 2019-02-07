@@ -13,7 +13,6 @@ class VoteController {
   static async vote(req, res) {
     let { officeid, candidateid } = req.body;
     const { userId } = req.decoded;
-    // Validate if office and candidateid exists
     officeid = Number(officeid);
     candidateid = Number(candidateid);
     const findOffice = await modelOffice.findOne(officeid);
@@ -21,13 +20,28 @@ class VoteController {
     if (!findOffice) return Response.errorData(res, 404, 'Office not found');
     if (!findCandidate) return Response.errorData(res, 404, 'Candidate not found');
     if (findCandidate.officeid !== officeid) return Response.errorData(res, 400, 'Candidate not going for the right office');
-    // Chek if the office has not been voted for before
     const checkIfVoted = await voteModel.checkVote(officeid, userId);
     if (checkIfVoted) return Response.errorData(res, 400, 'Candidate has been voted for previously');
     const params = { officeid, candidateid, userId };
     const data = await voteModel.castVote(params);
     if (!data) return Response.errorData(res, 500, 'internal server error');
     return Response.validData(res, 201, data);
+  }
+
+  /**
+ * @function voteResult
+ * @param {*} req request object
+ * @param {*} res response object
+ * @returns {*} a vote to the candidate
+ */
+  static async voteResult(req, res) {
+    let { officeId } = req.params;
+    officeId = Number(officeId);
+    if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid parameters');
+    const voteResult = await voteModel.checkResult(officeId);
+    if (typeof voteResult === 'string') return Response.errorData(res, 404, 'office not found!');
+    if (!voteResult) return Response.errorData(res, 500, 'internal server error');
+    return Response.validData(res, 200, voteResult);
   }
 }
 
