@@ -62,18 +62,6 @@ describe('Users should be able to express interest for a government office', () 
         done();
       });
   });
-  it('should return an error when you express interest for another user ', (done) => {
-    chai.request(app)
-      .post('/api/v1/office/5/register')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .send(expressObject)
-      .end((err, response) => {
-        response.body.status.should.eql(400);
-        response.body.error.should.eql('you cannot express interest for another user');
-        done();
-      });
-  });
   it('should express interest for an office', (done) => {
     chai.request(app)
       .post('/api/v1/office/1/register')

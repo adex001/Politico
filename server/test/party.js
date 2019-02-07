@@ -271,7 +271,7 @@ describe('Deletes a specific Political Party', () => {
       .end((err, response) => {
         response.status.should.eql(403);
         response.body.status.should.eql(403);
-        response.body.error.should.eql('You do not have the permission to access this resource!');
+        response.body.error.should.eql('Requires admin authorization');
         done();
       });
   });

@@ -15,8 +15,8 @@ class OfficeController {
     const { type, name, description } = req.body;
     const requestData = {
       type: type.trim().toLowerCase(),
-      name: name.trim(),
-      description: description.trim(),
+      name: name.replace(/\s+/g, ' ').trim(),
+      description: description.replace(/\s+/g, ' ').trim(),
     };
     const officeExist = await modelOffice.findName(name);
     if (officeExist) {
@@ -44,9 +44,9 @@ class OfficeController {
  * @returns {*} a specific office
  */
   static async getUniqueOffice(req, res) {
-    let { officeId } = req.params;
-    officeId = Number(officeId);
-    if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
+    const { officeId } = req.params;
+    // officeId = Number(officeId);
+    if (!(/^[\d]+$/.test(officeId))) return Response.errorData(res, 400, 'invalid office id');
     const data = await modelOffice.findOne(officeId);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'No such office');
@@ -59,9 +59,8 @@ class OfficeController {
  * @returns {*} the deleted office
  */
   static async deleteOffice(req, res) {
-    let { officeId } = req.params;
-    officeId = Number(officeId);
-    if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
+    const { officeId } = req.params;
+    if (!(/^[\d]+$/.test(officeId))) return Response.errorData(res, 400, 'invalid office id');
     if (!await modelOffice.findOne(officeId)) return Response.errorData(res, 404, 'Office does not exist');
     const data = await modelOffice.delete(officeId);
     if (data) return Response.validData(res, 200, [data]);
@@ -75,12 +74,11 @@ class OfficeController {
  * @returns {*} the office modified
  */
   static async modifyOffice(req, res) {
-    let { officeId } = req.params;
-    officeId = Number(officeId);
-    if (isNaN(officeId)) return Response.errorData(res, 400, 'invalid office id');
+    const { officeId } = req.params;
+    if (!(/^[\d]+$/.test(officeId))) return Response.errorData(res, 400, 'invalid office id');
     const { type, name, description } = req.body;
     if (!await modelOffice.findOne(officeId)) return Response.errorData(res, 404, 'office not found');
-    const officeObject = { type: type.trim().toLowerCase(), name: name.trim(), description: description.trim() };
+    const officeObject = { type: type.trim().toLowerCase(), name: name.replace(/\s+/g, ' ').trim(), description: description.replace(/\s+/g, ' ').trim() };
     const data = await modelOffice.modify(officeId, officeObject);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 500, 'Internal server error');

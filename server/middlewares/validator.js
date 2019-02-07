@@ -122,5 +122,19 @@ class Validator {
     }
     return next();
   }
+
+  /**
+ * @function validateVote
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
+  static validateVote(req, res, next) {
+    const { officeid, candidateid } = req.body;
+    if (!(/^[\d]+$/.test(officeid))) return Response.errorData(res, 400, 'Please, enter a valid officeid. Officeid must be a number');
+    if (!(/^[\d]+$/.test(candidateid))) return Response.errorData(res, 400, 'Please, enter a valid candidateid. Candidateid must be a number');
+    return next();
+  }
 }
 export default Validator;
