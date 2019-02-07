@@ -5,7 +5,7 @@ import Response from '../utilities/response';
    */
 class CandidateController {
   /**
-     * @function approveCandidate
+     * @function expressInterest
      * @req request object
      * @res response object
      * @returns {*} information about the political interest
