@@ -1,12 +1,26 @@
 import jwt from 'jsonwebtoken';
 import Response from './response';
-
+/**
+     * @class TokenHandler
+     */
 class TokenHandler {
+  /**
+     * @function validData
+     * @payload object you want to store
+     * @returns {*} the token
+     */
   static async createToken(payload) {
     const token = await jwt.sign(payload, process.env.SECRET_KEY);
     return token;
   }
 
+  /**
+     * @function validData
+     * @req request object
+     * @res response code
+     * @next middleware next
+     * @returns {*} the next middleware
+     */
   static verifyToken(req, res, next) {
     const { token } = req.headers;
     if (typeof token === 'undefined') {

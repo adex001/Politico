@@ -1,5 +1,7 @@
 import db from '../database/connection';
-
+/**
+     * @class Vote
+     */
 class Vote {
   /**
  * @function castVote
