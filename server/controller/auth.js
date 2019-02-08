@@ -26,12 +26,12 @@ class AuthController {
     };
     const data = await userModel.getUser(email);
     if (data) return Response.errorData(res, 400, 'Email exists already! try another!');
-    const payload = await userModel.create(userObject);
+    const payload = await userModel.create(userObject);    
     if (payload) {
       const payloadObject = {
-        userId: payload.userId,
+        userId: payload.userid,
         email: payload.email,
-        isAdmin: payload.isAdmin,
+        isAdmin: payload.isadmin,
       };
       const token = await TokenHandler.createToken(payloadObject);
       payloadObject.firstname = payload.firstname;
