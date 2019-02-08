@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-param-reassign */
 const asideNav = document.getElementById('aside-nav');
 const hamb = document.getElementsByClassName('hamb')[0];
 const officeDisp = document.getElementById('office-disp');
@@ -11,7 +13,6 @@ const historyDisp = document.getElementById('history-disp');
 const petitionDisp = document.getElementById('petition-disp');
 const partyLi = document.getElementById('party');
 const historyLi = document.getElementById('history');
-const displayDiv = document.getElementsByClassName('display-divs');
 
 const disp = {
   party: partyDisp,
@@ -22,59 +23,55 @@ const disp = {
   election: electionDisp,
   run: runDisp,
   history: historyDisp,
-  petitions: petitionDisp
+  petitions: petitionDisp,
 };
 
 let previous = null;
-if(partyDisp){
+if (partyDisp) {
   partyDisp.style.display = 'block';
-  partyLi.style.background = 'blue';
+  partyLi.style.background = '#134611';
   partyLi.style.color = 'white';
   partyLi.style.fontWeight = 'bolder';
-  }
-if(historyDisp){
+}
+if (historyDisp) {
   historyDisp.style.display = 'block';
-  historyLi.style.background = 'blue';
+  historyLi.style.background = '#134611';
   historyLi.style.color = 'white';
   historyLi.style.fontWeight = 'bolder';
 }
-asideNav.addEventListener("click", (e) => {  
-  if(e.target && e.target.nodeName == "LI") {
+asideNav.addEventListener('click', (e) => {
+  if (e.target && e.target.nodeName === 'LI') {
     const clickNav = (item) => {
-      if(previous === item){      
-      }
-      else{
-        if(partyDisp){
+      // eslint-disable-next-line no-empty
+      if (previous === item) {
+      } else {
+        if (partyDisp) {
           partyDisp.style.display = 'none';
-          partyLi.style.background = 'rgb(6, 86, 148)';
+          partyLi.style.background = '#4CB963';
           partyLi.style.fontWeight = 'normal';
         }
-        if(historyDisp){
+        if (historyDisp) {
           historyDisp.style.display = 'none';
-          historyLi.style.background = 'rgb(6, 86, 148)';
+          historyLi.style.background = '#4CB963';
           historyLi.style.fontWeight = 'normal';
         }
-        if(previous){
-          // Remove all Previous stylings
+        if (previous) {
           disp[previous.id].style.display = 'none';
-          previous.style.background = 'rgb(6, 86, 148)';
+          previous.style.background = '#4CB963';
           previous.style.fontWeight = 'normal';
         }
-        // Add all css stylings
-        disp[item.id].style.display ='block';
-        item.style.background = 'blue';
-        item.style.color = 'white';
+        disp[item.id].style.display = 'block';
+        item.style.background = '#134611';
+        item.style.color = '#E0F2E9';
         item.style.fontWeight = 'bolder';
         previous = item;
       }
-    }
-    clickNav(e.target)
+    };
+    clickNav(e.target);
   }
 });
 
 const close = document.getElementsByClassName('close');
-const modifyOfficeModal = document.getElementById('modify-office-modal');
-const modifyParty = document.getElementById('modify-party-modal');
 const newOfficeModal = document.getElementById('new-office-modal');
 const newPartyModal = document.getElementById('new-party-modal');
 const partyButton = document.getElementById('party-button');
@@ -82,19 +79,19 @@ const officeButton = document.getElementById('office-button');
 const asideDisp = document.getElementById('aside');
 
 
-if(partyButton || officeButton){
+if (partyButton || officeButton) {
   partyButton.onclick = () => {
     newPartyModal.style.display = 'flex';
-  }
+  };
   officeButton.onclick = () => {
     newOfficeModal.style.display = 'flex';
-  }
+  };
 }
 
 Array.from(close).forEach((element) => {
-  element.addEventListener('click', (e) => {    
-   e.target.parentElement.parentElement.style.display = 'none';   
-  })
+  element.addEventListener('click', (e) => {
+    e.target.parentElement.parentElement.style.display = 'none';
+  });
 });
 
 hamb.addEventListener('mouseover', () => {
@@ -103,13 +100,13 @@ hamb.addEventListener('mouseover', () => {
   asideDisp.addEventListener('mouseleave', () => {
     asideDisp.style.display = 'none';
   });
-})
+});
 const modifyButton = document.getElementsByClassName('modify');
-Array.from(modifyButton).forEach(element => {
+Array.from(modifyButton).forEach((element) => {
   element.addEventListener('click', (e) => {
-    if(e.target.offsetParent.children[3]){
+    if (e.target.offsetParent.children[3].id === 'modify-party-modal') {
       e.target.offsetParent.children[3].style.display = 'flex';
-    }else{
+    } else {
       e.target.offsetParent.children[1].children[3].style.display = 'flex';
     }
   });
