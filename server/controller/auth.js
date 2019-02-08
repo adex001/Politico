@@ -2,8 +2,16 @@ import userModel from '../model/user';
 import TokenHandler from '../utilities/tokenHandler';
 import PasswordHasher from '../utilities/passwordHasher';
 import Response from '../utilities/response';
-
+/**
+   * @class Auth Controller
+   */
 class AuthController {
+  /**
+     * @function signup
+     * @req request object
+     * @res response object
+     * @returns {*} the newly created user
+     */
   static async signup(req, res) {
     const {
       email, password, firstname, lastname, isAdmin,
@@ -38,6 +46,12 @@ class AuthController {
     return Response.errorData(res, 500, 'Internal server error!');
   }
 
+  /**
+     * @function login
+     * @req request object
+     * @res response object
+     * @returns {*} the user's data
+     */
   static async login(req, res) {
     const { email, password } = req.body;
     const data = await userModel.getUser(email);
