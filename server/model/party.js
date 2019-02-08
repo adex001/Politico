@@ -15,7 +15,7 @@ class Party {
       const result = await db.query(createQuery, partyObject);
       return result.rows[0];
     } catch (err) {
-      return err;
+      return false;
     }
   }
 
