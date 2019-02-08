@@ -1,0 +1,446 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Politico
+  description: Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
+  termsOfService: "http://github.com/adex001/"
+  contact: 
+    email: "adex001@gmail.com"
+  license:
+    name: "MIT License"
+    url: "https://github.com/adex001/Politico"
+host: politico2019.herokuapp.com
+basePath: /
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /api/v1/parties:
+    post:
+      description: Creates a political party
+      summary: Create Party
+      tags:
+      - Parties
+      operationId: ApiV1PartiesPost
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: name
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: address
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: logoUrl
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+    get:
+      description: Retrieves all parties
+      summary: Get Parties
+      tags:
+      - Parties
+      operationId: ApiV1PartiesGet
+      produces:
+      - application/json
+      parameters:
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /api/v1/parties/1:
+    get:
+      description: Retrieves a specific party
+      summary: Get Specific Party
+      tags:
+      - Parties
+      operationId: ApiV1Parties1Get
+      produces:
+      - application/json
+      parameters:
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /api/v1/parties/2:
+    patch:
+      description: Modifies a specific political party
+      summary: Modify Party
+      tags:
+      - Parties
+      operationId: ApiV1Parties2Patch
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: name
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: address
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: logoUrl
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /api/v1/auth/signup:
+    post:
+      description: Creates a User with user access.
+      summary: User Signup
+      tags:
+      - User
+      operationId: ApiV1AuthSignupPost
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: email
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: password
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: firstname
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: lastname
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /api/v1/auth/login:
+    post:
+      description: Login an admin
+      summary: Admin login
+      tags:
+      - User
+      operationId: ApiV1AuthLoginPost
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: email
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: password
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /api/v1/offices:
+    post:
+      description: Creates a government office
+      summary: Creates an office
+      tags:
+      - Offices
+      operationId: ApiV1OfficesPost
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: name
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: type
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: description
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+    get:
+      description: Creates a government office
+      summary: Get Offices
+      tags:
+      - Offices
+      operationId: ApiV1OfficesGet
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /api/v1/offices/3:
+    delete:
+      description: Deletes a government office
+      summary: Deletes a specific office
+      tags:
+      - Offices
+      operationId: ApiV1Offices3Delete
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /api/v1/offices/1:
+    get:
+      description: Creates a government office
+      summary: Get specific Office
+      tags:
+      - Offices
+      operationId: ApiV1Offices1Get
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /api/v1/office/1/register:
+    post:
+      description: Becomes a candidate by expressing for interest for a political post
+      summary: Become Candidate
+      tags:
+      - Candidates
+      operationId: ApiV1Office1RegisterPost
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: officename
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: partyname
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /api/v1/votes:
+    post:
+      description: Users can vote for candidates
+      summary: vote
+      tags:
+      - Vote
+      operationId: ApiV1VotesPost
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: officeid
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: candidateid
+        in: formData
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /api/v1/office/1/result:
+    get:
+      description: Users can check election results
+      summary: votes result
+      tags:
+      - Vote
+      operationId: ApiV1Office1ResultGet
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: token
+        in: header
+        required: true
+        type: string
+        description: ''
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /:
+    get:
+      description: Gets the homepage base URL
+      summary: Base URL
+      tags:
+      - Misc
+      operationId: UnnammedEndpointGet
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+tags:
+- name: Parties
+  description: All Parties Operations
+- name: User
+  description: All operation pertaining to a user
+- name: Offices
+  description: Describes activities for the government offices
+- name: Candidates
+  description: Users that express interest for a political office are candidates
+- name: Vote
+  description: Users vote for their candidates
+- name: Misc
+  description: ''
