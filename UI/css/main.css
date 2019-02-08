@@ -270,21 +270,21 @@ border-radius: 5px;
 .lost{
   border: 1px solid #E0F2E9;
   padding: 7px;
-  background: red;
+  background: #B73E23;
   color: #E0F2E9;
 }
 .petition button{
   width: 80px;
   padding: 8px 10px;
-  background: red;
+  background: #B73E23;
   color: #E0F2E9;
   border: 2px solid #E0F2E9;
   cursor: pointer;
 }
 .petition button:hover{
   background: #E0F2E9;
-  color: rgb(236, 26, 26);
-  border: 2px solid red;
+  color: #B73E23;
+  border: 2px solid #B73E23;
 }
 /* BECOME CANDIDATE */
 
@@ -377,10 +377,10 @@ footer{
   cursor: pointer;
 }
 #clear-button{
-  color: red;
+  color: #B73E23;
 }
 #clear-button:hover{
-  background: red;
+  background: #B73E23;
   color: #E0F2E9;
 }
 #new-party-modal, #new-office-modal, #modify-office-modal, #modify-party-modal{
@@ -404,7 +404,7 @@ footer{
   color: rgb(28, 121, 24);
 }
 .danger{
-  color: red;
+  color: #B73E23;
 }
 .action .warning{
   padding: 8px;
@@ -416,12 +416,12 @@ footer{
 .action .danger{
   padding: 8px;
   background: #E0F2E9;
-  border: 2px solid red;
+  border: 2px solid #B73E23;
   cursor: pointer;
   border-radius: 5px;
 }
 .danger:hover{
-  background: red;
+  background: #B73E23;
   color: #fff;
   border: 2px solid #fff;
 }
@@ -502,5 +502,23 @@ footer{
   }
   .cname, .pname{
     margin-right: 10px;
+  }
+  #election-disp{
+    width: 100%;
+  }
+  .sn{
+    width: 3vw;
+  }
+  .plogo{
+    width: 30vw;
+  }
+  .pname{
+    display: none;
+  }
+  .vote-span{
+    display: none;
+  }
+  .cname{
+    width: 30vw;
   }
 }
