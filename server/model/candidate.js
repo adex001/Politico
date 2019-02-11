@@ -21,7 +21,7 @@ class Candidate {
       const result = await db.query(bcomQuery, candidateObject);
       return result.rows[0];
     } catch (err) {
-      return err;
+      return false;
     }
   }
 

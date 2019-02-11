@@ -12,6 +12,9 @@ My UI templates can be found here: [ UI ](https://adex001.github.io/Politico/UI/
 ### Pivotal Tracker
 My Pivotal Tracker board can be found [ here ](https://www.pivotaltracker.com/n/projects/2238846)
 
+### API Documentation
+My Swagger API documentation can be found [ here ](https://politico2019.herokuapp.com/api-docs)
+
 ### API Endpoints
 My API can be found here: [ API ](https://politico2019.herokuapp.com)
 
