@@ -13,15 +13,12 @@ class Candidate {
   static async becomeCandidate(params) {
     const bcomQuery = 'INSERT INTO candidate (officeid, partyid, userid) VALUES ($1, $2, $3) RETURNING *';
     try {
-      const party = await modelParty.findName(params.partyname);
-      const { partyid } = party;
-      const office = await modelOffice.findName(params.officename);
-      const { officeid } = office;
+      const { officeid, partyid } = params;
       const candidateObject = [officeid, partyid, params.userId];
       const result = await db.query(bcomQuery, candidateObject);
       return result.rows[0];
     } catch (err) {
-      return err;
+      return false;
     }
   }
 
@@ -58,17 +55,15 @@ class Candidate {
   }
 
   /**
- * @function checkOfficename
+ * @function verifyOneCandiatePerParty
  * @param {*} officename
  * @param {*} userId
  * @returns {*} the candidate office name
  */
-  static async checkOfficeName(officename, userId) {
-    const query = 'SELECT officeid FROM candidate WHERE officeid = $1 AND userid = $2';
+  static async verifyOneCandiatePerParty(officeid, partyid) {
+    const query = 'SELECT * FROM candidate WHERE officeid = $1 AND partyid = $2';
     try {
-      const office = await modelOffice.findName(officename);
-      const { officeid } = office;
-      const result = await db.query(query, [officeid, userId]);
+      const result = await db.query(query, [officeid, partyid]);
       return result.rows[0];
     } catch (err) {
       return false;
