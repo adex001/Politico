@@ -2,16 +2,15 @@ import userModel from '../model/user';
 import TokenHandler from '../utilities/tokenHandler';
 import PasswordHasher from '../utilities/passwordHasher';
 import Response from '../utilities/response';
-
 /**
- * @class AuthController
- */
+   * @class Auth Controller
+   */
 class AuthController {
   /**
      * @function signup
      * @req request object
      * @res response object
-     * @returns {*} the token and the created user
+     * @returns {*} the newly created user
      */
   static async signup(req, res) {
     const {
@@ -30,9 +29,9 @@ class AuthController {
     const payload = await userModel.create(userObject);
     if (payload) {
       const payloadObject = {
-        userId: payload.userId,
+        userId: payload.userid,
         email: payload.email,
-        isAdmin: payload.isAdmin,
+        isAdmin: payload.isadmin,
       };
       const token = await TokenHandler.createToken(payloadObject);
       payloadObject.firstname = payload.firstname;
@@ -51,7 +50,7 @@ class AuthController {
      * @function login
      * @req request object
      * @res response object
-     * @returns {*} the token and the login user
+     * @returns {*} the user's data
      */
   static async login(req, res) {
     const { email, password } = req.body;
@@ -89,7 +88,6 @@ class AuthController {
     const { email } = req.body;
     const emailUser = await userModel.getUser(email);
     if (!emailUser) return Response.errorData(res, 400, 'Invalid email address!');
-    // 
   }
 }
 

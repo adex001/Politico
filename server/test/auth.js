@@ -67,10 +67,17 @@ describe('Handle Input Parameters', () => {
     lastname: 'Ebenezer',
   };
   const noAdminStatus = {
-    email: 'adex002@gmail.com',
+    email: 'adex003@gmail.com',
     firstname: 'Adeoye',
     lastname: 'Ebenezer',
     password: 'password',
+  };
+  const adminStatusError = {
+    email: 'adex003@gmail.com',
+    firstname: 'Adeoye',
+    lastname: 'Ebenezer',
+    password: 'password',
+    isAdmin: 'error',
   };
   it('should respond with error message "Enter a valid email address"', (done) => {
     chai.request(app)
@@ -116,14 +123,25 @@ describe('Handle Input Parameters', () => {
         done();
       });
   });
-  it('should respond with error "Enter a valid admin status. isAdmin should be either true or false."', (done) => {
+  it('should create when no admin status."', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .set('Accept', 'application/json')
       .send(noAdminStatus)
       .end((err, response) => {
+        response.body.status.should.eql(201);
+        response.body.data.should.be.an('array');
+        done();
+      });
+  });
+  it('should not create when there is an admin status but not true nor false."', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .set('Accept', 'application/json')
+      .send(adminStatusError)
+      .end((err, response) => {
         response.body.status.should.eql(400);
-        response.body.error.should.be.eql('Enter a valid admin status. isAdmin should be either true or false.');
+        response.body.error.should.eql('Enter a valid admin status. isAdmin should be either true or false.');
         done();
       });
   });

@@ -503,4 +503,22 @@ footer{
   .cname, .pname{
     margin-right: 10px;
   }
+  #election-disp{
+    width: 100%;
+  }
+  .sn{
+    width: 3vw;
+  }
+  .plogo{
+    width: 30vw;
+  }
+  .pname{
+    display: none;
+  }
+  .vote-span{
+    display: none;
+  }
+  .cname{
+    width: 30vw;
+  }
 }

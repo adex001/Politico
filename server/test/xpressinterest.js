@@ -10,8 +10,8 @@ chai.use(chaiHttp);
 chai.should();
 describe('Users should be able to express interest for a government office', () => {
   const expressObject = {
-    officename: 'Councillor',
-    partyname: 'Peoples Democratic Party',
+    officeid: 2,
+    partyid: 2,
   };
   const login = {
     email: 'adex002@gmail.com',
@@ -46,7 +46,7 @@ describe('Users should be able to express interest for a government office', () 
       });
   });
   const partyObject = {
-    logo: 'http://bit.ly',
+    logoUrl: 'http://bit.ly',
     name: 'Peoples Democratic Party',
     address: '21, Ilupeju road, Ikeja',
   };
@@ -59,18 +59,6 @@ describe('Users should be able to express interest for a government office', () 
       .end((err, response) => {
         response.body.status.should.eql(201);
         response.body.data.should.be.an('array');
-        done();
-      });
-  });
-  it('should return an error when you express interest for another user ', (done) => {
-    chai.request(app)
-      .post('/api/v1/office/5/register')
-      .set('Accept', 'application/json')
-      .set('token', `${adminToken}`)
-      .send(expressObject)
-      .end((err, response) => {
-        response.body.status.should.eql(400);
-        response.body.error.should.eql('you cannot express interest for another user');
         done();
       });
   });
@@ -89,22 +77,22 @@ describe('Users should be able to express interest for a government office', () 
 });
 describe('Handle invalid datas', () => {
   const invalidOfficeName = {
-    officename: 'er',
-    partyname: 'Modern Youth Political party',
+    officeid: '22',
+    partyid: 2,
   };
   const invalidPartyName = {
-    officename: 'errorororororororororrrrrrrrrrrrrr',
-    partyname: 'ee',
+    officeid: 2,
+    partyid: 'ee',
   };
-  it('should return an error when invalid office name is presented', (done) => {
+  it('should return an error when invalid office id is presented', (done) => {
     chai.request(app)
-      .post('/api/v1/office/1/register')
+      .post('/api/v1/office/3/register')
       .set('Accept', 'application/json')
       .set('token', `${adminToken}`)
       .send(invalidOfficeName)
       .end((err, response) => {
         response.body.status.should.eql(400);
-        response.body.error.should.eql('Please, enter a valid office name! Office Name must be greater than 3 characters');
+        response.body.error.should.eql('office not found');
         done();
       });
   });
@@ -116,7 +104,7 @@ describe('Handle invalid datas', () => {
       .send(invalidPartyName)
       .end((err, response) => {
         response.body.status.should.eql(400);
-        response.body.error.should.eql('Please, enter a valid party name! Party Name must be greater than 3 characters');
+        response.body.error.should.eql('Please, enter a valid partyid. partyid must be a number');
         done();
       });
   });

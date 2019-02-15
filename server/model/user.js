@@ -1,6 +1,13 @@
 import db from '../database/connection';
-
+/**
+     * @Class User
+     */
 class User {
+  /**
+     * @function create
+     * @params params
+     * @returns {*} the newly created user
+     */
   static async create(params) {
     try {
       const {
@@ -15,10 +22,30 @@ class User {
     }
   }
 
+  /**
+     * @function getUser
+     * @email email
+     * @returns {*} the user
+     */
   static async getUser(email) {
     try {
       const findQuery = 'SELECT * FROM users WHERE email = $1';
       const result = await db.query(findQuery, [email]);
+      return result.rows[0];
+    } catch (err) {
+      return false;
+    }
+  }
+  /**
+     * @function getUserById
+     * @email email
+     * @returns {*} the user
+     */
+
+  static async getUserById(id) {
+    try {
+      const findQuery = 'SELECT * FROM users WHERE userid = $1';
+      const result = await db.query(findQuery, [id]);
       return result.rows[0];
     } catch (err) {
       return false;

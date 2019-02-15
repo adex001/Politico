@@ -1,5 +1,7 @@
 import db from '../database/connection';
-
+/**
+     * @class Vote
+     */
 class Vote {
   /**
  * @function castVote
@@ -13,7 +15,7 @@ class Vote {
       const result = await db.query(voteQuery, voteObject);
       return result.rows[0];
     } catch (err) {
-      return err;
+      return false;
     }
   }
 

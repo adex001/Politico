@@ -1,6 +1,9 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import yaml from 'yamljs';
 import candidateRoute from './routes/candidates';
 import officeRouter from './routes/office';
 import partyRouter from './routes/party';
@@ -11,9 +14,12 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
+const swaggerDoc = yaml.load(`${process.cwd()}/swagger.yaml`);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(cors());
 app.use('/api/v1/', candidateRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/offices', officeRouter);

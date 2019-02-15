@@ -14,7 +14,7 @@ const isAdmin = (req, res, next) => {
   if (decoded.isAdmin) {
     return next();
   }
-  return Response.errorData(res, 403, 'You do not have the permission to access this resource!');
+  return Response.errorData(res, 403, 'Requires admin authorization');
 };
 
 export default isAdmin;

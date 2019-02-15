@@ -24,9 +24,8 @@ class PartyController {
  */
 
   static async getSpecificParty(req, res) {
-    let { partyId } = req.params;
-    partyId = Number(partyId);
-    if (isNaN(partyId)) return Response.errorData(res, 400, 'invalid party id');
+    const { partyId } = req.params;
+    if (!(/^[\d]+$/.test(partyId))) return Response.errorData(res, 400, 'invalid party id');
     const data = await modelParty.getOne(partyId);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 404, 'party not found');
@@ -39,12 +38,12 @@ class PartyController {
  */
 
   static async deleteParty(req, res) {
-    let { partyId } = req.params;
-    partyId = Number(partyId);
-    if (isNaN(partyId)) return Response.errorData(res, 400, 'invalid party id');
+    const { partyId } = req.params;
+    if (!(/^[\d]+$/.test(partyId))) return Response.errorData(res, 400, 'invalid party id');
+    if (!await modelParty.getOne(partyId)) return Response.errorData(res, 404, 'party not found');
     const data = await modelParty.delete(partyId);
     if (data) return Response.validData(res, 200, [data]);
-    return Response.errorData(res, 404, 'party not found');
+    return Response.errorData(res, 500, 'internal server error!');
   }
 
   /**
@@ -54,11 +53,12 @@ class PartyController {
  * @returns {*} the created party
  */
   static async createParty(req, res) {
-    const { name, logo, address } = req.body;
-    const partyObject = { name, address, logo };
-    if (await modelParty.findName(name)) return Response.errorData(res, 400, 'Party name already exists!');
+    const { name, logoUrl, address } = req.body;
+    const partyObject = { name: name.replace(/\s+/g, ' '), address: address.replace(/\s+/g, ' '), logoUrl };
+    if (await modelParty.findName(name.replace(/\s+/g, ' '))) return Response.errorData(res, 400, 'Party name already exists!');
     const data = await modelParty.create(partyObject);
-    return Response.validData(res, 201, [data]);
+    if (data) return Response.validData(res, 201, [data]);
+    return Response.errorData(res, 500, 'internal server error');
   }
 
   /**
@@ -68,14 +68,15 @@ class PartyController {
  * @returns {*} the modified party
  */
   static async modifyParty(req, res) {
-    const { name, logo, address } = req.body;
-    let { partyId } = req.params;
-    partyId = Number(partyId);
-    if (isNaN(partyId)) return Response.errorData(res, 400, 'invalid party id');
-    const partyObject = { name, address, logo };
+    const { name, logoUrl, address } = req.body;
+    const { partyId } = req.params;
+    if (!(/^[\d]+$/.test(partyId))) return Response.errorData(res, 400, 'invalid party id');
+    if (!await modelParty.getOne(partyId)) return Response.errorData(res, 404, 'No such party');
+    if (await modelParty.findName(name.replace(/\s+/g, ' '))) return Response.errorData(res, 400, 'Party name already exists!');
+    const partyObject = { name: name.replace(/\s+/g, ' '), address: address.replace(/\s+/g, ' '), logoUrl };
     const data = await modelParty.modify(partyId, partyObject);
     if (data) return Response.validData(res, 200, [data]);
-    return Response.errorData(res, 404, 'Update failed! party not found!');
+    return Response.errorData(res, 500, 'Internal server error!');
   }
 }
 export default PartyController;
