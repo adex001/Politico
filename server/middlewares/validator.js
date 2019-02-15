@@ -113,13 +113,9 @@ class Validator {
  * @returns {*} the next function
  */
   static validateInterest(req, res, next) {
-    const { officename, partyname } = req.body;
-    if (typeof officename !== 'string' || officename.length < 3) {
-      return Response.errorData(res, 400, 'Please, enter a valid office name! Office Name must be greater than 3 characters');
-    }
-    if (typeof partyname !== 'string' || partyname.length < 3) {
-      return Response.errorData(res, 400, 'Please, enter a valid party name! Party Name must be greater than 3 characters');
-    }
+    const { officeid, partyid } = req.body;
+    if (!(/^[\d]+$/.test(officeid))) return Response.errorData(res, 400, 'Please, enter a valid officeid. Officeid must be a number');
+    if (!(/^[\d]+$/.test(partyid))) return Response.errorData(res, 400, 'Please, enter a valid partyid. partyid must be a number');
     return next();
   }
 
@@ -134,6 +130,19 @@ class Validator {
     const { officeid, candidateid } = req.body;
     if (!(/^[\d]+$/.test(officeid))) return Response.errorData(res, 400, 'Please, enter a valid officeid. Officeid must be a number');
     if (!(/^[\d]+$/.test(candidateid))) return Response.errorData(res, 400, 'Please, enter a valid candidateid. Candidateid must be a number');
+    return next();
+  }
+
+  /**
+ * @function validateVoteResult
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
+  static validateVoteResult(req, res, next) {
+    const { officeId } = req.params;
+    if (!(/^[\d]+$/.test(officeId))) return Response.errorData(res, 400, 'Please, enter a valid officeid. Officeid must be a number');
     return next();
   }
 }

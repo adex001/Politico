@@ -47,6 +47,8 @@ This application was developed using NodeJs with express for routing.
 more info:
 (https://help.github.com/articles/cloning-a-repository/)
 - Run ``` npm install ``` to install the dependencies in the package.json file.
+- Rename ``` .env.sample ``` to ```.env``` and update file as specified.
+- Run ``` npm start ``` to start the application.
 
 ### Testing
 
