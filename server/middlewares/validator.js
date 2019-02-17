@@ -106,6 +106,21 @@ class Validator {
   }
 
   /**
+ * @function validatePassword
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
+  static validatePassword(req, res, next) {
+    const { password } = req.body;
+    if (typeof password !== 'string' || password.trim().length < 6) {
+      return Response.errorData(res, 400, 'Enter a valid password! password must be greater than 6 characters.');
+    }
+    return next();
+  }
+
+  /**
  * @function validateInterest
  * @param {*} req
  * @param {*} res
@@ -143,6 +158,21 @@ class Validator {
   static validateVoteResult(req, res, next) {
     const { officeId } = req.params;
     if (!(/^[\d]+$/.test(officeId))) return Response.errorData(res, 400, 'Please, enter a valid officeid. Officeid must be a number');
+    return next();
+  }
+  /**
+ * @function validateEmail
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
+
+  static validateEmail(req, res, next) {
+    const { email } = req.body;
+    if (typeof email === 'undefined' || !validator.isEmail(email)) {
+      return Response.errorData(res, 400, 'Enter a valid email address');
+    }
     return next();
   }
 }

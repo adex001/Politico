@@ -6,5 +6,7 @@ const authRoute = Router();
 
 authRoute.post('/signup', Validator.validateUserSignUp, AuthController.signup);
 authRoute.post('/login', Validator.validateUserLogin, AuthController.login);
+authRoute.post('/reset', Validator.validateEmail, AuthController.forgotPassword);
+authRoute.post('/reset/:hashedEmail', Validator.validatePassword, AuthController.changePassword);
 
 export default authRoute;
