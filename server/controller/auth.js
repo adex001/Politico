@@ -1,7 +1,10 @@
+import Crypter from '../utilities/crypter';
 import userModel from '../model/user';
 import TokenHandler from '../utilities/tokenHandler';
 import PasswordHasher from '../utilities/passwordHasher';
 import Response from '../utilities/response';
+import sendMail from '../utilities/mailer';
+
 /**
    * @class Auth Controller
    */
@@ -77,17 +80,46 @@ class AuthController {
     },
     ]);
   }
-
   /**
      * @function forgotPassword
      * @req request object
      * @res response object
-     * @returns {*} displays the password and sends a message to the email
+     * @returns {*} the password reset link
      */
+
   static async forgotPassword(req, res) {
     const { email } = req.body;
     const emailUser = await userModel.getUser(email);
     if (!emailUser) return Response.errorData(res, 400, 'Invalid email address!');
+
+    const encryptedEmail = await Crypter.encrypt(email);
+    const data = await sendMail(req, email, encryptedEmail);
+    if (data) {
+      return Response.validData(res, 200, [{
+        message: 'check your email for password reset link',
+        email,
+      }]);
+    }
+    return Response.errorData(res, 500, 'Internal server error! Check network!');
+  }
+
+  /**
+     * @function changePassword
+     * @req request object
+     * @res response object
+     * @returns {*} the changed password to the user
+     */
+  static async changePassword(req, res) {
+    const { password } = req.body;
+    const { hashedEmail } = req.params;
+    const email = await Crypter.decrypt(hashedEmail);
+    if (!email) return Response.errorData(res, 400, 'Invalid reset password link!');
+    const emailUser = await userModel.getUser(email);
+    if (!emailUser) return Response.errorData(res, 400, 'User with email does not exist!');
+    const hashedPassword = await PasswordHasher.create(password);
+    const data = await userModel.changePassword(email, hashedPassword);
+    if (data) return Response.validData(res, 200, data);
+    return Response.errorData(res, 500, 'internal server error!');
   }
 }
 

@@ -1,4 +1,5 @@
 import db from '../database/connection';
+import PasswordHasher from '../utilities/passwordHasher';
 /**
      * @Class User
      */
@@ -46,6 +47,22 @@ class User {
     try {
       const findQuery = 'SELECT * FROM users WHERE userid = $1';
       const result = await db.query(findQuery, [id]);
+      return result.rows[0];
+    } catch (err) {
+      return false;
+    }
+  }
+
+  /**
+     * @function changePassword
+     * @email email
+     * @returns {*} the newly created password
+     */
+  static async changePassword(email, password) {
+    try {
+      const encryptPassword = await PasswordHasher.create(password);
+      const query = 'UPDATE users SET password = $1 WHERE email = $2 RETURNING *';
+      const result = await db.query(query, [encryptPassword, email]);
       return result.rows[0];
     } catch (err) {
       return false;

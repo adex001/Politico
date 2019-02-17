@@ -106,6 +106,21 @@ class Validator {
   }
 
   /**
+ * @function validatePassword
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
+  static validatePassword(req, res, next) {
+    const { password } = req.body;
+    if (typeof password !== 'string' || password.trim().length < 6) {
+      return Response.errorData(res, 400, 'Enter a valid password! password must be greater than 6 characters.');
+    }
+    return next();
+  }
+
+  /**
  * @function validateInterest
  * @param {*} req
  * @param {*} res
