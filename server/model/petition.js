@@ -1,6 +1,14 @@
 import db from '../database/connection';
 
+/**
+ * @class Petition
+ */
 class Petition {
+  /**
+ * @function create
+ * @param {*} params
+ * @returns {*} a new petition
+ */
   static async create(params) {
     const {
       officeid, userId, text, evidence,
