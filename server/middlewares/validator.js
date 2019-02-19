@@ -175,5 +175,33 @@ class Validator {
     }
     return next();
   }
+
+  /**
+ * @function validatePetition
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns {*} the next function
+ */
+
+  static validatePetition(req, res, next) {
+    const {
+      officeid, text, evidence,
+    } = req.body;
+    if (!(/^[\d]+$/.test(officeid))) return Response.errorData(res, 400, 'Please, enter a valid officeid. Officeid must be a number');
+    if (typeof text !== 'string' || text.trim().length < 2) {
+      return Response.errorData(res, 400, 'Enter valid text! text must be 2 or more characters.');
+    }
+    if (typeof evidence !== 'object') return Response.errorData(res, 400, 'Enter a valid evidence. Evidence should be an array of urls!');
+    if (!Array.isArray(evidence)) return Response.errorData(res, 400, 'evidence should be an array of urls');
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < evidence.length; i++) {
+      if (!validator.isURL(evidence[i].trim())) {
+        return Response.errorData(res, 400, `${evidence[i]} is not a valid url`);
+      }
+    }
+
+    return next();
+  }
 }
 export default Validator;
