@@ -6,7 +6,10 @@ notifications:
   email: false
 
 services:
-  - postgresql: "9.6"
+  - postgresql
+
+addons:
+  postgresql: "10"
 
 env:
   global:
