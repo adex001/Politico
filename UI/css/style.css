@@ -230,6 +230,22 @@ footer{
   padding-top: 10px;
 }
 /* End of footer */
+/* Javascript */
+.danger-alertbox{
+  color: #B73E23;
+  background: rgb(231, 180, 171);
+  text-align: center;
+  height: 7vh;
+  top: 10vh;
+  width: 60%;
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  display: none;
+  border-radius: 5px;
+  padding: 10px;
+  letter-spacing: 1px;
+}
 
 /* ******** Media queries ************* */
 @media (min-width: 650px) {
