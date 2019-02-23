@@ -1,12 +1,35 @@
 const officeNewButton = getElementId('office-create');
 const baseAPI = 'https://politico2019.herokuapp.com/api/v1';
 
+const allOffices = () => {
+  fetch(`${baseAPI}/offices`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'content-type': 'application/json',
+      token: localStorage.getItem('token'),
+    },
+  })
+    .then(response => response.json())
+    .then((resultObject) => {
+      if (resultObject.status === 200) {
+        allOfficesDom(resultObject);
+      } else {
+        dangerAlertBox(resultObject.error, 3000);
+      }
+    });
+};
 const newOffice = ((e) => {
   e.preventDefault();
-  let officeName = getElementId('c-office-name');
-  let officeDesc = getElementId('c-office-desc');
-  let officeType = getElementId('c-office-type');
+  const officeName = getElementId('c-office-name');
+  const officeDesc = getElementId('c-office-desc');
+  const officeType = getElementId('c-office-type');
 
+  const resetOffice = () => {
+    officeDesc.value = '';
+    officeName.value = '';
+    officeType.selectedIndex = 0;
+  };
   if (!officeName.value) {
     dangerAlertBox('Enter an office name', 3000);
     return false;
@@ -39,14 +62,12 @@ const newOffice = ((e) => {
         newOfficeModal.style.display = 'flex';
         successAlertBox('Office successfully created', 4000);
         newOfficeModal.style.display = 'none';
-        officeDesc.value = '';
-        officeName.value = '';
-        officeType.selectedIndex = 0;
+        resetOffice();
+        allOffices();
       } else {
         dangerAlertBox(resultObject.error, 3000);
-        officeName.focus();
       }
     });
 });
-
+allOffices();
 officeNewButton.addEventListener('click', newOffice);
