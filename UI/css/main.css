@@ -465,6 +465,35 @@ footer{
   color: #E0F2E9;
   border: 2px solid #E0F2E9;
 }
+/* Javascript modals */
+.danger-alertbox{
+  color: #B73E23;
+  background: rgb(231, 180, 171);
+  text-align: center;
+  height: 7vh;
+  top: 10vh;
+  width: 100%;
+  position: absolute;
+  display: none;
+  border-radius: 5px;
+  padding: 10px;
+  letter-spacing: 1px;
+  z-index: 5;
+}
+.success-alertbox{
+  color: rgb(10, 149, 5);
+  background: rgb(197, 228, 199);
+  text-align: center;
+  height: 7vh;
+  top: 10vh;
+  width: 100%;
+  position: absolute;
+  display: none;
+  border-radius: 5px;
+  padding: 10px;
+  letter-spacing: 1px;
+  z-index: 5;
+}
 
 @media screen and (max-width: 700px) {
   main .container{

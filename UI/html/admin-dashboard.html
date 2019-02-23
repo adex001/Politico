@@ -100,16 +100,16 @@
                 <span id="off" class="close">&times;</span>
                 <h2>Create Government Office</h2>
                 <form action="#">
-                  <input type="text" class="create-group" id="" placeholder="Enter Office Name e.g president, governor, etc.">
-                  <input type="text" class="create-group" id="" placeholder="Enter office description.">
-                  <select id="" class="create-group office-select">
-                    <option selected disabled>Office type</option>
+                  <input type="text" id="c-office-name" class="create-group" placeholder="Enter Office Name e.g president, governor, etc.">
+                  <input type="text" id="c-office-desc" class="create-group" placeholder="Enter office description.">
+                  <select id="c-office-type" class="create-group office-select">
+                    <option>Office type</option>
                     <option value="federal">Federal </option>
                     <option value="legislative">Legislative</option>
                     <option value="state">State </option>
                     <option value="local">Local </option>
                   </select>
-                  <input type="submit" class="submit-button pty"  value="Create">
+                  <input type="submit" class="submit-button pty" id="office-create" value="Create">
                 </form>
               </div>
             </div>
@@ -237,6 +237,8 @@
             </div>
           </div> <!--party Display-->
           <div id="petition-disp"></div>
+          <div id="modals" class="danger-alertbox"></div>
+          <div id="success-modals" class="success-alertbox"></div>
         </div> <!--End of display-->
       </div> <!--End of portal-->
     </div> <!--End of container-->
@@ -247,5 +249,8 @@
     </div>
   </footer>
   <script src="../js/main.js"></script>
+  <script src="../../client/util.js"></script>
+  <script src="../../client/admin.js"></script>
+  
 </body>
 </html>

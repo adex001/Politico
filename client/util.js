@@ -9,3 +9,12 @@ const dangerAlertBox = (displayText, seconds) => {
     modal.style.display = 'none';
   }, seconds);
 };
+
+const successAlertBox = (displayText, seconds) => {
+  const modal = getElementId('success-modals');
+  modal.innerHTML = displayText;
+  modal.style.display = 'block';
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, seconds);
+};
