@@ -15,15 +15,16 @@ class OfficeController {
     const { type, name, description } = req.body;
     const requestData = {
       type: type.trim().toLowerCase(),
-      name: name.replace(/\s+/g, ' ').trim(),
+      name: name.toLowerCase().replace(/\s+/g, ' ').trim(),
       description: description.replace(/\s+/g, ' ').trim(),
     };
-    const officeExist = await modelOffice.findName(name);
+    const officeExist = await modelOffice.findName(name.toLowerCase());
     if (officeExist) {
       return Response.errorData(res, 400, 'office name exists already! try another');
     }
     const data = await modelOffice.create(requestData);
-    return Response.validData(res, 201, [data]);
+    if (data) return Response.validData(res, 201, [data]);
+    return Response.errorData(res, 500, 'internal server error!');
   }
 
   /**
@@ -78,7 +79,8 @@ class OfficeController {
     if (!(/^[\d]+$/.test(officeId))) return Response.errorData(res, 400, 'invalid office id');
     const { type, name, description } = req.body;
     if (!await modelOffice.findOne(officeId)) return Response.errorData(res, 404, 'office not found');
-    const officeObject = { type: type.trim().toLowerCase(), name: name.replace(/\s+/g, ' ').trim(), description: description.replace(/\s+/g, ' ').trim() };
+    if (await modelOffice.findName(name.toLowerCase())) return Response.errorData(res, 400, 'office name already exists!');
+    const officeObject = { type: type.trim().toLowerCase(), name: name.toLowerCase().replace(/\s+/g, ' ').trim(), description: description.replace(/\s+/g, ' ').trim() };
     const data = await modelOffice.modify(officeId, officeObject);
     if (data) return Response.validData(res, 200, [data]);
     return Response.errorData(res, 500, 'Internal server error');

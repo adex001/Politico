@@ -101,13 +101,3 @@ hamb.addEventListener('mouseover', () => {
     asideDisp.style.display = 'none';
   });
 });
-const modifyButton = document.getElementsByClassName('modify');
-Array.from(modifyButton).forEach((element) => {
-  element.addEventListener('click', (e) => {
-    if (e.target.offsetParent.children[3].id === 'modify-party-modal') {
-      e.target.offsetParent.children[3].style.display = 'flex';
-    } else {
-      e.target.offsetParent.children[1].children[3].style.display = 'flex';
-    }
-  });
-});

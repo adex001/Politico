@@ -19,7 +19,7 @@ describe('Tests for the Create Government office', () => {
   const officeObject = {
     type: 'state',
     name: 'Chairman',
-    description: 'Office of the Governor of Lagos State',
+    description: 'Office of the Chairman of Lagos State',
   };
   it('should login a user ', (done) => {
     chai.request(app)

@@ -40,11 +40,12 @@ const allOfficesDom = (offices) => {
       <span>${officeArray[i].description}</span>
       <span class="off-type">${officeArray[i].type}</span>
       <span class="action">
-        <a href="#"><button class="warning modify">modify</button></a>
+        <a href="${baseAPI}/offices/${officeArray[i].officeid}"><button class="warning modify">modify</button></a>
         <a href="#"><button class="danger">delete</button></a>
       </span>
     </li>`;
     }
     officeDOM.innerHTML = li;
   }
+  modifyFunction();
 };

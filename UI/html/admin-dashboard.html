@@ -45,6 +45,23 @@
             <div class="make-flex-column goffice">
               <h2>Available Government Offices</h2>
               <div class="goffice-list" id="office-list">
+                <li class="make-flex-row office-item">
+                  <span class="sn">s/n</span>
+                  <span class="off-name">Office Name</span>
+                  <span>Office Description</span>
+                  <span class="off-type">Office type</span>
+                  <span>Action</span>
+                </li>
+                <li class="make-flex-row office-item center-items">
+                  <span class="sn">${sn}</span>
+                  <span class="off-name">test</span>
+                  <span>This is a test DOM</span>
+                  <span class="off-type">federal</span>
+                  <span class="action">
+                    <a href="#"><button class="warning modify">modify</button></a>
+                    <a href="#"><button class="danger">delete</button></a>
+                  </span>
+                </li>
               </div>
             </div>
 
@@ -72,16 +89,16 @@
                 <span id="off" class="close">&times;</span>
                 <h2>Modify Government Office</h2>
                 <form action="#">
-                  <input type="text" class="create-group" id="" value="Enter Office Name e.g president, governor, etc.">
-                  <input type="text" class="create-group" id="" value="Enter office description.">
-                  <select id="" class="create-group office-select">
+                  <input type="text" class="create-group" id="m-office-name" value="Enter Office Name e.g president, governor, etc.">
+                  <input type="text" class="create-group" id="m-office-desc" value="Enter office description.">
+                  <select id="m-office-type" class="create-group office-select">
                     <option disabled>Office type</option>
                     <option selected value="federal">Federal</option>
                     <option value="legislative">Legislative</option>
                     <option value="state">State</option>
                     <option value="local">Local</option>
                   </select>
-                  <input type="submit" class="submit-button pty"  value="Modify">
+                  <input type="submit" id="office-modify" class="submit-button pty"  value="Modify">
                 </form>
               </div>
             </div>
