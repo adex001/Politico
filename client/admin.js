@@ -1,9 +1,6 @@
 const officeNewButton = getElementId('office-create');
 const officeModifyButton = getElementId('office-modify');
-<<<<<<< HEAD
 const modifyOfficeModal = getElementId('modify-office-modal');
-=======
->>>>>>> c5b8d8e1b251901c94aea342c569146eb0aaf938
 const baseAPI = 'https://politico2019.herokuapp.com/api/v1';
 
 const allOffices = () => {
