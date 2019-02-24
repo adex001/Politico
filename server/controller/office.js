@@ -18,12 +18,13 @@ class OfficeController {
       name: name.toLowerCase().replace(/\s+/g, ' ').trim(),
       description: description.replace(/\s+/g, ' ').trim(),
     };
-    const officeExist = await modelOffice.findName(name);
+    const officeExist = await modelOffice.findName(name.toLowerCase());
     if (officeExist) {
       return Response.errorData(res, 400, 'office name exists already! try another');
     }
     const data = await modelOffice.create(requestData);
-    return Response.validData(res, 201, [data]);
+    if (data) return Response.validData(res, 201, [data]);
+    return Response.errorData(res, 500, 'internal server error!');
   }
 
   /**
