@@ -78,6 +78,7 @@ class OfficeController {
     if (!(/^[\d]+$/.test(officeId))) return Response.errorData(res, 400, 'invalid office id');
     const { type, name, description } = req.body;
     if (!await modelOffice.findOne(officeId)) return Response.errorData(res, 404, 'office not found');
+    if (await modelOffice.findName(name)) return Response.errorData(res, 400, 'office name already exists!');
     const officeObject = { type: type.trim().toLowerCase(), name: name.replace(/\s+/g, ' ').trim(), description: description.replace(/\s+/g, ' ').trim() };
     const data = await modelOffice.modify(officeId, officeObject);
     if (data) return Response.validData(res, 200, [data]);
