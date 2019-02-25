@@ -1,7 +1,8 @@
 const officeNewButton = getElementId('office-create');
 const officeModifyButton = getElementId('office-modify');
 const modifyOfficeModal = getElementId('modify-office-modal');
-const baseAPI = 'https://politico2019.herokuapp.com/api/v1';
+// const baseAPI = 'https://politico2019.herokuapp.com/api/v1';
+const baseAPI = 'http://localhost:3000/api/v1';
 
 const allOffices = () => {
   fetch(`${baseAPI}/offices`, {
@@ -15,13 +16,16 @@ const allOffices = () => {
     .then(response => response.json())
     .then((resultObject) => {
       if (resultObject.status === 200) {
-        allOfficesDom(resultObject);
+        allOfficesDom(resultObject, () => {
+          modifyFunction();
+          deleteOffice();
+        });
       } else {
         dangerAlertBox(resultObject.error, 3000);
       }
     });
 };
-
+allOffices();
 const modifyFunction = () => {
   const modifyButton = document.getElementsByClassName('modify');
   Array.from(modifyButton).forEach((element) => {
@@ -141,6 +145,33 @@ const newOffice = (e) => {
       }
     });
 };
-allOffices();
+const success = (e) => {
+  const url = e.target.parentElement.href;
+  fetch(url, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'content-type': 'application/json',
+      token: localStorage.getItem('token'),
+    },
+  })
+    .then(response => response.json())
+    .then((result) => {
+      if (result.status === 200) {
+        successAlertBox('item deleted', 4000);
+        allOffices();
+      } else {
+        dangerAlertBox(result.error, 4000);
+      }
+    });
+};
+const deleteButton = document.getElementsByClassName('delete-office');
+const deleteOffice = () => {
+  Array.from(deleteButton).forEach((element) => {
+    element.addEventListener('click', (e) => {
+      e.preventDefault();      
+      confirmDialogBox('Are you sure you want to delete this item?', e, success);
+    });
+  });
+};
 officeNewButton.addEventListener('click', newOffice);
-modifyFunction();

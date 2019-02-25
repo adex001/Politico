@@ -494,6 +494,56 @@ footer{
   letter-spacing: 1px;
   z-index: 5;
 }
+.confirm-modal{
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  background: rgba(197, 228, 199, 0.8);
+  text-align: center;
+  min-height: 90vh;
+  top: 0;
+  width: 100%;
+  position: absolute;
+  z-index: 5;
+}
+.confirm-modal div{
+  background: rgb(114, 253, 128);
+  height: 10vh;
+  width: 60vw;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+.confirm-modal div p{
+  width: 100%;
+}
+#confirm-c{
+  color: #B73E23;
+  background: rgb(231, 180, 171);
+  padding: 5px 10px;
+  border: 2px solid #B73E23;
+  margin: 5px 10px;
+  border-radius: 5px;
+}
+#confirm-c:hover{
+  background: #B73E23;
+  color: #E0F2E9;
+  border: 2px solid #E0F2E9;
+}
+#confirm-b{
+  color: rgb(10, 149, 5);
+  background: rgb(197, 228, 199);
+  padding: 5px 10px;
+  border: 2px solid rgb(10, 149, 5);;
+  margin: 5px;
+  border-radius: 5px;
+}
+#confirm-b:hover{
+  background: rgb(10, 149, 5);
+  color: #E0F2E9;
+  border: 2px solid #E0F2E9;
+}
 
 @media screen and (max-width: 700px) {
   main .container{
