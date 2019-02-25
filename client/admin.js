@@ -18,6 +18,7 @@ const allOffices = () => {
         allOfficesDom(resultObject, () => {
           modifyFunction();
           deleteOffice();
+          logout();
         });
       } else {
         dangerAlertBox(resultObject.error, 3000);
