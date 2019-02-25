@@ -34,7 +34,16 @@ const successAlertBox = (displayText, seconds) => {
     modal.style.display = 'none';
   }, seconds);
 };
-
+const logout = () => {
+  const logoutButton = document.getElementsByClassName('logout');
+  Array.from(logoutButton).forEach((element) => {
+    element.addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('token');
+      window.location.replace('../index.html');
+    });
+  });
+};
 const officeDOM = getElementId('office-list');
 const allOfficesDom = (offices, loadMe) => {
   let li = `<li class="make-flex-row office-item">
