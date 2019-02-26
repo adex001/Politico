@@ -74,3 +74,36 @@ const allOfficesDom = (offices, loadMe) => {
   }
   loadMe();
 };
+const partiesDOM = getElementId('party-list');
+const allPartiesDom = (parties, callBack) => {
+  let li = `<li class="make-flex-row party-item">
+  <span class="sn">s/n</span>
+  <span class="plogo">Party Logo</span>
+  <span class="pname">Party Name</span>
+  <span>Party Address</span>
+  <span class="pslogan">Party Slogan</span>
+  <span class="action">Action</span>
+</li>`;
+  const partiesArray = parties.data;
+  if (partiesArray.length === 0) {
+    partiesDOM.innerHTML = '<p style="text-align:center; color:#B73E23">Parties Empty. Add a political party! </p>';
+  } else {
+    for (let i = 0; i < partiesArray.length; i++) {
+      const sn = i + 1;
+      li += `<li class="make-flex-row office-item center-items">
+    <span class="sn">${sn}</span>
+    <span class="plogo">
+      <img src="${partiesArray[i].logo}" alt="logo">
+    </span>
+    <span class="pname">${partiesArray[i].name}</span>
+    <span class="paddress">${partiesArray[i].address}</span>
+    <span class="action">
+      <a href="#"><button class="warning modify">modify</button></a>
+      <a href="#"><button class="danger">delete</button></a>
+      </span>
+  </li>`;
+    }
+    partiesDOM.innerHTML = li;
+  }
+  callBack();
+};

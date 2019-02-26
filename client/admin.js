@@ -25,7 +25,28 @@ const allOffices = () => {
       }
     });
 };
+const allParties = () => {
+  fetch(`${baseAPI}/parties`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'content-type': 'application/json',
+      token: localStorage.getItem('token'),
+    },
+  })
+    .then(response => response.json())
+    .then((resultObject) => {
+      if (resultObject.status === 200) {
+        allPartiesDom(resultObject, () => {
+          logout();
+        });
+      } else {
+        dangerAlertBox(resultObject.error, 3000);
+      }
+    });
+};
 allOffices();
+allParties();
 const modifyFunction = () => {
   const modifyButton = document.getElementsByClassName('modify');
   Array.from(modifyButton).forEach((element) => {
