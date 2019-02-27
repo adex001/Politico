@@ -98,7 +98,7 @@ const allPartiesDom = (parties, callBack) => {
     <span class="paddress">${partiesArray[i].address}</span>
     <span class="action">
       <a href="${baseAPI}/parties/${partiesArray[i].partyid}"><button class="warning modify">modify</button></a>
-      <a href="${baseAPI}/parties/${partiesArray[i].partyid}"><button class="danger">delete</button></a>
+      <a href="${baseAPI}/parties/${partiesArray[i].partyid}"><button class="danger delete-party">delete</button></a>
       </span>
   </li>`;
     }
@@ -106,4 +106,3 @@ const allPartiesDom = (parties, callBack) => {
   }
   callBack();
 };
-

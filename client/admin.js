@@ -41,6 +41,7 @@ const allParties = () => {
         allPartiesDom(resultObject, () => {
           logout();
           modifyFunction();
+          deleteParty();
         });
       } else {
         dangerAlertBox(resultObject.error, 3000);
@@ -293,14 +294,24 @@ const success = (e) => {
       if (result.status === 200) {
         successAlertBox('item deleted', 4000);
         allOffices();
+        allParties();
       } else {
         dangerAlertBox(result.error, 4000);
       }
     });
 };
 const deleteButton = document.getElementsByClassName('delete-office');
+const delButton = document.getElementsByClassName('delete-party');
 const deleteOffice = () => {
   Array.from(deleteButton).forEach((element) => {
+    element.addEventListener('click', (e) => {
+      e.preventDefault();
+      confirmDialogBox('Are you sure you want to delete this item?', e, success);
+    });
+  });
+};
+const deleteParty = () => {
+  Array.from(delButton).forEach((element) => {
     element.addEventListener('click', (e) => {
       e.preventDefault();
       confirmDialogBox('Are you sure you want to delete this item?', e, success);
