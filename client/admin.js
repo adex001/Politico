@@ -1,4 +1,5 @@
 const officeNewButton = getElementId('office-create');
+const partyNewButton = getElementId('c-submit-party');
 const officeModifyButton = getElementId('office-modify');
 const modifyOfficeModal = getElementId('modify-office-modal');
 const baseAPI = 'https://politico2019.herokuapp.com/api/v1';
@@ -224,6 +225,59 @@ const newOffice = (e) => {
       }
     });
 };
+const newParty = (e) => {
+  e.preventDefault();
+  const partyName = getElementId('c-party-name');
+  const partyAddress = getElementId('c-party-address');
+  const partyLogo = getElementId('c-party-logo');
+
+  const resetParty = () => {
+    partyName.value = '';
+    partyAddress.value = '';
+    partyLogo.value = '';
+  };
+  if (!partyName.value) {
+    dangerAlertBox('Enter a valid party name!', 3000);
+    partyName.focus();
+    return false;
+  }
+  if (!partyAddress.value) {
+    dangerAlertBox('Enter a valid party Address', 3000);
+    partyAddress.focus();
+    return false;
+  }
+  if (!partyLogo.value) { 
+    dangerAlertBox('Enter a valid party Logo', 3000);
+    partyLogo.focus();
+    return false;
+  }
+  const partyData = {
+    name: partyName.value,
+    address: partyAddress.value,
+    logoUrl: partyLogo.value,
+  };
+  fetch(`${baseAPI}/parties`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'content-type': 'application/json',
+      token: localStorage.getItem('token'),
+    },
+    body: JSON.stringify(partyData),
+  })
+    .then(response => response.json())
+    .then((result) => {
+      if (result.status === 201) {
+        successAlertBox('Party was successfully created', 4000);
+        getElementId('new-party-modal').style.display = 'none';
+        resetParty();
+        allParties();
+      } else {
+        dangerAlertBox(result.error, 3000);
+        partyName.focus();
+      }
+    });
+};
 const success = (e) => {
   const url = e.target.parentElement.href;
   fetch(url, {
@@ -254,3 +308,4 @@ const deleteOffice = () => {
   });
 };
 officeNewButton.addEventListener('click', newOffice);
+partyNewButton.addEventListener('click', newParty);

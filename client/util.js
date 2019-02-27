@@ -106,3 +106,4 @@ const allPartiesDom = (parties, callBack) => {
   }
   callBack();
 };
+
