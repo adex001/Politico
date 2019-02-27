@@ -81,7 +81,6 @@ const allPartiesDom = (parties, callBack) => {
   <span class="plogo">Party Logo</span>
   <span class="pname">Party Name</span>
   <span>Party Address</span>
-  <span class="pslogan">Party Slogan</span>
   <span class="action">Action</span>
 </li>`;
   const partiesArray = parties.data;
@@ -98,8 +97,8 @@ const allPartiesDom = (parties, callBack) => {
     <span class="pname">${partiesArray[i].name}</span>
     <span class="paddress">${partiesArray[i].address}</span>
     <span class="action">
-      <a href="#"><button class="warning modify">modify</button></a>
-      <a href="#"><button class="danger">delete</button></a>
+      <a href="${baseAPI}/parties/${partiesArray[i].partyid}"><button class="warning modify">modify</button></a>
+      <a href="${baseAPI}/parties/${partiesArray[i].partyid}"><button class="danger">delete</button></a>
       </span>
   </li>`;
     }
