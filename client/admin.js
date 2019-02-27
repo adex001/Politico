@@ -39,6 +39,7 @@ const allParties = () => {
       if (resultObject.status === 200) {
         allPartiesDom(resultObject, () => {
           logout();
+          modifyFunction();
         });
       } else {
         dangerAlertBox(resultObject.error, 3000);
@@ -52,10 +53,67 @@ const modifyFunction = () => {
   Array.from(modifyButton).forEach((element) => {
     element.addEventListener('click', (e) => {
       e.preventDefault();
+      const url = e.target.parentElement.href;
       if (e.target.offsetParent.children[3].id === 'modify-party-modal') {
-        e.target.offsetParent.children[3].style.display = 'flex';
+        const partyName = getElementId('m-party-name');
+        const partyAddress = getElementId('m-party-address');
+        const partyLogo = getElementId('m-party-logo');
+        const resetParty = () => {
+          partyName.value = '';
+          partyAddress.value = '';
+          partyLogo.value = '';
+        };
+        fetch(`${url}`, {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json, text/plain, */*',
+            'content-type': 'application/json',
+            token: localStorage.getItem('token'),
+          },
+        })
+          .then(response => response.json())
+          .then((partyObject) => {
+            if (partyObject.status === 200) {
+              partyName.value = partyObject.data[0].name;
+              partyAddress.value = partyObject.data[0].address;
+              partyLogo.value = partyObject.data[0].logo;
+              e.target.offsetParent.children[3].style.display = 'flex';
+              getElementId('m-submit-party').onclick = () => {
+                const partyData = {
+                  name: partyName.value,
+                  address: partyAddress.value,
+                  logoUrl: partyLogo.value,
+                };
+                fetch(`${url}`, {
+                  method: 'PATCH',
+                  headers: {
+                    Accept: 'application/json, text/plain, */*',
+                    'content-type': 'application/json',
+                    token: localStorage.getItem('token'),
+                  },
+                  body: JSON.stringify(partyData),
+                })
+                  .then(response => response.json())
+                  .then((result) => {
+                    if (result.status === 200) {
+                      successAlertBox('Party was successfully modified', 4000);
+                      getElementId('modify-party-modal').style.display = 'none';
+                      resetParty();
+                      allParties();
+                    } else {
+                      dangerAlertBox(result.error, 3000);
+                      partyName.focus();
+                    }
+                  });
+              };
+              getElementId('m-clear-party').onclick = () => {
+                resetParty();
+              };
+            } else {
+              dangerAlertBox(partyObject.error, 3000);
+            }
+          });
       } else {
-        const url = e.target.parentElement.href;
         const officeName = getElementId('m-office-name');
         const officeDesc = getElementId('m-office-desc');
         const officeType = getElementId('m-office-type');
@@ -190,7 +248,7 @@ const deleteButton = document.getElementsByClassName('delete-office');
 const deleteOffice = () => {
   Array.from(deleteButton).forEach((element) => {
     element.addEventListener('click', (e) => {
-      e.preventDefault();      
+      e.preventDefault();
       confirmDialogBox('Are you sure you want to delete this item?', e, success);
     });
   });
