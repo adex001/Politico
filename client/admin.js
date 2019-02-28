@@ -2,7 +2,8 @@ const officeNewButton = getElementId('office-create');
 const partyNewButton = getElementId('c-submit-party');
 const officeModifyButton = getElementId('office-modify');
 const modifyOfficeModal = getElementId('modify-office-modal');
-const baseAPI = 'https://politico2019.herokuapp.com/api/v1';
+// const baseAPI = 'https://politico2019.herokuapp.com/api/v1';
+const baseAPI = 'http://localhost:3000/api/v1';
 
 const allOffices = () => {
   fetch(`${baseAPI}/offices`, {

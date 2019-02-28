@@ -75,7 +75,7 @@
                   </select>
                   <br>
                 </div>
-                <button id="main-submit">VOTE</button>
+                <button class="main-submit">VOTE</button>
               </div>
             </div> <!--Votediv--->
           </div> <!-- vote disp-->
@@ -176,7 +176,7 @@
               <div class="vote-area make-flex-column ">
                 <div>
                   <span>Select Office name:</span>
-                  <select id="">
+                  <select id="s-office">
                     <option value="Select an Office" disabled></option>
                     <option value="president">President</option>
                     <option value="governor">Governor</option>
@@ -187,15 +187,11 @@
                 </div>
                 <div>
                   <span>Select Political Party:</span>
-                  <select name="" id="">
-                    <option value="APC">A P C</option>
-                    <option value="PDP">P D P</option>
-                    <option value="ACN">A C N</option>
-                    <option value="ACPN">A C P N</option>
+                  <select name="" id="s-parties">
                   </select>
                   <br>
                 </div>
-                <button id="main-submit">Declare Interest</button>
+                <button class="main-submit" id="express-interest">Declare Interest</button>
               </div>
             </div>
           </div> <!--run Display-->
@@ -293,6 +289,9 @@
               </div>
             </div>
           </div> <!-- Election disp-->
+          <div id="modals" class="danger-alertbox"></div>
+          <div id="success-modals" class="success-alertbox"></div>
+          <div id="confirm-dialog" class="confirm-modal">
         </div> <!--End of display-->
       </div> <!--End of portal-->
     </div> <!--End of container-->
@@ -303,5 +302,7 @@
     </div>
   </footer>
   <script src="../js/main.js"></script>
+  <script src="../../client/util.js"></script>
+  <script src="../../client/user.js"></script>
 </body>
 </html>

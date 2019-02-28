@@ -40,6 +40,7 @@ const logout = () => {
     element.addEventListener('click', (e) => {
       e.preventDefault();
       localStorage.removeItem('token');
+      localStorage.removeItem('userid');
       window.location.replace('../index.html');
     });
   });

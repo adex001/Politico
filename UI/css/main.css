@@ -183,7 +183,7 @@ transition: 0.5s;
 
 /* Vote Ends */
 
-#main-submit{
+.main-submit{
 padding: 10px 20px;
 color: #134611;
 background: #E0F2E9;
@@ -195,7 +195,7 @@ transition: 0.7s;
 cursor: pointer;
 border-radius: 5px;
 }
-#main-submit:hover{
+.main-submit:hover{
   color: #E0F2E9;
   background: #134611;
   border: 2px solid #E0F2E9;
