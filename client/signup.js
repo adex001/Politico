@@ -50,6 +50,7 @@ const signUp = ((e) => {
     .then((resultObject) => {
       if (resultObject.status === 201) {
         localStorage.setItem('token', resultObject.data[0].token);
+        localStorage.setItem('userid', resultObject.data[0].user.userId);
         window.location.replace('./dashboard.html');
       } else {
         dangerAlertBox(resultObject.error, 3000);

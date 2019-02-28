@@ -34,6 +34,7 @@ const login = ((e) => {
     .then((resultObject) => {
       if (resultObject.status === 200) {
         localStorage.setItem('token', resultObject.data[0].token);
+        localStorage.setItem('userid', resultObject.data[0].user.userId);
         if (resultObject.data[0].user.isAdmin) {
           window.location.replace('./admin-dashboard.html');
         } else {
