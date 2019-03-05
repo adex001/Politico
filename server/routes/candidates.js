@@ -8,5 +8,7 @@ const candidateRoute = Router();
 
 candidateRoute.get('/office/:officeId/result', TokenHandler.verifyToken, Validator.validateVoteResult, VoteController.voteResult);
 candidateRoute.post('/office/:userId/register', TokenHandler.verifyToken, Validator.validateInterest, CandidateController.expressInterest);
+candidateRoute.get('/party/:partyid', TokenHandler.verifyToken, CandidateController.listPartyCandidates);
+candidateRoute.get('/office/:officeid', TokenHandler.verifyToken, CandidateController.listPartyOffice);
 
 export default candidateRoute;

@@ -69,5 +69,35 @@ class Candidate {
       return false;
     }
   }
+
+  /**
+ * @function listPartyCandidates
+ * @param {*} partyid
+ * @returns {*} the candidates with party name
+ */
+  static async listPartyCandidates(partyid) {
+    const query = 'SELECT lastname, firstname, candidateid FROM candidate INNER JOIN users ON users.userid = candidate.userid WHERE partyid = $1';
+    try {
+      const result = await db.query(query, [partyid]);
+      return result.rows;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  /**
+ * @function listPartyOffice
+ * @param {*} officeid
+ * @returns {*} the candidates with party name
+ */
+  static async listPartyOffice(officeid) {
+    const query = 'SELECT name AS partyname, party.partyid FROM candidate INNER JOIN party ON party.partyid = candidate.partyid WHERE officeid = $1';
+    try {
+      const result = await db.query(query, [officeid]);
+      return result.rows;
+    } catch (err) {
+      return false;
+    }
+  }
 }
 export default Candidate;
