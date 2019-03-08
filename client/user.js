@@ -1,5 +1,4 @@
-// const baseAPI = 'https://politico2019.herokuapp.com/api/v1';
-const baseAPI = 'http://localhost:3000/api/v1';
+const baseAPI = 'https://politico2019.herokuapp.com/api/v1';
 let partiesSelect;
 let officeSelect;
 
@@ -231,5 +230,45 @@ const voteCandidate = () => {
       }
     });
 };
+const viewParties = () => {
+  fetch(`${baseAPI}/parties`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'content-type': 'application/json',
+      token: localStorage.getItem('token'),
+    },
+  })
+    .then(response => response.json())
+    .then((result) => {
+      const partiesDiv = getElementId('p-parties');
+      if (result.status === 200) {
+        if (result.data.length === 0) {
+          partiesDiv.innerHTML = '<p style="text-align:center; color:#B73E23">Parties Empty. Check back later! </p>';
+        } else {
+          let li = `<li class="make-flex-row center-items pdisp make-bold">
+          <span class="sn">s/n</span>
+          <span class="plogo">Party Logo</span>
+          <span class="pname">Party Name</span>
+          <span class="paddress">Party Address</span>
+        </li>`;
+          for (let i = 0; i < result.data.length; i++) {
+            const sn = i + 1;
+            li += `<li class="make-flex-row center-items pdisp">
+          <span class="sn">${sn}</span>
+          <span class="plogo"><img src="${result.data[i].logo}" alt="logo"></span>
+          <span class="pname">${result.data[i].name}</span>
+          <span class="paddress">${result.data[i].address}</span>
+        </li>`;
+          }
+          partiesDiv.innerHTML = li;
+        }
+      } else {
+        dangerAlertBox(result.error, 3000);
+      }
+    });
+};
 expressInterest();
 voteCandidate();
+viewParties();
+logout();
