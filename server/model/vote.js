@@ -41,12 +41,26 @@ class Vote {
  * @returns {*} the the specified office votes
  */
   static async checkResult(officeid) {
-    // Retrieve individual offices
     const resultQuery = 'SELECT officeid, candidateid, COUNT(candidateid) AS result FROM vote WHERE officeid = $1 GROUP BY candidateid, officeid';
     try {
       const result = await db.query(resultQuery, [officeid]);
       if (result.rowCount > 0) return result.rows;
       return 'no office found';
+    } catch (err) {
+      return false;
+    }
+  }
+
+  /**
+ * @function getHistory
+ * @param {*} officeid user id
+ * @returns {*} the vote history for the particular user
+ */
+  static async getHistory(userid) {
+    const query = 'SELECT party.logo AS partylogo, party.name AS partyname, users.lastname, users.firstname, office.name AS officename FROM vote INNER JOIN candidate ON vote.candidateid = candidate.candidateid INNER JOIN users ON users.userid = vote.userid INNER JOIN party ON candidate.partyid = party.partyid INNER JOIN office ON vote.officeid = office.officeid WHERE vote.userid = $1';
+    try {
+      const result = await db.query(query, [userid]);
+      return result.rows;
     } catch (err) {
       return false;
     }

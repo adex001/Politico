@@ -1,4 +1,5 @@
 const baseAPI = 'https://politico2019.herokuapp.com/api/v1';
+
 let partiesSelect;
 let officeSelect;
 
@@ -320,7 +321,7 @@ const viewPoliticians = () => {
       </li>`;
         if (candidates.status === 200) {
           for (let i = 0; i < candidates.data.length; i++) {
-            let sn = i + 1;
+            const sn = i + 1;
             li += `<li class="make-flex-row center-items pdisp">
             <span class="sn">${sn}</span>
             <span class="plogo"><img src="${candidates.data[i].logo}" alt="logo"></span>
@@ -337,8 +338,48 @@ const viewPoliticians = () => {
       });
   };
 };
+const viewHistory = () => {
+  fetch(`${baseAPI}/votes/history/${localStorage.getItem('userid')}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'content-type': 'application/json',
+      token: localStorage.getItem('token'),
+    },
+  })
+    .then(response => response.json())
+    .then((history) => {
+      const historyDisp = getElementId('v-history');
+      if (history.status === 200) {
+        if (history.data.length === 0) {
+          historyDisp.innerHTML = '<p style="text-align:center; color:#B73E23">You have no votes history!! </p>';
+        } else {
+          let li = `<li class="make-flex-row make-flex-row center-items pdisp make-bold">
+          <span class="sn">s/n</span>
+          <span class="plogo">Party Logo</span>
+          <span class="pname">Party Name</span>
+          <span class="cname">Candidate Name</span>
+          <span class="ocontest">Office Contested</span>
+        </li>`;
+          for (let i = 0; i < history.data.length; i++) {
+            li += `<li class="make-flex-row make-flex-row center-items pdisp make-bold">
+          <span class="sn">1</span>
+          <span class="plogo"><img src="${history.data[i].partylogo}" alt="logo"></span>
+          <span class="pname">${history.data[i].partyname}</span>
+          <span class="cname">${history.data[i].lastname} ${history.data[i].firstname}</span>
+          <span class="ocontest">${history.data[i].officename}</span>
+        </li>`;
+          }
+          historyDisp.innerHTML = li;
+        }
+      } else {
+        dangerAlertBox(history.error, 3000);
+      }
+    });
+};
 logout();
 expressInterest();
 voteCandidate();
 viewParties();
 viewPoliticians();
+viewHistory();
