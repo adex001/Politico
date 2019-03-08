@@ -39,6 +39,20 @@ class VoteController {
     if (!voteResult) return Response.errorData(res, 500, 'internal server error');
     return Response.validData(res, 200, voteResult);
   }
+
+  /**
+ * @function getHistory
+ * @param {*} req request object
+ * @param {*} res response object
+ * @returns {*} vote history of the user
+ */
+  static async getHistory(req, res) {
+    const { userId } = req.params;
+    if (!(/^[\d]+$/.test(userId))) return Response.errorData(res, 400, 'invalid user id');
+    const history = await voteModel.getHistory(userId);
+    if (history) return Response.validData(res, 200, history);
+    return Response.errorData(res, 500, 'internal server error!');
+  }
 }
 
 export default VoteController;
