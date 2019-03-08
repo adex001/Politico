@@ -99,5 +99,36 @@ class Candidate {
       return false;
     }
   }
+
+  /**
+ * @function listPoliticiansFromOffice
+ * @param {*} officeid
+ * @returns {*} the candidates contesting that particular office
+ */
+  static async listPoliticiansFromOffice(officeid) {
+    const query = 'SELECT users.lastname, users.firstname, party.name AS partyname, party.logo, office.name AS officename FROM candidate INNER JOIN users ON candidate.userid = users.userid INNER JOIN party on party.partyid = candidate.partyid INNER JOIN office ON office.officeid = candidate.officeid WHERE candidate.officeid = $1';
+    try {
+      const result = await db.query(query, [officeid]);
+      return result.rows;
+    } catch (err) {
+      return false;
+    }
+  }
+
+    /**
+ * @function listPoliticiansFromOffice
+ * @param {*} officeid
+ * @returns {*} the candidates contesting that particular office
+ */
+  static async listOfficeFromCandidates() {
+    const query = `SELECT candidate.officeid, name AS officename FROM candidate INNER JOIN office ON candidate.officeid = office.officeid GROUP BY candidate.officeid, name;
+    `;
+    try {
+      const result = await db.query(query);
+      return result.rows;
+    } catch (err) {
+      return false;
+    }
+  }
 }
 export default Candidate;
