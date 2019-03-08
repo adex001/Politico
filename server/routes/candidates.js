@@ -10,5 +10,6 @@ candidateRoute.get('/office/:officeId/result', TokenHandler.verifyToken, Validat
 candidateRoute.post('/office/:userId/register', TokenHandler.verifyToken, Validator.validateInterest, CandidateController.expressInterest);
 candidateRoute.get('/party/:partyid', TokenHandler.verifyToken, CandidateController.listPartyCandidates);
 candidateRoute.get('/office/:officeid', TokenHandler.verifyToken, CandidateController.listPartyOffice);
-
+candidateRoute.get('/candidates', TokenHandler.verifyToken, CandidateController.listOfficeFromCandidates);
+candidateRoute.get('/candidates/:officeid', TokenHandler.verifyToken, CandidateController.listPoliticiansFromOffice);
 export default candidateRoute;

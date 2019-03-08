@@ -268,7 +268,77 @@ const viewParties = () => {
       }
     });
 };
+const viewPoliticians = () => {
+  const officeSelect = getElementId('office-c');
+  const officeDisplay = getElementId('office-d');
+  officeDisplay.style.display = 'none';
+  fetch(`${baseAPI}/candidates`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'content-type': 'application/json',
+      token: localStorage.getItem('token'),
+    },
+  })
+    .then(response => response.json())
+    .then((resultObject) => {
+      if (resultObject.status === 200) {
+        officeSelect.length = 0;
+        const defaultOption = document.createElement('option');
+        defaultOption.text = 'select office';
+        defaultOption.disabled = true;
+        officeSelect.add(defaultOption);
+        officeSelect.selectedIndex = 0;
+        let option;
+        for (let i = 0; i < resultObject.data.length; i++) {
+          option = document.createElement('option');
+          option.text = resultObject.data[i].officename;
+          option.value = resultObject.data[i].officeid;
+          officeSelect.add(option);
+        }
+      } else {
+        dangerAlertBox(resultObject.error, 4000);
+      }
+    });
+  officeSelect.onchange = () => {
+    fetch(`${baseAPI}/candidates/${officeSelect.value}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'content-type': 'application/json',
+        token: localStorage.getItem('token'),
+      },
+    })
+      .then(response => response.json())
+      .then((candidates) => {
+        let li = `<li class="make-flex-row center-items pdisp make-bold">
+        <span class="sn">s/n</span>
+        <span class="plogo">Party Logo</span>
+        <span class="pname">Party Name</span>
+        <span class="cname">Candidate Name</span>
+        <span class="office">Office</span>
+      </li>`;
+        if (candidates.status === 200) {
+          for (let i = 0; i < candidates.data.length; i++) {
+            let sn = i + 1;
+            li += `<li class="make-flex-row center-items pdisp">
+            <span class="sn">${sn}</span>
+            <span class="plogo"><img src="${candidates.data[i].logo}" alt="logo"></span>
+            <span class="pname">${candidates.data[i].partyname}</span>
+            <span class="cname">${candidates.data[i].lastname} ${candidates.data[i].firstname}</span>
+            <span class="office">${candidates.data[i].officename}</span>
+          </li>`;
+          }
+          officeDisplay.innerHTML = li;
+          officeDisplay.style.display = 'flex';
+        } else {
+          dangerAlertBox(candidates.error, 4000);
+        }
+      });
+  };
+};
+logout();
 expressInterest();
 voteCandidate();
 viewParties();
-logout();
+viewPoliticians();

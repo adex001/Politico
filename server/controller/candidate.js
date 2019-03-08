@@ -55,5 +55,31 @@ class CandidateController {
     if (!parties) return Response.errorData(res, 500, 'Internal server error!');
     return Response.validData(res, 200, parties);
   }
+
+  /**
+   * @function listPoliticiansFromOffice
+   * @req request object
+   * @res response object
+   * @returns {*} list of candidates of a party
+   */
+  static async listPoliticiansFromOffice(req, res) {
+    const { officeid } = req.params;
+    if (!(/^[\d]+$/.test(officeid))) return Response.errorData(res, 400, 'invalid office id');
+    const candidates = await Candidate.listPoliticiansFromOffice(officeid);
+    if (candidates) return Response.validData(res, 200, candidates);
+    return Response.errorData(res, 500, 'internal server error');
+  }
+
+    /**
+   * @function listOfficeFromCandidates
+   * @req request object
+   * @res response object
+   * @returns {*} list of candidates of a party
+   */
+  static async listOfficeFromCandidates(req, res) {
+    const offices = await Candidate.listOfficeFromCandidates();
+    if (offices) return Response.validData(res, 200, offices);
+    return Response.errorData(res, 500, 'internal server error!');
+  }
 }
 export default CandidateController;
