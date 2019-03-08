@@ -39,22 +39,22 @@ const createTableParty = `CREATE TABLE IF NOT EXISTS party (
 const createTableCandidate = `CREATE TABLE IF NOT EXISTS candidate (
   candidateid serial PRIMARY KEY,
   userid SERIAL REFERENCES users(userid) UNIQUE,
-  officeid SERIAL REFERENCES office(officeid),
-  partyid SERIAL REFERENCES party(partyid),
+  officeid SERIAL REFERENCES office(officeid) ON DELETE CASCADE,
+  partyid SERIAL REFERENCES party(partyid) ON DELETE CASCADE,
   isapproved boolean DEFAULT false,
   creationtime TIMESTAMPTZ DEFAULT NOW()
 )`;
 const createTableVote = `CREATE TABLE IF NOT EXISTS vote (
   voteid serial PRIMARY KEY,
-  officeid SERIAL REFERENCES office(officeid),
-  userid serial REFERENCES users(userid),
-  candidateid serial REFERENCES candidate(candidateid),
+  officeid SERIAL REFERENCES office(officeid) ON DELETE CASCADE,
+  userid serial REFERENCES users(userid) ON DELETE CASCADE,
+  candidateid serial REFERENCES candidate(candidateid) ON DELETE CASCADE,
   vote_creation TIMESTAMPTZ DEFAULT NOW()
 )`;
 const createTablePetition = `CREATE TABLE IF NOT EXISTS petition (
   petitionid serial PRIMARY KEY,
-  officeid SERIAL REFERENCES office(officeid),
-  userid serial REFERENCES users(userid),
+  officeid SERIAL REFERENCES office(officeid) ON DELETE CASCADE,
+  userid serial REFERENCES users(userid) ON DELETE CASCADE,
   text varchar(300),
   evidence JSONB NOT NULL,
   creationtime TIMESTAMPTZ DEFAULT NOW()
